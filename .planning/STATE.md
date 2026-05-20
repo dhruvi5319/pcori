@@ -3,14 +3,14 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-foundation-01-PLAN.md
-last_updated: "2026-05-20T18:24:49.739Z"
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-05-20T18:26:24.450Z"
 last_activity: 2026-05-20 — Roadmap created; ready to begin Phase 1 planning
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 11
-  completed_plans: 1
+  completed_plans: 2
   percent: 0
 ---
 
@@ -53,6 +53,7 @@ Progress: [░░░░░░░░░░] 0%
 
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 2min | 2 tasks | 16 files |
+| Phase 01-foundation P02 | 4min | 2 tasks | 16 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: Removed deprecated version: '3.9' from docker-compose.yml (modern Docker Compose v2+ treats as obsolete)
 - [Phase 01-foundation]: Swagger disabled by default in base profile, enabled only in dev — security posture for production
 - [Phase 01-foundation]: JWT_SECRET dev value set to 64+ chars to pass HS512 minimum key length validation at startup
+- [Phase 01-foundation]: query-client file uses .tsx extension — contains JSX for QueryClientProvider; .ts extension causes Turbopack parse failure
+- [Phase 01-foundation]: geist npm package used for Geist font (geist/font/sans and geist/font/mono) — Next.js-compatible font loader, no next/font/google needed
 
 ### Pending Todos
 
@@ -83,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-20T18:24:49.738Z
-Stopped at: Completed 01-foundation-01-PLAN.md
+Last session: 2026-05-20T18:26:24.448Z
+Stopped at: Completed 01-02-PLAN.md
 Resume file: None
