@@ -3,15 +3,15 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-03-PLAN.md
-last_updated: "2026-05-20T18:29:37.865Z"
+stopped_at: Completed 01-04-PLAN.md
+last_updated: "2026-05-20T18:37:15.950Z"
 last_activity: 2026-05-20 — Roadmap created; ready to begin Phase 1 planning
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 11
-  completed_plans: 3
-  percent: 0
+  completed_plans: 4
+  percent: 36
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 ## Current Position
 
 Phase: 1 of 4 (Foundation)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-05-20 — Roadmap created; ready to begin Phase 1 planning
+Plan: 4 of 7 in current phase
+Status: In progress
+Last activity: 2026-05-20 — Completed Plan 04 (Spring Security + JWT infrastructure)
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [████░░░░░░] 36%
 
 ## Performance Metrics
 
@@ -55,6 +55,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01-foundation P01 | 2min | 2 tasks | 16 files |
 | Phase 01-foundation P02 | 4min | 2 tasks | 16 files |
 | Phase 01-foundation P03 | 1min | 2 tasks | 2 files |
+| Phase 01-foundation P04 | 5min | 2 tasks | 13 files |
 
 ## Accumulated Context
 
@@ -74,6 +75,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: geist npm package used for Geist font (geist/font/sans and geist/font/mono) — Next.js-compatible font loader, no next/font/google needed
 - [Phase 01-foundation]: Phase 1 migrations include auth tables only — classifications and pipeline tables deferred to Phase 2
 - [Phase 01-foundation]: ADMIN role assigned all permissions via CROSS JOIN — automatically includes future permissions
+- [Phase 01-foundation]: UserDetailsServiceImpl stub created — replaced fully in Plan 05 when UserRepository and User entity are available
+- [Phase 01-foundation]: Swagger gated to dev profile via AuthorizationDecision — unreachable in non-dev profiles without property overrides
 
 ### Pending Todos
 
@@ -89,6 +92,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-20T18:29:37.864Z
-Stopped at: Completed 01-03-PLAN.md
+Last session: 2026-05-20T18:37:15.949Z
+Stopped at: Completed 01-04-PLAN.md
 Resume file: None
