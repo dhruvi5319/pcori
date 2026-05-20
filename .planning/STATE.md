@@ -3,14 +3,14 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 01-06-PLAN.md
-last_updated: "2026-05-20T18:59:02.374Z"
-last_activity: 2026-05-20 — Completed Plan 04 (Spring Security + JWT infrastructure)
+stopped_at: "Completed 01-07-PLAN.md tasks 1-2; awaiting checkpoint:human-verify"
+last_updated: "2026-05-20T19:05:07.898Z"
+last_activity: 2026-05-20 — Completed Plan 06 (Auth UI screens — landing, login, signup, forgot/reset password, verify email)
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 11
-  completed_plans: 6
+  completed_plans: 7
   percent: 55
 ---
 
@@ -58,6 +58,7 @@ Progress: [██████░░░░] 55%
 | Phase 01-foundation P04 | 5min | 2 tasks | 13 files |
 | Phase 01-foundation P05 | 11min | 2 tasks | 20 files |
 | Phase 01-foundation P06 | 5min | 2 tasks | 19 files |
+| Phase 01-foundation P07 | 3min | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -83,6 +84,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: V3 migration adds created_by/last_modified_by audit columns to users table — AuditableEntity @MappedSuperclass mapped these but V1 DDL omitted them
 - [Phase 01-foundation]: ResetPasswordForm String() cast: TypeScript strict rejects FieldError as ReactNode from zod refine union type — cast to String() for rendering
 - [Phase 01-foundation]: E2E Playwright tests written as artifacts but execution deferred to verify phase per test execution boundary rules
+- [Phase 01-foundation]: LucideIcon type union in SidebarNavItem: accepts LucideIcon | React.ComponentType<LucideProps> to satisfy TypeScript strict mode
+- [Phase 01-foundation]: App Shell auth guard pattern: useEffect + isAuthenticated() → router.replace('/login') + spinner until auth checked
 
 ### Pending Todos
 
@@ -98,6 +101,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-20T18:59:02.373Z
-Stopped at: Completed 01-06-PLAN.md
+Last session: 2026-05-20T19:05:07.897Z
+Stopped at: Completed 01-07-PLAN.md tasks 1-2; awaiting checkpoint:human-verify
 Resume file: None
