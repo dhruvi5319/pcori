@@ -121,61 +121,67 @@ Explicitly excluded. Documented to prevent scope creep.
 
 ## Traceability
 
-Which phases cover which requirements. Updated during roadmap creation.
+Which phases cover which requirements. Updated after roadmap creation 2026-05-20.
 
-| Requirement | Phase | Status |
-|-------------|-------|--------|
-| FR-1.1 | Phase 1 | Pending |
-| FR-1.2 | Phase 1 | Pending |
-| FR-1.3 | Phase 1 | Pending |
-| FR-1.4 | Phase 1 | Pending |
-| FR-1.5 | Phase 1 | Pending |
-| FR-1.6 | Phase 1 | Pending |
-| FR-1.7 | Phase 1 | Pending |
-| FR-1.8 | Phase 1 | Pending |
-| FR-2.1 | Phase 2 | Pending |
-| FR-2.2 | Phase 2 | Pending |
-| FR-2.3 | Phase 2 | Pending |
-| FR-2.4 | Phase 2 | Pending |
-| FR-2.5 | Phase 2 | Pending |
-| FR-2.6 | Phase 2 | Pending |
-| FR-2.7 | Phase 2 | Pending |
-| FR-2.8 | Phase 2 | Pending |
-| FR-3.1 | Phase 2 | Pending |
-| FR-3.2 | Phase 2 | Pending |
-| FR-3.3 | Phase 2 | Pending |
-| FR-3.4 | Phase 2 | Pending |
-| FR-3.5 | Phase 2 | Pending |
-| FR-4.1 | Phase 3 | Pending |
-| FR-4.2 | Phase 3 | Pending |
-| FR-4.3 | Phase 3 | Pending |
-| FR-4.4 | Phase 3 | Pending |
-| FR-4.5 | Phase 3 | Pending |
-| FR-4.6 | Phase 3 | Pending |
-| FR-5.1 | Phase 3 | Pending |
-| FR-5.2 | Phase 3 | Pending |
-| FR-5.3 | Phase 3 | Pending |
-| FR-5.4 | Phase 3 | Pending |
-| FR-5.5 | Phase 3 | Pending |
-| FR-6.1 | Phase 4 | Pending |
-| FR-6.2 | Phase 4 | Pending |
-| FR-6.3 | Phase 4 | Pending |
-| FR-6.4 | Phase 4 | Pending |
-| FR-7.1 | Phase 4 | Pending |
-| FR-7.2 | Phase 4 | Pending |
-| FR-7.3 | Phase 4 | Pending |
-| FR-8.1 | Phase 4 | Pending |
-| FR-8.2 | Phase 4 | Pending |
-| FR-9.1 | Phase 4 | Pending |
-| FR-9.2 | Phase 4 | Pending |
-| FR-10.1 | Phase 2 | Pending |
-| FR-10.2 | Phase 2 | Pending |
+| Requirement | Phase | Phase Name | Status |
+|-------------|-------|------------|--------|
+| FR-1.1 | Phase 1 | Foundation | Pending |
+| FR-1.2 | Phase 1 | Foundation | Pending |
+| FR-1.3 | Phase 1 | Foundation | Pending |
+| FR-1.4 | Phase 1 | Foundation | Pending |
+| FR-1.5 | Phase 1 | Foundation | Pending |
+| FR-1.6 | Phase 1 | Foundation | Pending |
+| FR-1.7 | Phase 1 | Foundation | Pending |
+| FR-1.8 | Phase 1 | Foundation | Pending |
+| FR-2.1 | Phase 2 | Classification Pipeline | Pending |
+| FR-2.2 | Phase 2 | Classification Pipeline | Pending |
+| FR-2.3 | Phase 2 | Classification Pipeline | Pending |
+| FR-2.4 | Phase 2 | Classification Pipeline | Pending |
+| FR-2.5 | Phase 2 | Classification Pipeline | Pending |
+| FR-2.6 | Phase 2 | Classification Pipeline | Pending |
+| FR-2.7 | Phase 2 | Classification Pipeline | Pending |
+| FR-2.8 | Phase 2 | Classification Pipeline | Pending |
+| FR-3.1 | Phase 2 | Classification Pipeline | Pending |
+| FR-3.2 | Phase 2 | Classification Pipeline | Pending |
+| FR-3.3 | Phase 2 | Classification Pipeline | Pending |
+| FR-3.4 | Phase 2 | Classification Pipeline | Pending |
+| FR-3.5 | Phase 2 | Classification Pipeline | Pending |
+| FR-4.1 | Phase 3 | Insights | Pending |
+| FR-4.2 | Phase 3 | Insights | Pending |
+| FR-4.3 | Phase 3 | Insights | Pending |
+| FR-4.4 | Phase 3 | Insights | Pending |
+| FR-4.5 | Phase 3 | Insights | Pending |
+| FR-4.6 | Phase 3 | Insights | Pending |
+| FR-5.1 | Phase 3 | Insights | Pending |
+| FR-5.2 | Phase 3 | Insights | Pending |
+| FR-5.3 | Phase 3 | Insights | Pending |
+| FR-5.4 | Phase 3 | Insights | Pending |
+| FR-5.5 | Phase 3 | Insights | Pending |
+| FR-6.1 | Phase 4 | Reporting & Admin Polish | Pending |
+| FR-6.2 | Phase 4 | Reporting & Admin Polish | Pending |
+| FR-6.3 | Phase 4 | Reporting & Admin Polish | Pending |
+| FR-6.4 | Phase 4 | Reporting & Admin Polish | Pending |
+| FR-7.1 | Phase 4 | Reporting & Admin Polish | Pending |
+| FR-7.2 | Phase 4 | Reporting & Admin Polish | Pending |
+| FR-7.3 | Phase 4 | Reporting & Admin Polish | Pending |
+| FR-8.1 | Phase 3 | Insights | Pending |
+| FR-8.2 | Phase 3 | Insights | Pending |
+| FR-9.1 | Phase 4 | Reporting & Admin Polish | Pending |
+| FR-9.2 | Phase 4 | Reporting & Admin Polish | Pending |
+| FR-10.1 | Phase 2 | Classification Pipeline | Pending |
+| FR-10.2 | Phase 2 | Classification Pipeline | Pending |
 
 **Coverage:**
 - v1 requirements: 44 total
 - Mapped to phases: 44
 - Unmapped: 0 ✓
 
+**Phase distribution:**
+- Phase 1 (Foundation): 8 requirements — FR-1.1 through FR-1.8
+- Phase 2 (Classification Pipeline): 16 requirements — FR-2.1–2.8, FR-3.1–3.5, FR-10.1–10.2
+- Phase 3 (Insights): 13 requirements — FR-4.1–4.6, FR-5.1–5.5, FR-8.1–8.2
+- Phase 4 (Reporting & Admin Polish): 7 requirements — FR-6.1–6.4, FR-7.1–7.3, FR-9.1–9.2
+
 ---
 *Requirements defined: 2026-05-20*
-*Last updated: 2026-05-20 after initial definition*
+*Last updated: 2026-05-20 after roadmap creation — traceability updated with phase names and distribution*
