@@ -20,7 +20,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 ## Phase Details
 
 ### Phase 1: Foundation
-**Status**: executing
+**Status**: awaiting decision
 **Goal**: Reviewers and admins can securely register, log in, and have role-gated access enforced on every endpoint — running on a dev environment that mirrors production
 **Depends on**: Nothing (first phase)
 **Requirements**: FR-1.1, FR-1.2, FR-1.3, FR-1.4, FR-1.5, FR-1.6, FR-1.7, FR-1.8
