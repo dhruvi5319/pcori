@@ -233,7 +233,7 @@ PCORI reviewers process thousands of research plans annually. Each plan must be 
 - `FilterConfiguration` entity for saving reusable filter sets
 - `ExcelReport` artifact entity tracking generation status and file path
 
-**Priority:** P1 — Basic Excel export is high-value P0 deliverable; ad-hoc builder is P2
+**Priority:** P1 — One-click Excel export ships in Phase 4 as the highest-value deliverable in this feature; ad-hoc builder and saved templates are P2. (Note: F5 as a whole is P1 per the Feature Index in §10; the one-click export is the critical P1 sub-feature.)
 
 ---
 
@@ -310,7 +310,7 @@ PCORI reviewers process thousands of research plans annually. Each plan must be 
 | Category | Requirement |
 |---|---|
 | **Security** | JWT secret via env var only (512-bit minimum; startup failure if missing). BCrypt password hashing. CORS restricted to known production origins (no wildcard). HTTPS in production. Account lockout after configurable failed-login threshold. XSS-resistant token storage. Swagger UI disabled in production profile. |
-| **Performance** | Classification `202` response < 2 s for a 10-page PDF (excluding model latency). Dashboard initial load < 1.5 s. P95 API response < 500 ms (excluding model inference). Paginated list default page size 25. Excel report generation < 10 s for 1,000-row export. |
+| **Performance** | Classification `202` response < 2 s for a 10-page PDF (excluding model latency). Dashboard initial load < 1.5 s. P95 API response < 500 ms (excluding model inference). Paginated list default page size 25. Excel report generation < 10 s for 1,000-row export. Taxonomy search (`GET /api/taxonomy/search`) results returned within 500 ms of first character typed. |
 | **Scalability** | Stateless backend horizontally scalable behind a load balancer. HikariCP connection pooling. `SXSSFWorkbook` streaming for large Excel exports (>1,000 rows). `DashboardMetric` pre-aggregation table to avoid N×GROUP BY degradation. |
 | **Reliability** | Async pipeline startup recovery: records stuck in `PROCESSING` beyond configurable timeout are re-queued on `ApplicationReadyEvent`. `CallerRunsPolicy` rejection handler on `classificationExecutor` to prevent silent task drops. Failed classifications retryable. |
 | **Auditability** | All entities extend `AuditableEntity` @MappedSuperclass (createdAt, updatedAt, createdBy, lastModifiedBy). Every classification stores `uploadedBy`, `reviewedBy`, timestamps, override reason, model version. Soft-delete (`deleted_at`) preferred over hard-delete; classifications retained indefinitely. `@SQLRestriction("deleted_at IS NULL")` on all entities; native SQL analytics queries must add `AND deleted_at IS NULL` explicitly. |

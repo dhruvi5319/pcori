@@ -412,7 +412,7 @@ Every task in these journeys is most valuable when it completes in a single work
 | JRN-01.1 | 5: Submit Override | JTBD-01.3 | Override with required non-empty reason; `reviewedBy`, `reviewedAt` recorded |
 | JRN-01.1 | 6: Confirm Audit | JTBD-01.3 | Auditable record immediately available with reviewer identity + timestamp + override reason |
 | JRN-01.2 | 1: Login and Orient | JTBD-01.2 | Default post-login landing on classification list; no external tool needed |
-| JRN-01.2 | 2: Spot Notifications | JTBD-01.4 | In-app notification bell shows unread badge within ≤10s of classification status change |
+| JRN-01.2 | 2: Spot Notifications | JTBD-01.4 | In-app notification bell shows unread badge within ≤30s polling cycle of classification status change |
 | JRN-01.2 | 3–4: Triage + Sequence | JTBD-01.2 | NEEDS_REVIEW + FAILED items identifiable within 60s; filter returns results in <1.5s |
 | JRN-01.2 | 5: Open First Item | JTBD-01.2 | First priority plan opened within 60s of login |
 | JRN-02.1 | 1: Health Check | JTBD-02.1 | All KPI cards display current values; dashboard loads in <1.5s |

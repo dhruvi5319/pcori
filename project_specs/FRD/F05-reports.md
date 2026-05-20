@@ -129,10 +129,10 @@ See `Y1-api.md` §Reports for full request/response schemas.
 | Method | Path | Auth | Role |
 |---|---|---|---|
 | `POST` | `/api/excel/generate` | JWT | `MANAGER` |
-| `GET` | `/api/reports` | JWT | `MANAGER` |
+| `GET` | `/api/reports` | JWT | `MANAGER`, `VIEWER` |
 | `POST` | `/api/reports` | JWT | `MANAGER` |
-| `GET` | `/api/reports/{id}` | JWT | `MANAGER` |
-| `GET` | `/api/reports/{id}/download` | JWT | `MANAGER` |
+| `GET` | `/api/reports/{id}` | JWT | `MANAGER`, `VIEWER` |
+| `GET` | `/api/reports/{id}/download` | JWT | `MANAGER`, `VIEWER` |
 | `GET` | `/api/reports/templates` | JWT | `MANAGER` |
 | `POST` | `/api/reports/templates` | JWT | `MANAGER` |
 | `PUT` | `/api/reports/templates/{id}` | JWT | `MANAGER` |

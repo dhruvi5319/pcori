@@ -390,6 +390,7 @@ Key fields:
 - `GET /api/classifications` with query params: `page`, `size` (default 25), `sort`, `status`, `startDate`, `endDate`, `pcc`, `q` (keyword search on planId/title).
 - `JpaSpecificationExecutor` for dynamic filter composition.
 - Default sort: `uploadedAt DESC`.
+- Filter state preservation: active filter selections must be preserved in frontend state (e.g., URL query params or React context) so that navigating to a classification detail view and returning to the list restores the same filter and page position. This is a frontend routing responsibility, not a backend API change.
 
 ---
 
@@ -1122,10 +1123,10 @@ See `Y1-api.md` §Reports for full request/response schemas.
 | Method | Path | Auth | Role |
 |---|---|---|---|
 | `POST` | `/api/excel/generate` | JWT | `MANAGER` |
-| `GET` | `/api/reports` | JWT | `MANAGER` |
+| `GET` | `/api/reports` | JWT | `MANAGER`, `VIEWER` |
 | `POST` | `/api/reports` | JWT | `MANAGER` |
-| `GET` | `/api/reports/{id}` | JWT | `MANAGER` |
-| `GET` | `/api/reports/{id}/download` | JWT | `MANAGER` |
+| `GET` | `/api/reports/{id}` | JWT | `MANAGER`, `VIEWER` |
+| `GET` | `/api/reports/{id}/download` | JWT | `MANAGER`, `VIEWER` |
 | `GET` | `/api/reports/templates` | JWT | `MANAGER` |
 | `POST` | `/api/reports/templates` | JWT | `MANAGER` |
 | `PUT` | `/api/reports/templates/{id}` | JWT | `MANAGER` |

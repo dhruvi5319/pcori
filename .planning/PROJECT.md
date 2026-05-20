@@ -58,7 +58,7 @@ Reviewers upload a research plan PDF and receive an automated taxonomy classific
 - **Security:** JWT secret from env vars only (never source); CORS restricted to known production origins; HTTPS in production; all `/api/**` endpoints except public auth require authentication.
 - **Performance:** Classification response < 2 s for a 10-page PDF (excluding model latency); dashboard initial load < 1.5 s; P95 API < 500 ms.
 - **Accessibility:** WCAG 2.1 AA target; Radix UI primitives for keyboard nav + ARIA.
-- **Database:** Dev: H2 (in-container); Production: PostgreSQL or MySQL.
+  - **Database:** Dev: PostgreSQL 16 via Docker Compose (H2 eliminated — Flyway dialect gap is a known pitfall); Production: PostgreSQL or MySQL. `spring.jpa.hibernate.ddl-auto=validate` in production.
 - **Compliance:** HIPAA-aligned controls to be reviewed; PHI/PII handling requirements TBD.
 - **Internationalization:** English-only v1; copy externalized for future i18n.
 

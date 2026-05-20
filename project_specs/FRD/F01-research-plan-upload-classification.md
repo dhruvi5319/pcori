@@ -92,6 +92,7 @@
 - `GET /api/classifications` with query params: `page`, `size` (default 25), `sort`, `status`, `startDate`, `endDate`, `pcc`, `q` (keyword search on planId/title).
 - `JpaSpecificationExecutor` for dynamic filter composition.
 - Default sort: `uploadedAt DESC`.
+- Filter state preservation: active filter selections must be preserved in frontend state (e.g., URL query params or React context) so that navigating to a classification detail view and returning to the list restores the same filter and page position. This is a frontend routing responsibility, not a backend API change.
 
 ---
 
