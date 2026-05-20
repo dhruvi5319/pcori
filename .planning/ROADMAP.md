@@ -29,7 +29,16 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. After configurable failed login attempts the account locks; after configurable TTL or admin action it unlocks
   4. A user can request a password reset link and use it to set a new password within the reset TTL
   5. Admin-role endpoints return 403 when called with a REVIEWER-role JWT, confirming RBAC is enforced at the service layer
-**Plans**: TBD
+**Plans**: 7 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Docker Compose dev stack (PostgreSQL 16 + MailHog) + Spring Boot 3.4 project scaffold
+- [ ] 01-02-PLAN.md — Next.js 16 frontend scaffold: Tailwind CSS 4 CSS-first, Axios singleton, TanStack Query v5, design tokens
+- [ ] 01-03-PLAN.md — Flyway V1 (full schema DDL) + V2 (roles/permissions seed)
+- [ ] 01-04-PLAN.md — Spring Security config, JWT filter chain, AuditableEntity, GlobalExceptionHandler
+- [ ] 01-05-PLAN.md — User/Role/Permission JPA entities, AuthService (register/login/lockout/reset/verify/logout), AuthController
+- [ ] 01-06-PLAN.md — Public auth screens: Landing, Login, Signup, Forgot Password, Reset Password, Email Verification + Playwright e2e
+- [ ] 01-07-PLAN.md — App Shell: collapsible sidebar (glassmorphism, role-gated nav), sticky header, auth guard, UserMenu logout + Playwright e2e
 
 ### Phase 2: Classification Pipeline
 **Goal**: A reviewer can upload a PDF research plan and receive an automated PCORI taxonomy classification in minutes, with all files tracked in S3 and the full taxonomy tree browsable and maintainable
@@ -74,7 +83,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/7 | Not started | - |
 | 2. Classification Pipeline | 0/TBD | Not started | - |
 | 3. Insights | 0/TBD | Not started | - |
 | 4. Reporting & Admin Polish | 0/TBD | Not started | - |
