@@ -83,7 +83,7 @@ created: 2026-05-20
 - Dialog titles (Upload Plan, View Classification, Manual Override): 24px / 600
 - Filter bar label (above table): 14px / 400, muted color
 - Classification table — plan ID column: 14px / 600 (weight bump; plan ID is the primary identifier)
-- Confidence score numeric display inside radial gauge: 20px / 600 (larger than Label but smaller than Heading; fits gauge center)
+- Confidence score numeric display inside radial gauge: 16px / 600 (Body size with weight bump; fits gauge center)
 - Override reason textarea placeholder: 14px / 400, muted
 - Taxonomy breadcrumb preview: 14px / 400, muted, truncated with ellipsis
 - Monospaced (Geist Mono): taxonomy code field values in table (code + subcode columns), pipeline log entries (Phase 3)
@@ -195,7 +195,7 @@ Dark mode gauge colors: `#22C55E` / `#F59E0B` / `#EF4444` respectively.
 | `OverrideSplitPane` | inside ManualOverrideDialog | `Separator` (Radix) | Left/right panels; visual diff highlight on changed fields |
 | `TaxonomySelect` | inside ManualOverrideDialog | `Select` (Radix) | Dropdown for PCC / Category / Code / Subcode; active codes only |
 | `OverrideReasonTextarea` | inside ManualOverrideDialog | — | Required; 1–2000 chars; inline error if blank on submit |
-| `RetryConfirmDialog` | Row action — Retry | `Dialog` (Radix) | Simple confirmation: "Retry this classification?" Cancel + Retry |
+| `RetryConfirmDialog` | Row action — Retry | `Dialog` (Radix) | Simple confirmation: "Retry this classification?" — "Don't Retry" (secondary) + "Retry Classification" (secondary) |
 
 #### `/taxonomy` Route
 
@@ -208,7 +208,7 @@ Dark mode gauge colors: `#22C55E` / `#F59E0B` / `#EF4444` respectively.
 | `TaxonomyTreeNode` | inside TaxonomyTree | — | Chevron toggle; code + name; active/inactive visual; selected state |
 | `TaxonomyDetailPane` | `/taxonomy` right pane | — | Shows selected node detail OR empty state when no node selected |
 | `TaxonomyNodeDetail` | right pane | — | Code, name, description, level, parent, status badge, last modified, action buttons |
-| `TaxonomyEditForm` | right pane (edit mode) | — | Inline form replacing detail view; pre-populated; Save + Cancel |
+| `TaxonomyEditForm` | right pane (edit mode) | — | Inline form replacing detail view; pre-populated; Save + Discard Edits |
 | `TaxonomyAddDialog` | "Add Category" CTA | `Dialog` (Radix) | Create form; hierarchy breadcrumb preview |
 | `HierarchyBreadcrumbPreview` | inside TaxonomyAddDialog | — | Live "Root > Parent > [New Code]" preview; updates on parent selection |
 | `DeactivateConfirmDialog` | "Deactivate" button | `Dialog` (Radix) | Confirmation with cascade warning (N child codes affected) |
@@ -219,6 +219,8 @@ Dark mode gauge colors: `#22C55E` / `#F59E0B` / `#EF4444` respectively.
 ## Screen-by-Screen Visual Contract
 
 ### Screen 1: `/classifications` — Classifications List
+
+**Primary visual anchor:** The gradient "Upload Plan" CTA in the top-right header row is the primary focal point; the first visible data row in the classifications table is the secondary anchor.
 
 **Layout zones:**
 
@@ -336,7 +338,7 @@ Dark mode gauge colors: `#22C55E` / `#F59E0B` / `#EF4444` respectively.
 │                                                         │
 │  [Upload Progress Bar — shown after Upload clicked]     │
 │                                                         │
-│              [Cancel]   [Upload ▶]                      │
+│           [Discard]   [Upload Plan ▶]                   │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -363,10 +365,10 @@ Implement as SVG `<rect>` with animated stroke-dashoffset overlaid on the dropzo
 
 | State | Visual | Copy |
 |-------|--------|------|
-| Default (no file) | Disabled (opacity 50%, cursor-not-allowed) | "Upload" |
-| File selected | Enabled; gradient accent | "Upload" |
+| Default (no file) | Disabled (opacity 50%, cursor-not-allowed) | "Upload Plan" |
+| File selected | Enabled; gradient accent | "Upload Plan" |
 | Uploading | Spinner (`Loader2` animate-spin) + disabled | "Uploading…" |
-| Error (server) | Re-enabled; error toast shown | "Upload" |
+| Error (server) | Re-enabled; error toast shown | "Upload Plan" |
 
 **Progress bar (UploadProgressBar):**
 - Shown below the Notes field only after Upload is clicked and while upload is in progress
@@ -441,7 +443,7 @@ Implement as SVG `<rect>` with animated stroke-dashoffset overlaid on the dropzo
 - SVG-based; 120×120px
 - Outer ring: background track `#E5E7EB` (8px stroke width)
 - Progress arc: color band color (green/amber/red); animates from 0° to coverage angle on first render (0.3s ease-out)
-- Center text: percentage value (e.g., `87%`) at 20px/600 Geist Sans
+- Center text: percentage value (e.g., `87%`) at 16px/600 Geist Sans (Body size, weight bump)
 - Label below gauge: "High Confidence" / "Review Suggested" / "Low Confidence" at 14px/400 muted
 - Color bands (arc fill color):
   - Score ≥ 0.85 → `#16A34A` (green) / dark `#22C55E`
@@ -518,7 +520,7 @@ Implement as SVG `<rect>` with animated stroke-dashoffset overlaid on the dropzo
 │ └─────────────────────────────────────────────────────────────────┘   │
 │ [Inline error: "Override reason is required" — shown on submit attempt]│
 │────────────────────────────────────────────────────────────────────────│
-│                                              [Cancel] [Submit Override] │
+│                               [Keep AI Classification] [Submit Override] │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -666,7 +668,7 @@ Implement as SVG `<rect>` with animated stroke-dashoffset overlaid on the dropzo
 - Fields: Code (text), Name (text), Description (textarea), Display Order (number)
 - Parent field: read-only reference shown; parent change not supported in Phase 2 edit flow
 - Save button: gradient accent; disabled until ≥1 field changed
-- Cancel button: secondary; restores detail view
+- "Discard Edits" button: secondary; restores detail view (no changes applied)
 
 **Right pane — Empty state (no node selected):**
 - Icon: `TreePine` (lucide, 48px, muted)
@@ -695,7 +697,7 @@ Implement as SVG `<rect>` with animated stroke-dashoffset overlaid on the dropzo
 - Body:
   - Primary: "This code will be hidden from future classifications. Existing records using it will not be affected."
   - If node has children: "[N] child code(s) will also be deactivated."
-- Buttons: "Cancel" (secondary) + "Deactivate" (destructive red button)
+- Buttons: "Keep Active" (secondary) + "Deactivate" (destructive red button)
 - Destructive button: `#DC2626` bg; white text; NOT gradient
 
 ---
@@ -707,7 +709,7 @@ Implement as SVG `<rect>` with animated stroke-dashoffset overlaid on the dropzo
 | Element | Copy | Style |
 |---------|------|-------|
 | Classifications page CTA | "Upload Plan" | gradient accent button |
-| Upload dialog submit | "Upload" / "Uploading…" (loading) | gradient accent |
+| Upload dialog submit | "Upload Plan" / "Uploading…" (loading) | gradient accent |
 | Override dialog submit | "Submit Override" / "Saving override…" | gradient accent |
 | Taxonomy page CTA | "Add Category" | gradient accent (TAXONOMY_ADMIN only) |
 | Taxonomy edit save | "Save Changes" | gradient accent |
@@ -757,12 +759,12 @@ Implement as SVG `<rect>` with animated stroke-dashoffset overlaid on the dropzo
 
 ### Destructive Actions in Phase 2
 
-| Action | Confirmation Approach | Confirm Button Copy |
-|--------|----------------------|---------------------|
-| Deactivate taxonomy code | Modal dialog with cascade warning (N child codes affected) | "Deactivate" (red button) |
-| Retry failed classification | Inline confirmation within row action (popover or simple confirm dialog) | "Retry" (secondary button) |
+| Action | Confirmation Approach | Confirm Button Copy | Dismiss Button Copy |
+|--------|----------------------|---------------------|---------------------|
+| Deactivate taxonomy code | Modal dialog with cascade warning (N child codes affected) | "Deactivate" (red button) | "Keep Active" (secondary) |
+| Retry failed classification | Inline confirmation within row action (popover or simple confirm dialog) | "Retry Classification" (secondary button) | "Don't Retry" (secondary) |
 
-**Retry confirmation:** "Retry this classification?" — [Cancel] [Retry] — minimal dialog; NOT destructive styling (retry is not irreversible). Cancel secondary, Retry secondary (not accent, not red).
+**Retry confirmation:** "Retry this classification?" — [Don't Retry] [Retry Classification] — minimal dialog; NOT destructive styling (retry is not irreversible). "Don't Retry" secondary, "Retry Classification" secondary (not accent, not red).
 
 ---
 
@@ -894,11 +896,14 @@ All Phase 1 patterns apply unchanged:
 | Override reason required | `aria-required="true"` on textarea; `aria-describedby` linking to error message element |
 | Tree navigation | Each tree node: `role="treeitem"`; tree container: `role="tree"`; keyboard: arrow keys expand/collapse/navigate; Enter selects node |
 | Inactive taxonomy nodes | `aria-disabled="true"` on inactive node elements |
-| Confirmation dialogs | Radix Dialog: focus trap + Escape-to-close; destructive button is NOT auto-focused (Cancel is default-focused) |
+| Confirmation dialogs | Radix Dialog: focus trap + Escape-to-close; destructive button is NOT auto-focused (dismiss/secondary button is default-focused) |
 | Progress bar | Radix Progress primitive; `aria-valuenow={progress}` `aria-valuemin={0}` `aria-valuemax={100}` |
 | Table sort buttons | `aria-sort="ascending|descending|none"` on sortable column headers |
 | Table row click | Table rows are `role="row"`; clickable rows have `tabindex="0"` + `onKeyDown` Enter handler |
 | Filter chip remove | `aria-label="Remove [filter name] filter"` on each chip × button |
+| Row action — View icon (`Eye`) | `aria-label="View [Plan ID]"` (dynamic; e.g., `aria-label="View RP-2026-042"`) |
+| Row action — Override icon (`PenLine`) | `aria-label="Override [Plan ID]"` (dynamic; e.g., `aria-label="Override RP-2026-042"`) |
+| Row action — Retry icon (`RotateCcw`) | `aria-label="Retry [Plan ID]"` (dynamic; rendered only when row status is `FAILED`; e.g., `aria-label="Retry RP-2026-042"`) |
 
 ---
 
