@@ -281,7 +281,7 @@ Dark mode gauge colors: `#22C55E` / `#F59E0B` / `#EF4444` respectively.
 **Active filter chips:**
 
 - Each active filter shown as a chip above the table
-- Chip: label + `×` remove icon (lucide `X`, 12px)
+- Chip: label + `×` remove icon (lucide `X`, 14px)
 - Chip height: 28px; padding: 4px 8px; border-radius: 14px (full pill)
 - Removing a chip updates the filter bar control AND refetches table
 
@@ -607,7 +607,7 @@ Implement as SVG `<rect>` with animated stroke-dashoffset overlaid on the dropzo
 - While searching: spinner replaces search icon
 - Results list replaces tree below input when search has results
 - "No results for '[term]'" empty state in muted text
-- Search result item: `CODE — Name` (14px); `Level N · Parent: [parent name]` (12px, muted)
+- Search result item: `CODE — Name` (14px); `Level N · Parent: [parent name]` (14px, muted)
 - Clicking result: collapses search, expands tree to node, selects it, shows detail in right pane
 
 **Taxonomy Tree:**
