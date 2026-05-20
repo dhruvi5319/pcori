@@ -118,7 +118,10 @@ The following effects are required for Phase 1 and must be implemented precisely
 - Applied to: sidebar panel, app header (sticky), auth card on landing page
 
 #### Landing Page Hero Section
-- Background: dark section with CSS gradient mesh (`background: radial-gradient(ellipse at 20% 50%, #1e3a5f 0%, #0f172a 40%, #1a1040 100%)`)
+- Background: dark section with layered CSS effects:
+  1. **Base gradient mesh:** `background: radial-gradient(ellipse at 20% 50%, #1e3a5f 0%, #0f172a 40%, #1a1040 100%)`
+  2. **Noise texture overlay:** SVG noise at 3% opacity layered on top — `background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); background-blend-mode: overlay`
+  - The noise layer transforms the gradient from "SaaS template" to "hand-crafted" — eliminates the banded gradient look
 - Text: white/near-white against dark hero
 - Feature cards: gradient border on hover (`border: 1px solid transparent; background-clip: padding-box` with `::before` gradient pseudo-element — blue-to-purple)
 - Animated counters on KPI elements (landing page marketing stats, if any)
@@ -128,9 +131,17 @@ The following effects are required for Phase 1 and must be implemented precisely
 - Applied to: "Get Started" hero button, "Sign In" button, "Create Account" button
 - Hover state: gradient shifts slightly brighter + `transform: translateY(-1px)`
 
-#### Auth Card Elevation
-- Auth card (Login, Signup, Forgot Password, Reset Password): soft shadow `box-shadow: 0 8px 32px rgba(0,0,0,0.12)` light / `0 8px 32px rgba(0,0,0,0.4)` dark
-- Card hover does NOT trigger lift (auth cards are not interactive cards)
+#### Card Elevation System (3 levels — define in Phase 1, use throughout all phases)
+
+All cards in the application use one of three elevation levels. Consistent use prevents visual hierarchy confusion as more screens are added in Phase 2+.
+
+| Level | Name | Shadow (Light) | Shadow (Dark) | Use |
+|-------|------|----------------|---------------|-----|
+| **E1** | Surface | `0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)` | `0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2)` | Table rows, list items, inline cards (low prominence) |
+| **E2** | Raised | `0 4px 16px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06)` | `0 4px 16px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.25)` | KPI cards, dashboard widgets, taxonomy tree nodes |
+| **E3** | Floating | `0 8px 32px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.08)` | `0 8px 32px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.3)` | Auth cards (Login/Signup/etc.), dialogs, dropdowns, tooltips |
+
+**Hover lift rule:** Interactive cards (feature cards on landing, KPI cards on dashboard) add `transform: translateY(-2px)` + promote to next elevation level on hover. Auth cards and dialogs do NOT lift (they are not interactive card surfaces).
 
 ---
 
@@ -486,6 +497,8 @@ All requirements are WCAG 2.1 AA:
 | Medium UI density | User decision #3 |
 | Blue brand color | User decision #4 |
 | Advanced UI: glassmorphism, gradient CTAs, gradient card borders, animated counters | User decision #5 |
+| Hero noise texture overlay (SVG fractalNoise at 3% opacity, blend-mode overlay) | User decision — upgrade applied 2026-05-20 |
+| 3-level card elevation system (E1 Surface / E2 Raised / E3 Floating) | User decision — upgrade applied 2026-05-20 |
 | Auth screen layouts + flows (Login, Signup, Forgot PW, Reset PW, Verify Email) | UX-Mockup §Flow-00, §Screen-00–02 |
 | Copy: all error messages and flow states | UX-Mockup §Flow-00 |
 | Color tokens (primary, secondary, destructive, muted, accent, status colors) | PRD §8.5 / UX-Mockup Design System table |
