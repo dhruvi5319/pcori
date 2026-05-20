@@ -84,21 +84,21 @@ created: 2026-05-20
 | Body | 16px | 400 | 1.5 | Geist Sans | Tooltip text, notification body, description copy |
 | Label / Small | 14px | 400 | 1.4 | Geist Sans | Chart axis labels, KPI card sub-labels, notification timestamps |
 
+**Declared sizes: exactly 4 — 14 / 16 / 24 / 48px. No other sizes are part of the type scale.**
+
 **Phase 3 specific usage notes:**
 
 - KPI card primary number: 48px / 600 (Display size — these are the hero metrics)
 - KPI card label below number: 14px / 400, muted color (e.g., "Total Plans", "Avg AI Confidence")
-- KPI card delta/sub-label (e.g., "+5 today"): 12px / 400 — **exception**: this is the only 12px text in the system; used exclusively for KPI card delta chips; too small for body use
+- KPI card delta/sub-label (e.g., "+5 today"): 14px / 400 (Label size — green for positive, red for negative, gray for zero)
 - Chart section title: 16px / 600 (Body size with weight bump — not 24px; charts are dense)
-- Chart axis tick labels: 12px / 400 (Recharts default is already 12px; use Geist Sans via `style` prop on Recharts `<XAxis>` / `<YAxis>`)
+- Chart axis tick labels: Recharts SVG internal `fontSize` default — not a declared type scale token; executor sets `style={{ fontSize: 12 }}` directly on `<XAxis>`/`<YAxis>` SVG props without adding to the type scale
 - Chart custom tooltip card: 14px / 400 (Label size)
-- Pipeline log entry: 12px / 400, Geist Mono — **exception**: 12px mono is readable in dense log panels; matches log line density expectation
+- Pipeline log entry: 14px / 400, Geist Mono (Label size in monospace font — log line density handled by compact vertical padding, not reduced font size)
 - Pipeline stats header: 16px / 600 (Body size, weight bump for status values)
 - Notification item title: 14px / 600 (Label size, weight bump — title is primary scent)
 - Notification item body: 14px / 400 (Label size, regular weight)
-- Notification timestamp: 12px / 400, muted — **exception**: compact timestamp in notification list
-
-> **Weight exception note:** 12px entries above are the only text below 14px in the system. They appear exclusively in: (1) KPI delta chips, (2) chart axis ticks, (3) pipeline log entries, (4) notification timestamps. Executor must not introduce 12px text in other contexts.
+- Notification timestamp: 14px / 400, muted (Label size — compact enough at 14px with muted color treatment)
 
 ---
 
@@ -242,7 +242,7 @@ Implemented as an SVG `<linearGradient>` referenced by the Recharts `<Area fill=
 | `KpiCardGrid` | `/dashboard` | — | 4-across responsive grid; passes widget layout from DashboardConfiguration |
 | `KpiCard` | `/dashboard` | — | E2 Raised card; metric number (48px/600) + label (14px/400) + sparkline + optional delta chip; drag handle |
 | `KpiCardSparkline` | inside KpiCard | — | SVG sparkline 80×40px; 7-day trend data points; colored line (per metric color); no axes shown |
-| `KpiDeltaChip` | inside KpiCard | — | "+N today" small chip; 12px/400; green for positive, red for negative, gray for zero |
+| `KpiDeltaChip` | inside KpiCard | — | "+N today" small chip; 14px/400; green for positive, red for negative, gray for zero |
 | `KpiCardSkeleton` | `/dashboard` | — | Gradient shimmer skeleton matching KpiCard dimensions |
 | `DragHandle` | inside KpiCard | — | `GripVertical` lucide icon; visible only in customize mode; `cursor-grab` / `cursor-grabbing` |
 | `DragGhostCard` | overlay | — | Semi-transparent ghost preview during drag operation; matches KpiCard size/shape |
@@ -289,14 +289,14 @@ Implemented as an SVG `<linearGradient>` referenced by the Recharts `<Area fill=
 | `StuckRecordsWarning` | `/data-pipeline` | — | Amber callout `AlertTriangle` + text; shown only when stuckCount > 0 |
 | `PipelineControlActions` | `/data-pipeline` | — | Button group: Start / Stop / Pause / Resume / Sync Now; ADMIN role only |
 | `PipelineControlButton` | inside controls | — | Individual control button; contextually disabled per pipeline state rules |
-| `StopConfirmDialog` | Stop button | `Dialog` (Radix) | "Stop the pipeline? In-flight stage will complete." — [Cancel] + [Stop] |
-| `SyncConfirmDialog` | Sync Now button | `Dialog` (Radix) | "Trigger manual sync?" — [Cancel] + [Sync Now] |
+| `StopConfirmDialog` | Stop button | `Dialog` (Radix) | "Stop the pipeline? In-flight stage will complete." — [Keep Pipeline Running] + [Stop Pipeline] |
+| `SyncConfirmDialog` | Sync Now button | `Dialog` (Radix) | "Trigger manual sync?" — [Don't Sync] + [Sync Now] |
 | `StageCardsRow` | `/data-pipeline` | — | 3 stage cards side-by-side: EXTRACT, CLASSIFY, PERSIST |
 | `StageCard` | inside row | — | E2 Raised card; left border color-coded by state; name + state + last run + duration + error |
 | `StageStateIndicator` | inside StageCard | — | Colored dot + state text label (same color system as pipeline state) |
 | `StuckRecordsBanner` | inside StageCard | — | Amber banner inside card when stage has stuck records; explicit, not subtle |
 | `StageRetryButton` | inside StageCard | — | Visible only when stage state is FAILED; secondary button style; opens StageRetryConfirmDialog |
-| `StageRetryConfirmDialog` | Retry button | `Dialog` (Radix) | "Retry [STAGE] stage?" — [Cancel] + [Retry] |
+| `StageRetryConfirmDialog` | Retry button | `Dialog` (Radix) | "Retry [STAGE] stage?" — [Don't Retry Stage] + [Retry Stage] |
 | `DbHealthPanel` | `/data-pipeline` | — | E1 Surface card; connections (active/idle/max) + queue depth |
 | `PipelineLogsPanel` | `/data-pipeline` | — | Collapsible panel; Geist Mono font; log level color coding |
 | `PipelineLogEntry` | inside logs | — | Timestamp + level badge + message; INFO/WARN/ERROR colors |
@@ -381,7 +381,7 @@ Implemented as an SVG `<linearGradient>` referenced by the Recharts `<Area fill=
 │                                                              │
 │  143                          [sparkline SVG 80×40px]       │ ← 48px / 600 number; sparkline right-aligned
 │  Total Plans                  ⌒⌒⌒⌒⌒                        │ ← 14px / 400 label; sparkline line
-│  +5 today [chip]                                             │ ← 12px / 400 delta chip; green bg
+│  +5 today [chip]                                             │ ← 14px / 400 delta chip; green bg
 │                                                              │
 └──────────────────────────────────────────────────────────────┘
 ```
@@ -497,7 +497,7 @@ Feed shows last 10 items by default; "View all Classifications →" link at bott
 **Category Accuracy Horizontal Bar Chart:**
 - Recharts `BarChart` with `layout="vertical"` and `isAnimationActive={false}`
 - Bar color: green (`#16A34A`) if `overrideRate <= 0.15`; red (`#DC2626`) if `overrideRate > 0.15`
-- Red bar additionally shows a text label inline after bar end: "Above 15% threshold" in red 12px/400
+- Red bar additionally shows a text label inline after bar end: "Above 15% threshold" in red 14px/400
 - Click on bar → sets `selectedCategory` state → `RecentOverridesSection` filter activates
 - Selected bar: increases `opacity` from 0.8 to 1.0 and adds a thin outer stroke `#1D4ED8`
 - Custom tooltip: category name + total + override count + accuracy rate %
@@ -559,7 +559,7 @@ Feed shows last 10 items by default; "View all Classifications →" link at bott
 │  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─  │
 │                                                                            │
 │  ── CONTROL ACTIONS (ADMIN role only) ─────────────────────────────────── │
-│  [▶ Start]  [⏹ Stop]  [⏸ Pause]  [▶▶ Resume]  [↻ Sync Now]              │
+│  [▶ Start Pipeline]  [⏹ Stop Pipeline]  [⏸ Pause Pipeline]  [▶▶ Resume Pipeline]  [↻ Sync Now]  │
 │  (disabled buttons shown at opacity 50% with cursor-not-allowed)           │
 │                                                                            │
 │  ── STAGE CARDS (3 cards, equal width) ────────────────────────────────── │
@@ -588,7 +588,7 @@ Feed shows last 10 items by default; "View all Classifications →" link at bott
 │  ── LOGS + RUN HISTORY (Tabbed, collapsible log panel) ────────────────── │
 │  [Event Log ▾]  [Run History]                          [▼ Expand / ▲ Collapse] │
 │  ┌─────────────────────────────────────────────────────────────────────┐  │
-│  │ [Geist Mono 12px]                                                   │  │
+│  │ [Geist Mono 14px]                                                   │  │
 │  │ 09:42:15  INFO   Pipeline run started: run-a1b2c3                   │  │
 │  │ 09:42:16  INFO   EXTRACT stage: processing RP-2026-043              │  │
 │  │ 09:41:55  WARN   Text quality gate: low char count (92)             │  │
@@ -625,9 +625,9 @@ Disabled buttons: `opacity: 50%; cursor: not-allowed; pointer-events: none`
 
 | Level | Color (Light) | Color (Dark) | Font |
 |-------|--------------|--------------|------|
-| `INFO` | `#6B7280` gray | `#9CA3AF` | Geist Mono 12px / 400 |
-| `WARN` | `#D97706` amber | `#F59E0B` | Geist Mono 12px / 400 |
-| `ERROR` | `#DC2626` red | `#EF4444` | Geist Mono 12px / 600 (weight bump for errors) |
+| `INFO` | `#6B7280` gray | `#9CA3AF` | Geist Mono 14px / 400 |
+| `WARN` | `#D97706` amber | `#F59E0B` | Geist Mono 14px / 400 |
+| `ERROR` | `#DC2626` red | `#EF4444` | Geist Mono 14px / 600 (weight bump for errors) |
 
 Log panel collapsed height: 240px (shows ~4 log lines). Expanded: 480px. Toggle button shows `ChevronDown` / `ChevronUp`.
 
@@ -681,7 +681,7 @@ App header [⭐ Bell: 🔴3]  ← unread badge, red dot with count
 - Type icon: 20px lucide icon, left-aligned, colored by type (see color spec above)
 - Title: 14px / 600 (label size + weight bump)
 - Body: 14px / 400; truncated to 2 lines with CSS `line-clamp: 2`
-- Timestamp: 12px / 400, muted; right-aligned on same row as title
+- Timestamp: 14px / 400, muted; right-aligned on same row as title
 - Click notification: marks as read (PATCH /api/notifications/{id}/read); navigates to related record if applicable
 - Hover: subtle bg tint `bg-accent/8`
 - Item separator: `1px solid rgba(0,0,0,0.06)` light / `rgba(255,255,255,0.04)` dark
@@ -717,7 +717,7 @@ App header [⭐ Bell: 🔴3]  ← unread badge, red dot with count
 │  │ Override Submitted             │  [●━━━]  │  [○━━━]      │  │
 │  └────────────────────────────────┴───────────┴───────────────┘  │
 │                                                                   │
-│  Email column note: "Emails sent only when SMTP is configured"   │ ← 12px/400, muted italic
+│  Email column note: "Emails sent only when SMTP is configured"   │ ← 14px/400, muted italic
 │                                                                   │
 │──────────────────────────────────────────────────────────────────│
 │                               [Cancel]  [Save Preferences]        │
@@ -891,8 +891,8 @@ This is a PRD mandate (PRD §5.1) to prevent paint jank. NEVER remove this prop 
 | Notification preferences save | "Save Preferences" | Gradient accent |
 | Pipeline Start | "Start Pipeline" | Secondary button; `Play` icon |
 | Pipeline Stop | "Stop Pipeline" | Secondary button; `Square` icon (destructive confirmation required) |
-| Pipeline Pause | "Pause" | Secondary button; `Pause` icon |
-| Pipeline Resume | "Resume" | Secondary button (accent); `Play` icon |
+| Pipeline Pause | "Pause Pipeline" | Secondary button; `Pause` icon |
+| Pipeline Resume | "Resume Pipeline" | Secondary button (accent); `Play` icon |
 | Pipeline Sync | "Sync Now" | Secondary button; `RefreshCw` icon |
 | Stage Retry | "Retry Stage" | Secondary button; `RotateCcw` icon |
 
@@ -943,9 +943,9 @@ This is a PRD mandate (PRD §5.1) to prevent paint jank. NEVER remove this prop 
 
 | Action | Confirmation Approach | Confirm Button | Dismiss Button |
 |--------|----------------------|----------------|----------------|
-| Stop pipeline | Modal dialog: "Stop the pipeline? The in-flight stage will complete." | "Stop Pipeline" (secondary, NOT red — stopping is operational not destructive) | "Cancel" |
-| Sync Now | Modal dialog: "Trigger manual sync to pick up pending records?" | "Sync Now" (secondary) | "Cancel" |
-| Stage Retry | Modal dialog: "Retry [EXTRACT / CLASSIFY / PERSIST] stage?" | "Retry" (secondary) | "Cancel" |
+| Stop pipeline | Modal dialog: "Stop the pipeline? The in-flight stage will complete." | "Stop Pipeline" (secondary, NOT red — stopping is operational not destructive) | "Keep Pipeline Running" |
+| Sync Now | Modal dialog: "Trigger manual sync to pick up pending records?" | "Sync Now" (secondary) | "Don't Sync" |
+| Stage Retry | Modal dialog: "Retry [EXTRACT / CLASSIFY / PERSIST] stage?" | "Retry Stage" (secondary) | "Don't Retry Stage" |
 
 > Note: Pipeline control actions use secondary buttons in confirmation dialogs (NOT destructive red). These are operational controls, not data-loss actions. The only true destructive button in the app remains red (e.g., taxonomy deactivation from Phase 2).
 
@@ -1041,7 +1041,7 @@ This is a PRD mandate (PRD §5.1) to prevent paint jank. NEVER remove this prop 
 | Pipeline state color system (green/amber/gray/red) | Derived from status color reference |
 | Log level colors (INFO gray, WARN amber, ERROR red) | UX-Mockup Screen-06 log level reference |
 | Chart section title 16px/600 (not 24px) | Density requirement — data-forward layouts use smaller section titles |
-| 12px text exceptions (KPI delta chips, chart axis ticks, log entries, notification timestamps) | Justified exceptions for dense data contexts |
+| Chart axis tick `fontSize: 12` via SVG prop (not a type scale token) | Recharts SVG internal setting — set directly on `<XAxis>`/`<YAxis>` style prop |
 | WCAG 2.1 AA accessibility | PRD §8.6 + Phase 1 baseline |
 | Responsive breakpoints | PRD §8.7 + Phase 1 baseline |
 | TanStack Query staleTime per resource | FRD §F03 + Phase 2 patterns |
