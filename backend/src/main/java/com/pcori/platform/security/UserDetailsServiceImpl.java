@@ -1,22 +1,24 @@
 package com.pcori.platform.security;
 
+import com.pcori.platform.domain.user.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Stub implementation — replaced in Plan 05 when UserRepository and User entity are available.
- * This stub prevents circular dependency during security configuration at startup.
- * Full implementation in Plan 05 will inject UserRepository and load user from DB.
- */
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    private final UserRepository userRepository;
+
     @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Full implementation in Plan 05 when UserRepository is available
-        // This stub prevents circular dependency during security configuration
-        throw new UsernameNotFoundException("UserDetailsServiceImpl not yet fully initialized - replace in Plan 05");
+        return userRepository.findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException(
+                "User not found with username: " + username));
     }
 }
