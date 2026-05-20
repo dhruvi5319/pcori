@@ -177,7 +177,7 @@ The following effects are required for Phase 1 and must be implemented precisely
 **Layout zones:**
 1. **Public Nav bar** — Logo left, "Login" + "Sign Up" buttons right. Height 64px. No glassmorphism (clean white/dark bar).
 2. **Hero Section** — Full-width dark gradient mesh background. Min-height 600px. Centered content column (max-width 720px).
-   - Headline (Display 48px / 700): "Automate Research Plan Classification"
+   - Headline (Display 48px / 600): "Automate Research Plan Classification"
    - Subheadline (Body 16px / 400): "Upload a PDF. Get AI-powered PCORI taxonomy classification in minutes."
    - Dual CTAs: "Get Started →" (gradient accent button, primary) + "Sign In" (ghost/outline button, secondary)
    - Animated counter KPIs below hero text (e.g., "143 Plans Classified" with count-up animation on first scroll into view)
