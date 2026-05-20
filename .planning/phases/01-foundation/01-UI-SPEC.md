@@ -63,14 +63,12 @@ Declared values (all multiples of 4 — 8-point grid):
 
 | Role | Size | Weight | Line Height | Font | Usage |
 |------|------|--------|-------------|------|-------|
-| Display | 48px (3rem) | 700 (bold) | 1.1 | Geist Sans | Landing page hero headline only |
+| Display | 48px (3rem) | 600 (semibold) | 1.1 | Geist Sans | Landing page hero headline only |
 | Heading | 24px (1.5rem) | 600 (semibold) | 1.2 | Geist Sans | Auth card titles ("Sign In to PCORI Analytics"), page section headers |
 | Body | 16px (1rem) | 400 (regular) | 1.5 | Geist Sans | Form labels, descriptions, paragraph text, nav item labels (expanded) |
 | Label / Small | 14px (0.875rem) | 400 (regular) | 1.4 | Geist Sans | Helper text, field hints, footer links, secondary nav text, form error messages |
 
-**Declared weights:** 400 (regular) + 600 (semibold) + 700 (bold — Display only)
-
-> Note: 700 is used exclusively for the landing hero headline. All other bold usage uses 600 semibold. The executor should treat this as 2 weights for application UI (400 + 600), with 700 reserved for the single hero display element.
+**Declared weights:** 400 (regular) + 600 (semibold)
 
 **Mono font (Geist Mono):** Used exclusively in log panels (Pipeline Monitoring, Phase 2+). Not used in Phase 1 auth screens. Define it in global CSS for Phase 2 readiness.
 
@@ -389,7 +387,7 @@ The following effects are required for Phase 1 and must be implemented precisely
 | Passwords mismatch | "Passwords do not match." | Inline field error |
 | Token expired (reset) | "This reset link has expired or has already been used." | Card error state |
 | Token expired (verify) | "This verification link has expired or was already used." | Card error state |
-| Network error (generic) | "Something went wrong. Please try again." | sonner red |
+| Network error (generic) | "Connection error — please check your network and try again." | sonner red |
 
 ### Empty States
 
@@ -449,6 +447,7 @@ All requirements are WCAG 2.1 AA:
 | Error associations | `aria-describedby` linking input to its error message element |
 | Dialog focus trap | Radix Dialog primitive handles focus trap + Escape-to-close automatically |
 | Tooltip accessibility | Radix Tooltip primitive; `aria-label` on icon-only sidebar items (collapsed state) |
+| Header icon-only buttons | `ThemeToggle` → `aria-label="Toggle theme"`; `NotificationBell` → `aria-label="View notifications"`; Mobile sidebar trigger → `aria-label="Open navigation"` |
 | Touch targets | Minimum 44px height/width for all interactive elements |
 | Screen reader | sonner toasts have `role="status"` / `aria-live` (built-in) |
 | Password show/hide | Toggle button has `aria-label="Show password"` / `aria-label="Hide password"` |
