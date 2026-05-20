@@ -2,15 +2,15 @@
 pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Completed 01-04-PLAN.md
-last_updated: "2026-05-20T18:37:15.950Z"
-last_activity: 2026-05-20 — Roadmap created; ready to begin Phase 1 planning
+status: executing
+stopped_at: Completed 01-05-PLAN.md
+last_updated: "2026-05-20T18:51:24.215Z"
+last_activity: 2026-05-20 — Completed Plan 04 (Spring Security + JWT infrastructure)
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 11
-  completed_plans: 4
+  completed_plans: 5
   percent: 36
 ---
 
@@ -56,6 +56,7 @@ Progress: [████░░░░░░] 36%
 | Phase 01-foundation P02 | 4min | 2 tasks | 16 files |
 | Phase 01-foundation P03 | 1min | 2 tasks | 2 files |
 | Phase 01-foundation P04 | 5min | 2 tasks | 13 files |
+| Phase 01-foundation P05 | 11min | 2 tasks | 20 files |
 
 ## Accumulated Context
 
@@ -77,6 +78,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: ADMIN role assigned all permissions via CROSS JOIN — automatically includes future permissions
 - [Phase 01-foundation]: UserDetailsServiceImpl stub created — replaced fully in Plan 05 when UserRepository and User entity are available
 - [Phase 01-foundation]: Swagger gated to dev profile via AuthorizationDecision — unreachable in non-dev profiles without property overrides
+- [Phase 01-foundation]: @Transactional(noRollbackFor = BadCredentialsException.class) required on AuthService — without it Spring rolls back login_attempts increment, breaking FR-1.3 account lockout
+- [Phase 01-foundation]: V3 migration adds created_by/last_modified_by audit columns to users table — AuditableEntity @MappedSuperclass mapped these but V1 DDL omitted them
 
 ### Pending Todos
 
@@ -92,6 +95,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-20T18:37:15.949Z
-Stopped at: Completed 01-04-PLAN.md
+Last session: 2026-05-20T18:51:24.213Z
+Stopped at: Completed 01-05-PLAN.md
 Resume file: None
