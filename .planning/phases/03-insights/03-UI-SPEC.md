@@ -687,7 +687,7 @@ App header [⭐ Bell: 🔴3]  ← unread badge, red dot with count
 - Item separator: `1px solid rgba(0,0,0,0.06)` light / `rgba(255,255,255,0.04)` dark
 
 **Unread badge behavior:**
-- Red circle with white count text, min-width 18px, height 18px, border-radius 9px
+- Red circle with white count text, min-width 20px, height 20px, border-radius 10px
 - Position: `absolute top-0 right-0 translate-x-1/2 -translate-y-1/2` on bell icon
 - When panel opened → badge immediately disappears (not delayed; count set to 0 visually)
 - Badge count updates every 30s via polling (staleTime: 30000)
@@ -720,7 +720,7 @@ App header [⭐ Bell: 🔴3]  ← unread badge, red dot with count
 │  Email column note: "Emails sent only when SMTP is configured"   │ ← 14px/400, muted italic
 │                                                                   │
 │──────────────────────────────────────────────────────────────────│
-│                               [Cancel]  [Save Preferences]        │
+│                    [Keep Current Settings]  [Save Preferences]    │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
