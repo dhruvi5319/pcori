@@ -52,7 +52,16 @@ Plans:
   4. Classifications can be filtered by status, date range, and PCC; searched by plan ID or title; paginated and sorted
   5. Taxonomy admin can CRUD PCORI/ICD-10 categories, view the full hierarchy tree, and activate/deactivate codes without deletion
   6. Uploaded PDF is stored in S3-compatible object storage and retrievable via a 15-minute pre-signed URL; direct public access returns 403
-**Plans**: TBD
+**Plans**: 7 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — MinIO Docker Compose service + Flyway V3 (classifications + uploaded_files DDL) + V4 (taxonomy_categories DDL + PCORI seed)
+- [ ] 02-02-PLAN.md — Files domain: UploadedFile entity, StorageService interface, S3StorageService (MinIO endpointOverride), FileController pre-signed URL
+- [ ] 02-03-PLAN.md — Taxonomy domain: TaxonomyCategory entity, TaxonomyRepository, TaxonomyService (CRUD + cascade + tree), TaxonomyController (11 endpoints)
+- [ ] 02-04-PLAN.md — Classification domain: entity, repository, service, controller, PlanIdGenerator, async pipeline (3 stages + PipelineRecovery), KeywordClassificationStrategy
+- [ ] 02-05-PLAN.md — Classifications frontend: /classifications page, filter bar with URL params, table, status badges (animate-ping PROCESSING), empty states, Playwright e2e
+- [ ] 02-06-PLAN.md — Classification dialogs: Upload Plan (dropzone + SVG animated border), View (confidence gauge), Manual Override (split pane + diff highlight), Retry Confirm
+- [ ] 02-07-PLAN.md — Taxonomy frontend: /taxonomy two-pane page, collapsible tree, detail pane, inline edit form, Add Category dialog (breadcrumb preview), Deactivate confirm
 
 ### Phase 3: Insights
 **Goal**: Program managers and admins have real-time visibility into classification volume, accuracy, override patterns, and pipeline health — with in-app notifications keeping reviewers informed without manual polling
