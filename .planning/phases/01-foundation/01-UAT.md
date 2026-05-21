@@ -1,9 +1,9 @@
 ---
-status: complete
+status: diagnosed
 phase: 01-foundation
 source: 01-01-SUMMARY.md, 01-02-SUMMARY.md, 01-03-SUMMARY.md, 01-04-SUMMARY.md, 01-05-SUMMARY.md, 01-06-SUMMARY.md, 01-07-SUMMARY.md
 started: 2026-05-21T00:00:00Z
-updated: 2026-05-21T04:30:00Z
+updated: 2026-05-21T04:45:00Z
 ---
 
 ## Current Test
@@ -109,37 +109,54 @@ skipped: 10
   reason: "User reported: The page is unstyled ,nothing renders styled"
   severity: major
   test: 3
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "globals.css contains unlayered `* { margin: 0; padding: 0 }` reset (lines 63-68) that overrides all Tailwind v4 `@layer utilities` rules per CSS Cascade Level 5 spec — unlayered author CSS wins over all layered rules. Secondary: production build postcss.config.mjs may not be resolved by next build, emitting zero utility classes."
+  artifacts:
+    - path: "frontend/src/app/globals.css"
+      issue: "Unlayered * reset at lines 63-68 overrides all Tailwind spacing utilities"
+    - path: "frontend/postcss.config.mjs"
+      issue: "May not be resolved by next build (secondary — production only)"
+  missing:
+    - "Remove unlayered * { margin: 0; padding: 0 } block from globals.css (Tailwind v4 provides equivalent reset inside @layer base)"
+    - "Optionally rename postcss.config.mjs to postcss.config.js with CommonJS exports to ensure production build compatibility"
+  debug_session: ".planning/debug/tailwind-styles-not-applied.md"
 
 - truth: "Login page shows styled auth card with username field, password field with show/hide toggle, and disabled Sign In button"
   status: failed
   reason: "User reported: can see all the elements but it is not styled"
   severity: major
   test: 4
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "Same root cause as Test 3 — unlayered CSS reset in globals.css overrides all Tailwind utilities including layout, color, and spacing classes on the login page."
+  artifacts:
+    - path: "frontend/src/app/globals.css"
+      issue: "Unlayered * reset overrides all Tailwind utilities (shared cause with Test 3)"
+  missing:
+    - "Fix is shared with Test 3 — remove unlayered * reset from globals.css"
+  debug_session: ".planning/debug/tailwind-styles-not-applied.md"
 
 - truth: "Submitting signup form creates user, sends verification email to MailHog, shows success confirmation"
   status: failed
   reason: "User reported: on clicking 'create account' nothing happens"
   severity: major
   test: 6
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "Button is correctly HTML-disabled (disabled={!isValid}) but Tailwind CSS failure makes the disabled state visually indistinguishable — user cannot see it is disabled. Validation errors (password complexity rules) are also invisible due to Tailwind failure. Submission wiring (handleSubmit, mutation, API call) is correctly implemented."
+  artifacts:
+    - path: "frontend/src/components/auth/SignupForm.tsx"
+      issue: "Button disabled state (line 141) and validation error messages are invisible without Tailwind styles"
+  missing:
+    - "Fix is shared with Tests 3 & 4 — once Tailwind is fixed, disabled button state and validation errors will be visible"
+  debug_session: ".planning/debug/signup-submit-no-action.md"
 
 - truth: "Theme toggle button is visible in the app header and cycles between light, dark, and system themes"
   status: failed
   reason: "User reported: No theme toggle visible"
   severity: major
   test: 14
-  root_cause: ""
-  artifacts: []
-  missing: []
-  debug_session: ""
+  root_cause: "ThemeToggle is only rendered inside (protected)/layout.tsx via AppHeader — it is never shown on public routes (landing, login, signup). UAT test 14 was evaluated on a public page where the authenticated shell never mounts."
+  artifacts:
+    - path: "frontend/src/app/(protected)/layout.tsx"
+      issue: "AppHeader (containing ThemeToggle) only renders behind auth gate — not on public routes"
+    - path: "frontend/src/app/page.tsx"
+      issue: "Landing page nav has no ThemeToggle"
+  missing:
+    - "Add ThemeToggle to public landing page nav (app/page.tsx) if spec requires it on public routes, OR confirm test 14 should be run while authenticated (in which case no code change needed)"
+  debug_session: ".planning/debug/theme-toggle-missing.md"
