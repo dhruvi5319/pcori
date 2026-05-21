@@ -1,18 +1,14 @@
 ---
-status: testing
+status: complete
 phase: 01-foundation
 source: 01-01-SUMMARY.md, 01-02-SUMMARY.md, 01-03-SUMMARY.md, 01-04-SUMMARY.md, 01-05-SUMMARY.md, 01-06-SUMMARY.md, 01-07-SUMMARY.md
 started: 2026-05-21T00:00:00Z
-updated: 2026-05-21T00:00:00Z
+updated: 2026-05-21T04:30:00Z
 ---
 
 ## Current Test
 
-number: 10
-name: Forgot Password Flow
-expected: |
-  Navigate to `/forgot-password`. Enter any email address and submit. The form always shows a success message (never reveals whether the email exists). If the email belongs to a registered user, MailHog receives a password-reset email.
-awaiting: user response
+[testing complete]
 
 ## Tests
 
@@ -64,39 +60,47 @@ reason: User could not run API test; skipped
 
 ### 10. Forgot Password Flow
 expected: Navigate to `/forgot-password`. Enter any email address and submit. The form always shows a success message (never reveals whether the email exists). If the email belongs to a registered user, MailHog receives a password-reset email with a reset link.
-result: [pending]
+result: skipped
+reason: Cannot test without a registered user (blocked by Test 6 failure)
 
 ### 11. Account Lockout After Failed Logins
 expected: On the `/login` page, attempt to log in with a valid username but wrong password 5 times in a row. After the 5th failure, the login attempt returns a "Account locked" error (403). The account is locked in the database.
-result: [pending]
+result: skipped
+reason: Requires a registered user account (blocked by Test 6 failure)
 
 ### 12. RBAC — Admin Endpoint Blocked for Reviewer
-expected: Log in as a regular (REVIEWER-role) user and obtain the JWT from localStorage. Call an admin-only endpoint with it: `curl -H "Authorization: Bearer <token>" http://localhost:8080/api/users` (or similar admin route). The response is `403 Forbidden`, not `200 OK`.
-result: [pending]
+expected: Log in as a regular (REVIEWER-role) user and obtain the JWT from localStorage. Call an admin-only endpoint with it: `curl -H "Authorization: Bearer <token>" http://localhost:8080/api/users`. The response is `403 Forbidden`, not `200 OK`.
+result: skipped
+reason: Requires a working login (blocked by Test 6 failure)
 
 ### 13. App Shell Sidebar and Navigation
 expected: When logged in and on the dashboard, the left sidebar is visible in collapsed (icon-only) mode by default. Clicking the toggle expands it to show labels. Navigation items appear based on the user's role. Clicking a nav item highlights it with a blue left border.
-result: [pending]
+result: skipped
+reason: Requires a working login (blocked by Test 6 failure)
 
 ### 14. Theme Toggle
 expected: In the app header, a theme toggle button is visible. Clicking it cycles between light, dark, and system themes. The page appearance changes accordingly (background color shifts). The preference persists after page reload.
-result: [pending]
+result: issue
+reported: "No theme toggle visible"
+severity: major
 
 ### 15. Logout Flow
 expected: Click the user avatar or name in the header to open the user menu. Click "Sign Out". A toast appears: "You've been signed out." The user is redirected to `/login`. The `jwt_token` key is removed from localStorage.
-result: [pending]
+result: skipped
+reason: Requires a working login (blocked by Test 6 failure)
 
 ### 16. Swagger UI in Dev Mode
 expected: With the backend running in dev profile, navigate to `http://localhost:8080/swagger-ui/index.html`. The OpenAPI documentation page loads with available endpoints listed.
-result: [pending]
+result: skipped
+reason: User skipped
 
 ## Summary
 
 total: 16
 passed: 2
-issues: 3
-pending: 7
-skipped: 4
+issues: 4
+pending: 0
+skipped: 10
 
 ## Gaps
 
@@ -125,6 +129,16 @@ skipped: 4
   reason: "User reported: on clicking 'create account' nothing happens"
   severity: major
   test: 6
+  root_cause: ""
+  artifacts: []
+  missing: []
+  debug_session: ""
+
+- truth: "Theme toggle button is visible in the app header and cycles between light, dark, and system themes"
+  status: failed
+  reason: "User reported: No theme toggle visible"
+  severity: major
+  test: 14
   root_cause: ""
   artifacts: []
   missing: []
