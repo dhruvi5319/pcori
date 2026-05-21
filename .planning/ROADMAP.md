@@ -30,7 +30,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. After configurable failed login attempts the account locks; after configurable TTL or admin action it unlocks
   4. A user can request a password reset link and use it to set a new password within the reset TTL
   5. Admin-role endpoints return 403 when called with a REVIEWER-role JWT, confirming RBAC is enforced at the service layer
-**Plans**: 10 plans
+**Plans**: 11 plans
 
 Plans:
 - [ ] 01-01-PLAN.md — Docker Compose dev stack (PostgreSQL 16 + MailHog) + Spring Boot 3.4 project scaffold
@@ -42,7 +42,8 @@ Plans:
 - [ ] 01-07-PLAN.md — App Shell: collapsible sidebar (glassmorphism, role-gated nav), sticky header, auth guard, UserMenu logout + Playwright e2e
 - [ ] 01-08-PLAN.md — Gap closure: postcss.config.mjs (Tailwind v4 utility classes) + SignupForm mode:onChange fix
 - [ ] 01-09-PLAN.md — Gap closure: remove unlayered CSS reset from globals.css (fixes Tailwind utility cascade; unblocks Tests 3, 4, 6)
-- [ ] 01-10-PLAN.md — Gap closure: add ThemeToggle to public landing page nav (unblocks Test 14)
+- [ ] 01-10-PLAN.md — Gap closure: add ThemeToggle to public landing page nav + Playwright test (unblocks Test 14)
+- [ ] 01-11-PLAN.md — Gap closure: AdminController GET /api/admin/ping with @PreAuthorize ADMIN role (satisfies SC-5 / FR-1.7)
 
 ### Phase 2: Classification Pipeline
 **Goal**: A reviewer can upload a PDF research plan and receive an automated PCORI taxonomy classification in minutes, with all files tracked in S3 and the full taxonomy tree browsable and maintainable
