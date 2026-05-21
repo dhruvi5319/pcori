@@ -14,6 +14,11 @@ test.describe('Landing Page', () => {
     await expect(page.getByText('Full Audit Trail')).toBeVisible()
     await expect(page.getByText('Analytics & Reporting')).toBeVisible()
   })
+
+  test('theme toggle button is visible in nav', async ({ page }) => {
+    await page.goto('/')
+    await expect(page.getByRole('button', { name: /toggle theme/i })).toBeVisible()
+  })
 })
 
 test.describe('Login Form', () => {

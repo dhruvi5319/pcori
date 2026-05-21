@@ -1,5 +1,6 @@
 import { LandingHero } from '@/components/landing/LandingHero'
 import { FeatureCard } from '@/components/landing/FeatureCard'
+import { ThemeToggle } from '@/components/layout/ThemeToggle'
 import { Brain, ClipboardCheck, BarChart3 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -30,7 +31,8 @@ export default function LandingPage() {
         style={{ borderColor: 'var(--color-border)' }}
       >
         <span className="font-semibold text-lg">PCORI Analytics</span>
-        <div className="flex gap-3">
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
           <Link
             href="/login"
             className="px-4 py-2 rounded-lg text-sm font-medium border min-h-[44px] flex items-center"
