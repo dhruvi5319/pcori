@@ -3,14 +3,14 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Completed 01-07-PLAN.md tasks 1-2; awaiting checkpoint:human-verify"
-last_updated: "2026-05-20T19:05:07.898Z"
+stopped_at: Completed 01-08-PLAN.md
+last_updated: "2026-05-21T03:54:15.198Z"
 last_activity: 2026-05-20 — Completed Plan 06 (Auth UI screens — landing, login, signup, forgot/reset password, verify email)
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 11
-  completed_plans: 7
+  total_plans: 15
+  completed_plans: 8
   percent: 55
 ---
 
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 ## Current Position
 
 Phase: 1 of 4 (Foundation)
-Plan: 6 of 7 in current phase
+Plan: 8 of 8 in current phase (all foundation plans complete)
 Status: In progress
-Last activity: 2026-05-20 — Completed Plan 06 (Auth UI screens — landing, login, signup, forgot/reset password, verify email)
+Last activity: 2026-05-21 — Completed Plan 08 (UAT gap closure: postcss.config.mjs + SignupForm onChange fix)
 
-Progress: [██████░░░░] 55%
+Progress: [█████░░░░░] 53%
 
 ## Performance Metrics
 
@@ -59,6 +59,7 @@ Progress: [██████░░░░] 55%
 | Phase 01-foundation P05 | 11min | 2 tasks | 20 files |
 | Phase 01-foundation P06 | 5min | 2 tasks | 19 files |
 | Phase 01-foundation P07 | 3min | 2 tasks | 11 files |
+| Phase 01-foundation P08 | 3min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: E2E Playwright tests written as artifacts but execution deferred to verify phase per test execution boundary rules
 - [Phase 01-foundation]: LucideIcon type union in SidebarNavItem: accepts LucideIcon | React.ComponentType<LucideProps> to satisfy TypeScript strict mode
 - [Phase 01-foundation]: App Shell auth guard pattern: useEffect + isAuthenticated() → router.replace('/login') + spinner until auth checked
+- [Phase 01-foundation]: postcss.config.mjs required for Tailwind v4 + Next.js Turbopack — without it @import tailwindcss is inert and no utility classes are emitted
+- [Phase 01-foundation]: SignupForm mode changed to onChange matching LoginForm — onBlur caused isValid to never update without explicit field blur, permanently disabling Create Account button
 
 ### Pending Todos
 
@@ -101,6 +104,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-20T19:05:07.897Z
-Stopped at: Completed 01-07-PLAN.md tasks 1-2; awaiting checkpoint:human-verify
+Last session: 2026-05-21T03:54:15.194Z
+Stopped at: Completed 01-08-PLAN.md
 Resume file: None
