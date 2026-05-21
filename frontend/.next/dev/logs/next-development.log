@@ -1,2 +1,4 @@
 {"timestamp":"00:00:00.667","source":"Server","level":"LOG","message":""}
 {"timestamp":"00:00:05.851","source":"Server","level":"WARN","message":"⚠ Blocked cross-origin request to Next.js dev resource /_next/webpack-hmr from \"3000-9ichfcplpzbfsnmw.daytonaproxy01.net\".\nCross-origin access to Next.js dev resources is blocked by default for safety.\n\nTo allow this host in development, add it to \"allowedDevOrigins\" in next.config.js and restart the dev server:\n\n// next.config.js\nmodule.exports = {\n  allowedDevOrigins: ['3000-9ichfcplpzbfsnmw.daytonaproxy01.net'],\n}\n\nRead more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins"}
+{"timestamp":"00:04:11.998","source":"Server","level":"LOG","message":"✓ Compiled in 18ms"}
+{"timestamp":"00:04:15.031","source":"Server","level":"LOG","message":"✓ Compiled in 423ms"}

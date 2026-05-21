@@ -7,6 +7,7 @@
 /build/src/main/java/com/pcori/platform/config/AsyncConfig.java
 /build/src/main/java/com/pcori/platform/config/JpaAuditConfig.java
 /build/src/main/java/com/pcori/platform/config/SecurityConfig.java
+/build/src/main/java/com/pcori/platform/domain/admin/AdminController.java
 /build/src/main/java/com/pcori/platform/domain/auth/AuthController.java
 /build/src/main/java/com/pcori/platform/domain/auth/AuthService.java
 /build/src/main/java/com/pcori/platform/domain/auth/dto/ForgotPasswordRequest.java

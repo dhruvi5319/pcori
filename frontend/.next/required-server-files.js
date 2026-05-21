@@ -166,7 +166,7 @@ self.__SERVER_FILES_MANIFEST={
       "proxyPrefetch": "flexible",
       "optimisticClientCache": true,
       "manualClientBasePath": false,
-      "cpus": 63,
+      "cpus": 47,
       "memoryBasedWorkersCount": false,
       "imgOptConcurrency": null,
       "imgOptTimeoutInSeconds": 7,
