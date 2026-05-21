@@ -3,8 +3,8 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 01-10-PLAN.md
-last_updated: "2026-05-21T22:51:23.575Z"
+stopped_at: Completed 01-09-PLAN.md
+last_updated: "2026-05-21T22:51:41.439Z"
 last_activity: "2026-05-21 — Completed Plan 08 (UAT gap closure: postcss.config.mjs + SignupForm onChange fix)"
 progress:
   total_phases: 4
@@ -61,6 +61,7 @@ Progress: [█████░░░░░] 53%
 | Phase 01-foundation P07 | 3min | 2 tasks | 11 files |
 | Phase 01-foundation P08 | 3min | 2 tasks | 2 files |
 | Phase 01-foundation P10 | 1min | 1 tasks | 2 files |
+| Phase 01-foundation P09 | 2min | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -91,6 +92,7 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: postcss.config.mjs required for Tailwind v4 + Next.js Turbopack — without it @import tailwindcss is inert and no utility classes are emitted
 - [Phase 01-foundation]: SignupForm mode changed to onChange matching LoginForm — onBlur caused isValid to never update without explicit field blur, permanently disabling Create Account button
 - [Phase 01-foundation]: ThemeToggle already had aria-label='Toggle theme' — no ThemeToggle.tsx modification needed; Playwright uses getByRole by role+name
+- [Phase 01-foundation]: Removed unlayered * { margin: 0; padding: 0 } from globals.css — Tailwind v4 includes equivalent reset in @layer base; unlayered CSS wins over all @layer rules per CSS Cascade Level 5
 
 ### Pending Todos
 
@@ -106,6 +108,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-21T22:51:23.573Z
-Stopped at: Completed 01-10-PLAN.md
+Last session: 2026-05-21T22:51:41.437Z
+Stopped at: Completed 01-09-PLAN.md
 Resume file: None
