@@ -30,7 +30,7 @@ type SignupFormData = z.infer<typeof signupSchema>
 export function SignupForm() {
   const { register, handleSubmit, watch, formState: { errors, isValid } } = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
-    mode: 'onBlur',
+    mode: 'onChange',
   })
   const registerMutation = useRegisterMutation()
   const [passwordFocused, setPasswordFocused] = useState(false)
