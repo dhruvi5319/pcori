@@ -60,13 +60,6 @@
   --glass-border: rgba(255, 255, 255, 0.08);
 }
 
-/* ── Base Reset ── */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
