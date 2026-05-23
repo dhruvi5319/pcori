@@ -3,14 +3,14 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-05-23T20:35:03.536Z"
+stopped_at: Completed 02-03-PLAN.md
+last_updated: "2026-05-23T20:36:53.973Z"
 last_activity: "2026-05-23 — Phase 2 complete: MinIO+S3 storage, 3-stage async classification pipeline, taxonomy CRUD with cascade deactivation, /classifications page with dialogs, /taxonomy two-pane page"
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 18
-  completed_plans: 13
+  completed_plans: 14
   percent: 90
 ---
 
@@ -65,6 +65,7 @@ Progress: [█████████░] 90%
 | Phase 01-foundation P11 | 1min | 1 tasks | 1 files |
 | Phase 02-classification-pipeline P01 | 1min | 3 tasks | 3 files |
 | Phase 02-classification-pipeline P02 | 3min | 2 tasks | 12 files |
+| Phase 02-classification-pipeline P03 | 5min | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -110,6 +111,8 @@ Recent decisions affecting current work:
 - [Phase 02-classification-pipeline]: MinIO added to Docker Compose with pcori-files bucket via minio-setup initializer; backend uses STORAGE_ENDPOINT env var for S3StorageService endpointOverride
 - [Phase 02-classification-pipeline]: S3Presigner built in constructor with @Value params rather than separate @Bean to avoid circular dependency
 - [Phase 02-classification-pipeline]: UploadedFile.uploadedBy stored as UUID column (not @ManyToOne) to avoid circular loading with User domain
+- [Phase 02-classification-pipeline]: TaxonomyCategory.createdBy mapped as String (not UUID) — V6 migration fixes V5 DDL mismatch to match AuditableEntity @CreatedBy String pattern
+- [Phase 02-classification-pipeline]: TaxonomyController delegates to TaxonomyService.toDto() (public method) — avoids duplicate mapping logic; DELETE /taxonomy/{id} returns 200 with deactivated entity to confirm soft-delete
 
 ### Pending Todos
 
@@ -125,6 +128,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-23T20:35:03.534Z
-Stopped at: Completed 02-02-PLAN.md
+Last session: 2026-05-23T20:36:53.971Z
+Stopped at: Completed 02-03-PLAN.md
 Resume file: None
