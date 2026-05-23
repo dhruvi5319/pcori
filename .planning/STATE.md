@@ -67,6 +67,7 @@ Progress: [█████████░] 90%
 | Phase 02-classification-pipeline P02 | 3min | 2 tasks | 12 files |
 | Phase 02-classification-pipeline P03 | 5min | 2 tasks | 11 files |
 | Phase 02-classification-pipeline P04 | 4min | 2 tasks | 25 files |
+| Phase 02-classification-pipeline P05 | 4min | 2 tasks | 15 files |
 | Phase 02-classification-pipeline P07 | 4min | 2 tasks | 12 files |
 
 ## Accumulated Context
@@ -120,6 +121,8 @@ Recent decisions affecting current work:
 - [Phase 02-classification-pipeline]: ClassificationController resolves uploadedBy UUID via User instanceof cast (User extends UserDetails) — username is not a UUID
 - [Phase 02-classification-pipeline]: CSS max-height transition (0→9999px) for tree expand/collapse — no JS height measurement needed; matches UI-SPEC 0.2s ease
 - [Phase 02-classification-pipeline]: isAdmin hardcoded true in taxonomy page.tsx — role-gating from JWT context deferred to Phase 3
+- [Phase 02-classification-pipeline]: formatRelativeDate added to lib/utils.ts — simple relative date string without external library dependency (implied by ClassificationRow code)
+- [Phase 02-classification-pipeline]: TanStack Query conditional refetchInterval: polls 5s when any row status === PROCESSING; false otherwise — stops polling when all terminal
 
 ### Pending Todos
 
