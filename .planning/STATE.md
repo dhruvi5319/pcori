@@ -2,15 +2,15 @@
 pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Phase 2 complete — all 7 plans executed
-last_updated: "2026-05-23T00:00:00.000Z"
-last_activity: "2026-05-23 — Phase 2 complete: MinIO storage, classification pipeline, taxonomy domain, all frontend dialogs"
+status: completed
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-05-23T20:32:47.900Z"
+last_activity: "2026-05-23 — Phase 2 complete: MinIO+S3 storage, 3-stage async classification pipeline, taxonomy CRUD with cascade deactivation, /classifications page with dialogs, /taxonomy two-pane page"
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 1
   total_plans: 18
-  completed_plans: 18
+  completed_plans: 12
   percent: 90
 ---
 
@@ -63,6 +63,7 @@ Progress: [█████████░] 90%
 | Phase 01-foundation P10 | 1min | 1 tasks | 2 files |
 | Phase 01-foundation P09 | 2min | 1 tasks | 1 files |
 | Phase 01-foundation P11 | 1min | 1 tasks | 1 files |
+| Phase 02-classification-pipeline P01 | 1min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -104,6 +105,8 @@ Recent decisions affecting current work:
 - [Phase 02-classification-pipeline]: @radix-ui/react-progress added to package.json for UploadProgressBar in Plan 06
 - [Phase 02-classification-pipeline]: dash-flow @keyframe added to globals.css for PDF dropzone SVG animated dashed border
 - [Phase 02-classification-pipeline]: Classifications page wires all 4 dialogs (Upload, View, Override, Retry) in single page.tsx; dialog state via useState hooks
+- [Phase 02-classification-pipeline]: V4/V5 migration numbering used — V3 was taken by Phase 1 audit columns; classification_schema=V4, taxonomy_seed=V5
+- [Phase 02-classification-pipeline]: MinIO added to Docker Compose with pcori-files bucket via minio-setup initializer; backend uses STORAGE_ENDPOINT env var for S3StorageService endpointOverride
 
 ### Pending Todos
 
@@ -119,6 +122,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-21T22:52:29.411Z
-Stopped at: Completed 01-11-PLAN.md
+Last session: 2026-05-23T20:32:47.898Z
+Stopped at: Completed 02-01-PLAN.md
 Resume file: None
