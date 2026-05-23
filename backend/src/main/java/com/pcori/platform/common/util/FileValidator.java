@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * PDF file validation using Apache Tika MIME detection (NOT extension-only).
- * Validates content type and enforces configurable file size limit.
+ * Validates uploaded files using Apache Tika for MIME detection (not extension-only).
  */
 @Component
 public class FileValidator {
@@ -20,19 +19,26 @@ public class FileValidator {
     private int maxUploadSizeMb;
 
     public void validatePdf(MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            throw new DomainExceptions.InvalidFileTypeException("No file provided");
+        }
+
+        // MIME type detection via Tika (not extension-based)
         try (InputStream is = file.getInputStream()) {
             Tika tika = new Tika();
             String mimeType = tika.detect(is, file.getOriginalFilename());
             if (!"application/pdf".equals(mimeType)) {
-                throw new DomainExceptions.InvalidFileTypeException("Only PDF files are accepted");
+                throw new DomainExceptions.InvalidFileTypeException(
+                    "Only PDF files are accepted. Detected type: " + mimeType);
             }
-        } catch (DomainExceptions.InvalidFileTypeException e) {
-            throw e;
         } catch (IOException e) {
             throw new DomainExceptions.InvalidFileTypeException("Could not read uploaded file");
         }
+
+        // Size check
         if (file.getSize() > getMaxUploadSizeBytes()) {
-            throw new DomainExceptions.FileTooLargeException("File exceeds maximum allowed size of " + maxUploadSizeMb + "MB");
+            throw new DomainExceptions.FileTooLargeException(
+                "File exceeds maximum allowed size of " + maxUploadSizeMb + " MB");
         }
     }
 

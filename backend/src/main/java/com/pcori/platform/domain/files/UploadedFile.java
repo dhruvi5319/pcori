@@ -9,11 +9,6 @@ import org.hibernate.annotations.SQLRestriction;
 import java.time.Instant;
 import java.util.UUID;
 
-/**
- * JPA entity mapped to the uploaded_files table.
- * Tracks every file stored in S3-compatible storage (MinIO in dev, S3 in prod).
- * Soft-deleted via deleted_at column; @SQLRestriction filters deleted records automatically.
- */
 @Entity
 @Table(name = "uploaded_files")
 @SQLRestriction("deleted_at IS NULL")
@@ -26,28 +21,23 @@ public class UploadedFile {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    /** S3 object key — the authoritative storage location. */
     @Column(name = "filename", nullable = false, length = 500)
-    private String filename;
+    private String filename;         // S3 object key
 
-    /** Original filename from user upload — for display only. */
     @Column(name = "original_name", nullable = false, length = 255)
     private String originalName;
 
     @Column(name = "content_type", nullable = false, length = 100)
     private String contentType;
 
-    /** File size in bytes. */
     @Column(name = "size", nullable = false)
-    private Long size;
+    private Long size;               // bytes
 
-    /** S3 object key (same as filename for v1). */
     @Column(name = "path", nullable = false, length = 500)
-    private String path;
+    private String path;             // S3 object key (same as filename for v1)
 
-    /** FK to users.id — stored as UUID, not a JPA join, to avoid circular loading. */
     @Column(name = "uploaded_by", nullable = false)
-    private UUID uploadedBy;
+    private UUID uploadedBy;         // FK to users.id
 
     @Column(name = "uploaded_at", nullable = false)
     private Instant uploadedAt = Instant.now();

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * Stage 2 of ClassificationPipeline: run ClassificationStrategy and determine final status.
+ * Stage 2: Run the classification strategy against extracted text.
  */
 @Component
 @RequiredArgsConstructor
@@ -30,12 +30,13 @@ public class ClassificationStage {
     }
 
     /**
-     * Determines the final status based on confidence score.
-     * confidence >= threshold → CLASSIFIED; < threshold → NEEDS_REVIEW
+     * Determine final status based on confidence score.
+     * confidence >= threshold → CLASSIFIED
+     * confidence < threshold → NEEDS_REVIEW
      */
     public ClassificationStatus determineStatus(double confidenceScore) {
         return confidenceScore >= needsReviewThreshold
-                ? ClassificationStatus.CLASSIFIED
-                : ClassificationStatus.NEEDS_REVIEW;
+            ? ClassificationStatus.CLASSIFIED
+            : ClassificationStatus.NEEDS_REVIEW;
     }
 }

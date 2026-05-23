@@ -72,3 +72,18 @@ export interface ClassificationStatistics {
   avgConfidence: number
   overrideRate: number
 }
+
+export interface UploadResponse {
+  classificationId: string
+  planId: string
+  status: 'PENDING'
+  uploadedAt: string
+}
+
+export interface ManualOverrideRequest {
+  pcc?: string
+  taxonomyCategory?: string
+  taxonomyCode?: string
+  taxonomySubcode?: string
+  overrideReason: string
+}

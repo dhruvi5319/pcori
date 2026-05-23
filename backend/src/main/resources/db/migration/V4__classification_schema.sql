@@ -68,8 +68,8 @@ CREATE TABLE classifications (
     error_message        TEXT,
     created_at           TIMESTAMPTZ           NOT NULL DEFAULT NOW(),
     updated_at           TIMESTAMPTZ           NOT NULL DEFAULT NOW(),
-    created_by           UUID                  REFERENCES users(id),
-    last_modified_by     UUID                  REFERENCES users(id),
+    created_by           VARCHAR(255),
+    last_modified_by     VARCHAR(255),
     deleted_at           TIMESTAMPTZ
 );
 

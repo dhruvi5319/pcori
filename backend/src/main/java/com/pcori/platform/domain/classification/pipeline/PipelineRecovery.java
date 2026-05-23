@@ -15,8 +15,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 /**
- * Startup recovery: finds classifications stuck in PROCESSING state and marks them FAILED.
- * Per TechArch spec: @EventListener(ApplicationReadyEvent) to reset stuck records on boot.
+ * Startup recovery: resets stuck PROCESSING records to FAILED on JVM restart.
+ * Mandatory safety net for @Async pipeline — if JVM crashes during processing,
+ * records are left in PROCESSING state indefinitely without this recovery.
  */
 @Component
 @RequiredArgsConstructor
@@ -32,13 +33,19 @@ public class PipelineRecovery {
     public void recoverStuckRecords() {
         Instant cutoff = Instant.now().minus(stuckTimeoutMinutes, ChronoUnit.MINUTES);
         List<Classification> stuck = classificationRepository.findStuckProcessing(cutoff);
+
         if (!stuck.isEmpty()) {
-            log.info("Startup recovery: found {} stuck PROCESSING records — marking FAILED", stuck.size());
+            log.info("Startup recovery: found {} stuck PROCESSING records older than {}min — marking FAILED",
+                stuck.size(), stuckTimeoutMinutes);
             stuck.forEach(c -> {
                 c.setStatus(ClassificationStatus.FAILED);
-                c.setErrorMessage("Classification was stuck in PROCESSING state and reset during startup recovery");
+                c.setErrorMessage(
+                    "Classification was stuck in PROCESSING state and reset during startup recovery");
             });
             classificationRepository.saveAll(stuck);
+            log.info("Startup recovery: {} records reset to FAILED", stuck.size());
+        } else {
+            log.info("Startup recovery: no stuck PROCESSING records found");
         }
     }
 }

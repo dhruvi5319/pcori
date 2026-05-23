@@ -11,11 +11,6 @@ import software.amazon.awssdk.services.s3.S3ClientBuilder;
 
 import java.net.URI;
 
-/**
- * S3Client bean configuration.
- * When STORAGE_ENDPOINT is set (MinIO / LocalStack dev), applies endpointOverride
- * and forcePathStyle. Otherwise uses default AWS SDK endpoint resolution (production).
- */
 @Configuration
 public class S3Config {
 
@@ -25,10 +20,10 @@ public class S3Config {
     @Value("${AWS_REGION:us-east-1}")
     private String region;
 
-    @Value("${AWS_ACCESS_KEY_ID:}")
+    @Value("${AWS_ACCESS_KEY_ID:minioadmin}")
     private String accessKeyId;
 
-    @Value("${AWS_SECRET_ACCESS_KEY:}")
+    @Value("${AWS_SECRET_ACCESS_KEY:minioadmin}")
     private String secretAccessKey;
 
     @Bean
@@ -40,7 +35,7 @@ public class S3Config {
 
         if (storageEndpoint != null && !storageEndpoint.isBlank()) {
             builder.endpointOverride(URI.create(storageEndpoint))
-                   .forcePathStyle(true);  // required for MinIO path-style addressing
+                   .forcePathStyle(true);  // required for MinIO
         }
         return builder.build();
     }

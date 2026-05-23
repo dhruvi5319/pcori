@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Default ClassificationStrategy using taxonomy keyword matching.
- * Model version: "keyword-v1".
- * Confidence ≥0.75 → CLASSIFIED; <0.75 → NEEDS_REVIEW.
+ * Keyword-based classification strategy.
+ * Matches extracted PDF text against taxonomy category names and descriptions.
+ * Model version: keyword-v1
+ * Confidence: 0.30 (no match) → up to 0.95 (strong keyword hits)
  */
 @Component
 @Slf4j
@@ -20,48 +21,56 @@ public class KeywordClassificationStrategy implements ClassificationStrategy {
 
     @Override
     public ClassificationResult classify(String extractedText, List<TaxonomyCategory> activeCategories) {
+        if (extractedText == null || extractedText.isBlank()) {
+            return emptyResult();
+        }
         String text = extractedText.toLowerCase();
 
-        // Find best matching PCC (level 0) by counting keyword matches
+        // Find best matching PCC (level 0) by keyword hits
         TaxonomyCategory bestPcc = activeCategories.stream()
-                .filter(c -> c.getLevel() == 0)
+            .filter(c -> c.getLevel() == 0 && Boolean.TRUE.equals(c.getIsActive()))
+            .max(Comparator.comparingInt(c -> countKeywordHits(text, c)))
+            .orElse(null);
+
+        // Find best matching category (level 1) under the winning PCC
+        TaxonomyCategory bestCategory = null;
+        if (bestPcc != null) {
+            final TaxonomyCategory pccRef = bestPcc;
+            bestCategory = activeCategories.stream()
+                .filter(c -> c.getLevel() == 1
+                    && Boolean.TRUE.equals(c.getIsActive())
+                    && c.getParent() != null
+                    && c.getParent().getId().equals(pccRef.getId()))
                 .max(Comparator.comparingInt(c -> countKeywordHits(text, c)))
                 .orElse(null);
+        }
 
-        // Find best matching category (level 1) under the PCC
-        TaxonomyCategory bestCategory = activeCategories.stream()
-                .filter(c -> c.getLevel() == 1 && bestPcc != null &&
-                             c.getParent() != null && c.getParent().getId().equals(bestPcc.getId()))
-                .max(Comparator.comparingInt(c -> countKeywordHits(text, c)))
-                .orElse(null);
-
-        // Calculate confidence: normalized hit count ratio
         double confidence = calculateConfidence(text, bestPcc, bestCategory);
-
-        log.debug("Keyword classification: pcc={}, category={}, confidence={}",
-                bestPcc != null ? bestPcc.getCode() : "null",
-                bestCategory != null ? bestCategory.getCode() : "null",
-                confidence);
+        log.debug("KeywordClassification: pcc={}, confidence={:.2f}",
+            bestPcc != null ? bestPcc.getCode() : "null", confidence);
 
         return new ClassificationResult(
-                bestPcc != null ? bestPcc.getCode() : null,
-                bestCategory != null ? bestCategory.getName() : null,
-                bestCategory != null ? bestCategory.getCode() : null,
-                null,   // subcode — requires level 2; extend in future iteration
-                extractSentences(text, 2),   // project summary: first 2 sentences
-                null, null, null,            // population, intervention, comparator
-                extractSentences(text, 1),   // primary outcome: first sentence
-                null,
-                confidence,
-                "keyword-v1"
+            bestPcc != null ? bestPcc.getCode() : null,
+            bestCategory != null ? bestCategory.getName() : null,
+            bestCategory != null ? bestCategory.getCode() : null,
+            null,
+            safeExtractSentences(text, 2),
+            null,
+            null,
+            null,
+            safeExtractSentences(text, 1),
+            null,
+            confidence,
+            "keyword-v1"
         );
     }
 
     private int countKeywordHits(String text, TaxonomyCategory category) {
         int hits = 0;
-        String[] keywords = category.getName().toLowerCase().split("\\s+");
-        for (String kw : keywords) {
-            if (kw.length() > 3 && text.contains(kw)) hits++;
+        if (category.getName() != null) {
+            for (String kw : category.getName().toLowerCase().split("\\s+")) {
+                if (kw.length() > 3 && text.contains(kw)) hits++;
+            }
         }
         if (category.getDescription() != null) {
             for (String kw : category.getDescription().toLowerCase().split("\\s+")) {
@@ -75,19 +84,26 @@ public class KeywordClassificationStrategy implements ClassificationStrategy {
         if (pcc == null) return 0.30;
         int pccHits = countKeywordHits(text, pcc);
         int catHits = category != null ? countKeywordHits(text, category) : 0;
-        // Score: base 0.5 + up to 0.35 for PCC hits + up to 0.15 for category hits
+        // Score: base 0.50 + up to 0.35 for PCC hits + up to 0.15 for category hits
         double score = 0.50 + Math.min(pccHits * 0.07, 0.35) + Math.min(catHits * 0.05, 0.15);
-        return Math.min(score, 0.95);   // cap at 0.95 — keyword never claims 100%
+        return Math.min(score, 0.95); // cap at 0.95 — keyword never claims 100%
     }
 
-    private String extractSentences(String text, int count) {
+    private String safeExtractSentences(String text, int count) {
         if (text == null || text.isBlank()) return null;
-        String[] sentences = text.split("[.!?]\\s+");
-        String joined = Arrays.stream(sentences)
+        try {
+            String[] sentences = text.split("[.!?]\\s+");
+            String result = Arrays.stream(sentences)
                 .filter(s -> s.length() > 20)
                 .limit(count)
                 .collect(Collectors.joining(". "));
-        if (joined.isEmpty()) return null;
-        return joined.substring(0, Math.min(500, joined.length()));
+            return result.isEmpty() ? null : result.substring(0, Math.min(500, result.length()));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private ClassificationResult emptyResult() {
+        return new ClassificationResult(null, null, null, null, null, null, null, null, null, null, 0.30, "keyword-v1");
     }
 }

@@ -42,7 +42,6 @@ public class TaxonomyCategory {
     @JoinColumn(name = "parent_id")
     private TaxonomyCategory parent;
 
-    // Bidirectional children (used for tree assembly; not persisted as separate column)
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     @OrderBy("displayOrder ASC")
     private List<TaxonomyCategory> children = new ArrayList<>();
@@ -76,6 +75,6 @@ public class TaxonomyCategory {
     private Instant deletedAt;
 
     // search_vector is a generated column — exclude from JPA writes
-    @Column(name = "search_vector", insertable = false, updatable = false)
+    @Column(name = "search_vector", insertable = false, updatable = false, columnDefinition = "tsvector")
     private String searchVector;
 }

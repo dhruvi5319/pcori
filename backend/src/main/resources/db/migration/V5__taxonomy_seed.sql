@@ -14,8 +14,8 @@ CREATE TABLE taxonomy_categories (
     display_order    INTEGER      NOT NULL DEFAULT 0,
     created_at       TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
     updated_at       TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
-    created_by       UUID         REFERENCES users(id),
-    last_modified_by UUID         REFERENCES users(id),
+    created_by       VARCHAR(255),
+    last_modified_by VARCHAR(255),
     deleted_at       TIMESTAMPTZ,
     UNIQUE (code, parent_id)
 );
@@ -35,17 +35,16 @@ ALTER TABLE taxonomy_categories ADD COLUMN search_vector TSVECTOR
 CREATE INDEX idx_taxonomy_fts ON taxonomy_categories USING GIN(search_vector);
 
 -- PCORI Primary Clinical Conditions (PCC) — level 0 root nodes
--- These are the top-level taxonomy entries; sub-categories added via admin UI or future migration.
 INSERT INTO taxonomy_categories (id, code, name, description, parent_id, is_active, level, display_order)
 VALUES
-  (gen_random_uuid(), 'DIABETES',      'Type 2 Diabetes',          'Research plans focused on Type 2 Diabetes management and outcomes',    NULL, TRUE, 0, 1),
-  (gen_random_uuid(), 'CARDIOVASCULAR','Cardiovascular Disease',    'Heart failure, coronary artery disease, hypertension research',        NULL, TRUE, 0, 2),
-  (gen_random_uuid(), 'CANCER',        'Cancer',                    'Oncology research including prevention, treatment, and survivorship',   NULL, TRUE, 0, 3),
-  (gen_random_uuid(), 'MENTAL_HEALTH', 'Mental and Behavioral Health', 'Depression, anxiety, substance use disorder research',              NULL, TRUE, 0, 4),
-  (gen_random_uuid(), 'PAIN',          'Pain Management',           'Chronic pain, opioid alternatives, pain outcomes research',            NULL, TRUE, 0, 5),
-  (gen_random_uuid(), 'RESPIRATORY',   'Respiratory Disease',       'COPD, asthma, pulmonary disease research',                            NULL, TRUE, 0, 6),
-  (gen_random_uuid(), 'OBESITY',       'Obesity and Weight Management', 'Weight loss interventions and metabolic syndrome research',        NULL, TRUE, 0, 7),
-  (gen_random_uuid(), 'RARE_DISEASE',  'Rare Diseases',             'Research on conditions affecting fewer than 200,000 people',          NULL, TRUE, 0, 8),
-  (gen_random_uuid(), 'PEDIATRIC',     'Pediatric Health',          'Child and adolescent health outcomes research',                       NULL, TRUE, 0, 9),
-  (gen_random_uuid(), 'AGING',         'Aging and Dementia',        'Alzheimer''s disease, dementia, and healthy aging research',          NULL, TRUE, 0, 10)
+  (gen_random_uuid(), 'DIABETES',      'Type 2 Diabetes',             'Research plans focused on Type 2 Diabetes management and outcomes',    NULL, TRUE, 0, 1),
+  (gen_random_uuid(), 'CARDIOVASCULAR','Cardiovascular Disease',       'Heart failure, coronary artery disease, hypertension research',        NULL, TRUE, 0, 2),
+  (gen_random_uuid(), 'CANCER',        'Cancer',                      'Oncology research including prevention, treatment, and survivorship',   NULL, TRUE, 0, 3),
+  (gen_random_uuid(), 'MENTAL_HEALTH', 'Mental and Behavioral Health', 'Depression, anxiety, substance use disorder research',                 NULL, TRUE, 0, 4),
+  (gen_random_uuid(), 'PAIN',          'Pain Management',             'Chronic pain, opioid alternatives, pain outcomes research',             NULL, TRUE, 0, 5),
+  (gen_random_uuid(), 'RESPIRATORY',   'Respiratory Disease',         'COPD, asthma, pulmonary disease research',                             NULL, TRUE, 0, 6),
+  (gen_random_uuid(), 'OBESITY',       'Obesity and Weight Management','Weight loss interventions and metabolic syndrome research',            NULL, TRUE, 0, 7),
+  (gen_random_uuid(), 'RARE_DISEASE',  'Rare Diseases',               'Research on conditions affecting fewer than 200,000 people',           NULL, TRUE, 0, 8),
+  (gen_random_uuid(), 'PEDIATRIC',     'Pediatric Health',            'Child and adolescent health outcomes research',                        NULL, TRUE, 0, 9),
+  (gen_random_uuid(), 'AGING',         'Aging and Dementia',          'Alzheimer''s disease, dementia, and healthy aging research',           NULL, TRUE, 0, 10)
 ON CONFLICT DO NOTHING;

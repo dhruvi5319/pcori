@@ -78,16 +78,16 @@ public class Classification {
     private String secondaryOutcomes;
 
     @Column(name = "text_preview", length = 500)
-    private String textPreview;         // max 500 chars; no PHI in logs
+    private String textPreview;
 
     @Column(name = "extraction_warning", length = 255)
     private String extractionWarning;
 
     @Column(name = "confidence_score", precision = 5, scale = 4)
-    private BigDecimal confidenceScore;  // DECIMAL(5,4): 0.0000–1.0000
+    private BigDecimal confidenceScore;
 
     @Column(name = "model_version", length = 100)
-    private String modelVersion;        // "keyword-v1" or ML provider version
+    private String modelVersion;
 
     @Column(name = "processing_time_ms")
     private Integer processingTimeMs;
@@ -147,6 +147,7 @@ public class Classification {
     @Column(name = "deleted_at")
     private Instant deletedAt;
 
-    @Column(name = "search_vector", insertable = false, updatable = false)
+    // search_vector is a generated column — exclude from JPA writes
+    @Column(name = "search_vector", insertable = false, updatable = false, columnDefinition = "tsvector")
     private String searchVector;
 }

@@ -105,13 +105,9 @@ code, pre, .font-mono {
   font-family: var(--font-geist-mono, 'Geist Mono', ui-monospace, monospace);
 }
 
-/* ── Classification Table Row lift animation ── */
-.classification-row {
-  transition: box-shadow 0.15s ease, transform 0.15s ease, background-color 0.1s ease;
-}
-
-/* ── Dropzone Animated Dashed Border (UI-SPEC §Dropzone Animated Dashed Border) ── */
+/* ── PDF Dropzone animated dashed border (Phase 2) ── */
 @keyframes dash-flow {
-  to { stroke-dashoffset: -24; }
+  to {
+    stroke-dashoffset: -24;
+  }
 }
-

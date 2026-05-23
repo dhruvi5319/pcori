@@ -26,16 +26,11 @@ public interface StorageService {
 
     /**
      * Get file content as InputStream for pipeline extraction.
-     *
-     * @param storageKey S3 object key
-     * @return InputStream of file content
      */
     InputStream getFile(String storageKey);
 
     /**
-     * Soft-delete: mark object for deletion (does not remove from S3 immediately in v1).
-     *
-     * @param storageKey S3 object key
+     * Soft-delete: log intent for future cleanup.
      */
     void delete(String storageKey);
 }

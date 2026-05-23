@@ -33,16 +33,15 @@ public class S3StorageService implements StorageService {
     public S3StorageService(S3Client s3Client,
                             @Value("${STORAGE_ENDPOINT:}") String storageEndpoint,
                             @Value("${AWS_REGION:us-east-1}") String region,
-                            @Value("${AWS_ACCESS_KEY_ID:}") String accessKeyId,
-                            @Value("${AWS_SECRET_ACCESS_KEY:}") String secretAccessKey) {
+                            @Value("${AWS_ACCESS_KEY_ID:minioadmin}") String accessKeyId,
+                            @Value("${AWS_SECRET_ACCESS_KEY:minioadmin}") String secretAccessKey) {
         this.s3Client = s3Client;
 
-        // Build presigner with same endpoint override as S3Client
+        // Build presigner with same endpoint override
         S3Presigner.Builder presignerBuilder = S3Presigner.builder()
             .region(Region.of(region))
             .credentialsProvider(StaticCredentialsProvider.create(
                 AwsBasicCredentials.create(accessKeyId, secretAccessKey)));
-
         if (storageEndpoint != null && !storageEndpoint.isBlank()) {
             presignerBuilder.endpointOverride(URI.create(storageEndpoint));
         }
