@@ -48,9 +48,9 @@ Plans:
 
 ### Phase 2: Classification Pipeline
 <<<<<<< HEAD
-**Status**: In progress
+**Status**: passed
 =======
-**Status**: In Progress
+**Status**: passed
 >>>>>>> 580607b (docs: update planning artifacts [pivota-auto])
 **Last Updated**: 2026-05-23T00:00:00Z
 **Goal**: A reviewer can upload a PDF research plan and receive an automated PCORI taxonomy classification in minutes, with all files tracked in S3 and the full taxonomy tree browsable and maintainable
