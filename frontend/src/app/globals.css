@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/* ── Geist Font Variables ── */
+@font-face {
+  font-family: 'Geist';
+  src: url('https://fonts.gstatic.com/s/geist/v1/gyBhwUlxnKqRMgGFKtJP.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* NOTE: Use next/font/google in layout.tsx for production Geist loading */
+
+/* ── Design Tokens: Light Mode (UI-SPEC Color §) ── */
+:root {
+  /* Dominant (60%) */
+  --color-background: #FFFFFF;
+  /* Secondary (30%) */
+  --color-surface: #F4F6F9;
+  /* Accent Brand Blue (10%) */
+  --color-accent: #1D4ED8;
+  --color-accent-hover: #1e40af;
+  /* Destructive */
+  --color-destructive: #DC2626;
+  /* Text */
+  --color-foreground: #0a0a0a;
+  --color-muted: #6B7280;
+  /* Border */
+  --color-border: rgba(0, 0, 0, 0.08);
+  /* Status colors */
+  --color-status-classified: #16A34A;
+  --color-status-processing: #2563EB;
+  --color-status-pending: #6B7280;
+  --color-status-failed: #DC2626;
+  --color-status-needs-review: #D97706;
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  /* Sidebar */
+  --sidebar-width-collapsed: 56px;
+  --sidebar-width-expanded: 240px;
+  /* CTA gradient */
+  --gradient-cta: linear-gradient(135deg, #1D4ED8 0%, #7C3AED 100%);
+}
+
+/* ── Dark Mode Tokens ── */
+.dark {
+  --color-background: #0A0A0A;
+  --color-surface: #141414;
+  --color-accent: #3B82F6;
+  --color-accent-hover: #60a5fa;
+  --color-destructive: #EF4444;
+  --color-foreground: #fafafa;
+  --color-muted: #9CA3AF;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-status-classified: #22C55E;
+  --color-status-processing: #3B82F6;
+  --color-status-pending: #9CA3AF;
+  --color-status-failed: #EF4444;
+  --color-status-needs-review: #F59E0B;
+  --glass-bg: rgba(10, 10, 10, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-geist-sans, 'Geist', system-ui, sans-serif);
+  line-height: 1.5;
+}
+
+/* ── Focus Ring (UI-SPEC Accessibility §) ── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ── Glassmorphism utility (UI-SPEC Advanced Visual Effects §) ── */
+.glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+}
+
+/* ── CTA gradient button ── */
+.btn-gradient {
+  background: var(--gradient-cta);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.btn-gradient:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+.btn-gradient:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Geist Mono (for log panels, Phase 2+) ── */
+code, pre, .font-mono {
+  font-family: var(--font-geist-mono, 'Geist Mono', ui-monospace, monospace);
+}

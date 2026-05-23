@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: pcori-postgres
+    environment:
+      POSTGRES_DB: pcori
+      POSTGRES_USER: pcori
+      POSTGRES_PASSWORD: pcori_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pcori -d pcori"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    container_name: pcori-mailhog
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # Web UI
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pcori-backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/pcori
+      SPRING_DATASOURCE_USERNAME: pcori
+      SPRING_DATASOURCE_PASSWORD: pcori_dev
+      JWT_SECRET: dev-secret-must-be-at-least-64-chars-long-for-hs512-algorithm-pcori
+      JWT_EXPIRATION_MS: 3600000
+      MAX_LOGIN_ATTEMPTS: 5
+      LOCKOUT_DURATION_MINUTES: 30
+      PASSWORD_RESET_TTL_MINUTES: 60
+      MAIL_HOST: mailhog
+      MAIL_PORT: 1025
+      SPRING_MAIL_HOST: mailhog
+      SPRING_MAIL_PORT: 1025
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
