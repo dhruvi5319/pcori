@@ -76,4 +76,21 @@ public class DomainExceptions {
     public static class InactiveParentException extends RuntimeException {
         public InactiveParentException(String message) { super(message); }
     }
+
+    // ── Classification domain exceptions ────────────────────────────────────
+
+    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+    public static class InvalidFileTypeException extends RuntimeException {
+        public InvalidFileTypeException(String message) { super(message); }
+    }
+
+    @ResponseStatus(HttpStatus.PAYLOAD_TOO_LARGE)
+    public static class FileTooLargeException extends RuntimeException {
+        public FileTooLargeException(String message) { super(message); }
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public static class InvalidStatusException extends RuntimeException {
+        public InvalidStatusException(String message) { super(message); }
+    }
 }

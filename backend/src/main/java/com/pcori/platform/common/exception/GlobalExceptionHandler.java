@@ -150,6 +150,44 @@ public class GlobalExceptionHandler {
                 .build());
     }
 
+    // ── Classification domain exception handlers ─────────────────────────────
+
+    @ExceptionHandler(DomainExceptions.InvalidFileTypeException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidFileType(DomainExceptions.InvalidFileTypeException ex) {
+        return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body(
+            ErrorResponse.builder()
+                .type("https://pcori.com/errors/invalid-file-type")
+                .title("Invalid File Type")
+                .status(415)
+                .detail(ex.getMessage())
+                .timestamp(Instant.now())
+                .build());
+    }
+
+    @ExceptionHandler(DomainExceptions.FileTooLargeException.class)
+    public ResponseEntity<ErrorResponse> handleFileTooLarge(DomainExceptions.FileTooLargeException ex) {
+        return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body(
+            ErrorResponse.builder()
+                .type("https://pcori.com/errors/file-too-large")
+                .title("File Too Large")
+                .status(413)
+                .detail(ex.getMessage())
+                .timestamp(Instant.now())
+                .build());
+    }
+
+    @ExceptionHandler(DomainExceptions.InvalidStatusException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidStatus(DomainExceptions.InvalidStatusException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+            ErrorResponse.builder()
+                .type("https://pcori.com/errors/invalid-status")
+                .title("Invalid Status Transition")
+                .status(409)
+                .detail(ex.getMessage())
+                .timestamp(Instant.now())
+                .build());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneral(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
