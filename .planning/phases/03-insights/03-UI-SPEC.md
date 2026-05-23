@@ -64,7 +64,7 @@ created: 2026-05-20
 | Chart section card min-height | 320px | Recharts needs breathing room; skeleton matches this height |
 | Notification panel width | 380px | User decision — slide-out from right edge |
 | Notification panel max-height | calc(100vh - 64px) | Full height minus app header |
-| Notification item padding | 16px horizontal, 12px vertical | Comfortable tap target in dense list |
+| Notification item padding | 16px horizontal, 8px vertical | Compact list — 8px vertical + 14px text yields adequate touch target height |
 | Pipeline stage card min-width | 200px | 3 across; fits EXTRACT/CLASSIFY/PERSIST labels + status |
 | Pipeline status header height | 80px | Fits 2 rows of status info + last sync timestamp |
 | Pipeline log panel height | 240px (collapsed), 480px (expanded) | Collapsed shows ~4 log lines; expanded shows ~10 |
@@ -215,7 +215,7 @@ Implemented as an SVG `<linearGradient>` referenced by the Recharts `<Area fill=
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08); /* E2 elevation */
   border: 1px solid #E5E7EB;
-  padding: 8px 12px;
+  padding: 8px 16px;
   font-family: 'Geist Sans', sans-serif;
   font-size: 14px;
 }
@@ -677,7 +677,7 @@ App header [⭐ Bell: 🔴3]  ← unread badge, red dot with count
 
 - Unread item: white/`#1A1A1A` bg; unread red dot (8px solid `#DC2626`) right-aligned
 - Read item: secondary bg (same as drawer bg); no dot
-- Item padding: 16px horizontal, 12px vertical
+- Item padding: 16px horizontal, 8px vertical
 - Type icon: 20px lucide icon, left-aligned, colored by type (see color spec above)
 - Title: 14px / 600 (label size + weight bump)
 - Body: 14px / 400; truncated to 2 lines with CSS `line-clamp: 2`
