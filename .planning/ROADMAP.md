@@ -47,7 +47,8 @@ Plans:
 - [x] 01-11-PLAN.md — Gap closure: AdminController GET /api/admin/ping with @PreAuthorize ADMIN role (satisfies SC-5 / FR-1.7)
 
 ### Phase 2: Classification Pipeline
-**Status**: executing
+**Status**: failed
+**Last Updated**: 2026-05-23T00:00:00Z
 **Goal**: A reviewer can upload a PDF research plan and receive an automated PCORI taxonomy classification in minutes, with all files tracked in S3 and the full taxonomy tree browsable and maintainable
 **Depends on**: Phase 1
 **Requirements**: FR-2.1, FR-2.2, FR-2.3, FR-2.4, FR-2.5, FR-2.6, FR-2.7, FR-2.8, FR-3.1, FR-3.2, FR-3.3, FR-3.4, FR-3.5, FR-10.1, FR-10.2
@@ -61,13 +62,13 @@ Plans:
 **Plans**: 7 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — MinIO Docker Compose service + Flyway V3 (classifications + uploaded_files DDL) + V4 (taxonomy_categories DDL + PCORI seed)
-- [ ] 02-02-PLAN.md — Files domain: UploadedFile entity, StorageService interface, S3StorageService (MinIO endpointOverride), FileController pre-signed URL
-- [ ] 02-03-PLAN.md — Taxonomy domain: TaxonomyCategory entity, TaxonomyRepository, TaxonomyService (CRUD + cascade + tree), TaxonomyController (11 endpoints)
-- [ ] 02-04-PLAN.md — Classification domain: entity, repository, service, controller, PlanIdGenerator, async pipeline (3 stages + PipelineRecovery), KeywordClassificationStrategy
-- [ ] 02-05-PLAN.md — Classifications frontend: /classifications page, filter bar with URL params, table, status badges (animate-ping PROCESSING), empty states, Playwright e2e
-- [ ] 02-06-PLAN.md — Classification dialogs: Upload Plan (dropzone + SVG animated border), View (confidence gauge), Manual Override (split pane + diff highlight), Retry Confirm
-- [ ] 02-07-PLAN.md — Taxonomy frontend: /taxonomy two-pane page, collapsible tree, detail pane, inline edit form, Add Category dialog (breadcrumb preview), Deactivate confirm
+- [x] 02-01-PLAN.md — MinIO Docker Compose service + Flyway V4 (classifications + uploaded_files DDL) + V5 (taxonomy_categories DDL + PCORI seed)
+- [x] 02-02-PLAN.md — Files domain: UploadedFile entity, StorageService interface, S3StorageService (MinIO endpointOverride), FileController pre-signed URL
+- [x] 02-03-PLAN.md — Taxonomy domain: TaxonomyCategory entity, TaxonomyRepository, TaxonomyService (CRUD + cascade + tree), TaxonomyController (11 endpoints)
+- [x] 02-04-PLAN.md — Classification domain: entity, repository, service, controller, PlanIdGenerator, async pipeline (3 stages + PipelineRecovery), KeywordClassificationStrategy
+- [x] 02-05-PLAN.md — Classifications frontend: /classifications page, filter bar with URL params, table, status badges (animate-ping PROCESSING), empty states, Playwright e2e
+- [x] 02-06-PLAN.md — Classification dialogs: Upload Plan (dropzone + SVG animated border), View (confidence gauge), Manual Override (split pane + diff highlight), Retry Confirm
+- [x] 02-07-PLAN.md — Taxonomy frontend: /taxonomy two-pane page, collapsible tree, detail pane, inline edit form, Add Category dialog (breadcrumb preview), Deactivate confirm
 
 ### Phase 3: Insights
 **Goal**: Program managers and admins have real-time visibility into classification volume, accuracy, override patterns, and pipeline health — with in-app notifications keeping reviewers informed without manual polling
@@ -100,7 +101,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 11/11 | Complete ✓ | 2026-05-21 |
-| 2. Classification Pipeline | 0/TBD | Not started | - |
+| 2. Classification Pipeline | 7/7 | Complete ✓ | 2026-05-23 |
 | 3. Insights | 0/TBD | Not started | - |
 | 4. Reporting & Admin Polish | 0/TBD | Not started | - |
 

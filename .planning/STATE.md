@@ -3,15 +3,15 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 1 complete — all 11 plans executed, verification passed 5/5
-last_updated: "2026-05-21T23:00:00.000Z"
-last_activity: "2026-05-21 — Phase 1 complete: gap closure plans 09-11 executed, verification passed 5/5 SC"
+stopped_at: Phase 2 complete — all 7 plans executed
+last_updated: "2026-05-23T00:00:00.000Z"
+last_activity: "2026-05-23 — Phase 2 complete: MinIO storage, classification pipeline, taxonomy domain, all frontend dialogs"
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 18
-  completed_plans: 11
-  percent: 61
+  completed_plans: 18
+  percent: 90
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 
 ## Current Position
 
-Phase: 1 of 4 (Foundation) — COMPLETE ✓
-Plan: 11/11 complete — verification passed 5/5 success criteria
-Status: Phase 1 complete — ready for Phase 2
-Last activity: 2026-05-21 — Phase 1 complete: all gap closure plans executed, AdminController RBAC endpoint satisfies FR-1.7/SC-5
+Phase: 2 of 4 (Classification Pipeline) — COMPLETE ✓
+Plan: 7/7 complete
+Status: Phase 2 complete — ready for Phase 3
+Last activity: 2026-05-23 — Phase 2 complete: MinIO+S3 storage, 3-stage async classification pipeline, taxonomy CRUD with cascade deactivation, /classifications page with dialogs, /taxonomy two-pane page
 
-Progress: [██████░░░░] 61%
+Progress: [█████████░] 90%
 
 ## Performance Metrics
 
@@ -96,6 +96,14 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: Removed unlayered * { margin: 0; padding: 0 } from globals.css — Tailwind v4 includes equivalent reset in @layer base; unlayered CSS wins over all @layer rules per CSS Cascade Level 5
 - [Phase 01-foundation]: @PreAuthorize over @Secured/@RolesAllowed for admin endpoint RBAC — consistent with @EnableMethodSecurity already in SecurityConfig
 - [Phase 01-foundation]: AdminController uses ResponseEntity<Map<String,Object>> for ping — no custom DTO needed; serves as Phase 2 admin scaffold
+- [Phase 02-classification-pipeline]: Flyway migrations V3 (Phase 1 audit columns) already taken; V4=classification_schema, V5=taxonomy_seed — plan numbering adjusted
+- [Phase 02-classification-pipeline]: created_by/last_modified_by in Classification and TaxonomyCategory mapped as VARCHAR(255) String (not UUID) to match AuditableEntity pattern
+- [Phase 02-classification-pipeline]: ClassificationController resolves uploadedBy UUID via User instanceof cast (User extends UserDetails) — username is not a UUID
+- [Phase 02-classification-pipeline]: KeywordClassificationStrategy confidence ≥0.75 routes to CLASSIFIED; <0.75 routes to NEEDS_REVIEW (configurable via app.classification.needs-review-threshold)
+- [Phase 02-classification-pipeline]: PDFBox 3.x uses Loader.loadPDF(byte[]) API — readAllBytes() required before passing to Loader (stream must be fully read)
+- [Phase 02-classification-pipeline]: @radix-ui/react-progress added to package.json for UploadProgressBar in Plan 06
+- [Phase 02-classification-pipeline]: dash-flow @keyframe added to globals.css for PDF dropzone SVG animated dashed border
+- [Phase 02-classification-pipeline]: Classifications page wires all 4 dialogs (Upload, View, Override, Retry) in single page.tsx; dialog state via useState hooks
 
 ### Pending Todos
 
