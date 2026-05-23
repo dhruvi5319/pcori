@@ -49,4 +49,31 @@ public class DomainExceptions {
     public static class StorageUnavailableException extends RuntimeException {
         public StorageUnavailableException(String message) { super(message); }
     }
+
+    // ── Taxonomy domain exceptions ──────────────────────────────────────────
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public static class CodeDuplicateException extends RuntimeException {
+        public CodeDuplicateException(String message) { super(message); }
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class InvalidParentException extends RuntimeException {
+        public InvalidParentException(String message) { super(message); }
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class InvalidLevelException extends RuntimeException {
+        public InvalidLevelException(String message) { super(message); }
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class CircularReferenceException extends RuntimeException {
+        public CircularReferenceException(String message) { super(message); }
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class InactiveParentException extends RuntimeException {
+        public InactiveParentException(String message) { super(message); }
+    }
 }

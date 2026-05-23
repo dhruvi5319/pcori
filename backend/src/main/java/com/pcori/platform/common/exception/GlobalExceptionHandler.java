@@ -121,6 +121,35 @@ public class GlobalExceptionHandler {
                 .build());
     }
 
+    // ── Taxonomy domain exception handlers ─────────────────────────────────
+
+    @ExceptionHandler(DomainExceptions.CodeDuplicateException.class)
+    public ResponseEntity<ErrorResponse> handleCodeDuplicate(DomainExceptions.CodeDuplicateException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+            ErrorResponse.builder()
+                .type("https://pcori.com/errors/taxonomy/code-duplicate")
+                .title("Duplicate Taxonomy Code")
+                .status(409)
+                .detail(ex.getMessage())
+                .timestamp(Instant.now())
+                .build());
+    }
+
+    @ExceptionHandler({DomainExceptions.InvalidParentException.class,
+                        DomainExceptions.InvalidLevelException.class,
+                        DomainExceptions.CircularReferenceException.class,
+                        DomainExceptions.InactiveParentException.class})
+    public ResponseEntity<ErrorResponse> handleTaxonomyValidation(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+            ErrorResponse.builder()
+                .type("https://pcori.com/errors/taxonomy/validation")
+                .title("Taxonomy Validation Error")
+                .status(400)
+                .detail(ex.getMessage())
+                .timestamp(Instant.now())
+                .build());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneral(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
