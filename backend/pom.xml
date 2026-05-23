@@ -20,7 +20,21 @@
   <properties>
     <java.version>21</java.version>
     <jjwt.version>0.12.6</jjwt.version>
+    <aws.sdk.version>2.26.0</aws.sdk.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- AWS SDK v2 BOM -->
+      <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>bom</artifactId>
+        <version>${aws.sdk.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <!-- Spring Boot Starters -->
@@ -90,6 +104,26 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <optional>true</optional>
+    </dependency>
+
+    <!-- AWS SDK v2 — S3 + pre-signed URLs -->
+    <dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>s3</artifactId>
+    </dependency>
+
+    <!-- Apache Tika — MIME type detection for file validation -->
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-core</artifactId>
+      <version>2.9.2</version>
+    </dependency>
+
+    <!-- Apache PDFBox 3.x — PDF text extraction for classification pipeline -->
+    <dependency>
+      <groupId>org.apache.pdfbox</groupId>
+      <artifactId>pdfbox</artifactId>
+      <version>3.0.3</version>
     </dependency>
 
     <!-- SpringDoc OpenAPI (Swagger — dev only) -->

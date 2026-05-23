@@ -1,9 +1,5 @@
 export type ClassificationStatus =
-  | 'PENDING'
-  | 'PROCESSING'
-  | 'CLASSIFIED'
-  | 'FAILED'
-  | 'NEEDS_REVIEW'
+  | 'PENDING' | 'PROCESSING' | 'CLASSIFIED' | 'FAILED' | 'NEEDS_REVIEW'
 
 export interface Classification {
   id: string
@@ -14,9 +10,6 @@ export interface Classification {
   taxonomyCategory?: string
   taxonomyCode?: string
   taxonomySubcode?: string
-  primaryCondition?: string
-  secondaryConditions?: string
-  icdCodes?: string
   projectSummary?: string
   populationSetting?: string
   intervention?: string
@@ -31,7 +24,6 @@ export interface Classification {
   fileId?: string
   fileName?: string
   fileSize?: number
-  filePath?: string
   notes?: string
   uploadedBy: string
   uploadedAt: string
@@ -53,6 +45,21 @@ export interface ClassificationFilters {
   endDate?: string
   pcc?: string
   q?: string
+}
+
+export interface UploadResponse {
+  classificationId: string
+  planId: string
+  status: 'PENDING'
+  uploadedAt: string
+}
+
+export interface ManualOverrideRequest {
+  pcc?: string
+  taxonomyCategory?: string
+  taxonomyCode?: string
+  taxonomySubcode?: string
+  overrideReason: string
 }
 
 export interface ClassificationStatistics {
