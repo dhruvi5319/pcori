@@ -109,6 +109,18 @@ public class GlobalExceptionHandler {
                 .build());
     }
 
+    @ExceptionHandler(DomainExceptions.StorageUnavailableException.class)
+    public ResponseEntity<ErrorResponse> handleStorageUnavailable(DomainExceptions.StorageUnavailableException ex) {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(
+            ErrorResponse.builder()
+                .type("https://pcori.com/errors/storage-unavailable")
+                .title("Storage Unavailable")
+                .status(503)
+                .detail(ex.getMessage())
+                .timestamp(Instant.now())
+                .build());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneral(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(

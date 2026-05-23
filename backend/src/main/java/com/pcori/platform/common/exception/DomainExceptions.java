@@ -44,4 +44,9 @@ public class DomainExceptions {
     public static class InvalidTokenException extends RuntimeException {
         public InvalidTokenException(String message) { super(message); }
     }
+
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    public static class StorageUnavailableException extends RuntimeException {
+        public StorageUnavailableException(String message) { super(message); }
+    }
 }
