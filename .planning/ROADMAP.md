@@ -47,7 +47,7 @@ Plans:
 - [x] 01-11-PLAN.md — Gap closure: AdminController GET /api/admin/ping with @PreAuthorize ADMIN role (satisfies SC-5 / FR-1.7)
 
 ### Phase 2: Classification Pipeline
-**Status**: failed
+**Status**: In Progress
 **Last Updated**: 2026-05-23T00:00:00Z
 **Goal**: A reviewer can upload a PDF research plan and receive an automated PCORI taxonomy classification in minutes, with all files tracked in S3 and the full taxonomy tree browsable and maintainable
 **Depends on**: Phase 1
