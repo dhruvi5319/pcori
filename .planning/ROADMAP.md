@@ -47,10 +47,6 @@ Plans:
 - [x] 01-11-PLAN.md — Gap closure: AdminController GET /api/admin/ping with @PreAuthorize ADMIN role (satisfies SC-5 / FR-1.7)
 
 ### Phase 2: Classification Pipeline
-<<<<<<< HEAD
-**Status**: completed (2026-05-23)
-**Last Updated**: 2026-05-23T23:07:34Z
-=======
 **Status**: In Progress
 **Last Updated**: 2026-05-23T00:00:00Z
 >>>>>>> 580607b (docs: update planning artifacts [pivota-auto])
