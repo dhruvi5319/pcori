@@ -3,14 +3,14 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 02-04-PLAN.md
-last_updated: "2026-05-23T20:44:07.348Z"
+stopped_at: Completed 02-07-PLAN.md
+last_updated: "2026-05-23T20:51:21.968Z"
 last_activity: "2026-05-23 — Phase 2 complete: MinIO+S3 storage, 3-stage async classification pipeline, taxonomy CRUD with cascade deactivation, /classifications page with dialogs, /taxonomy two-pane page"
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 18
-  completed_plans: 15
+  completed_plans: 17
   percent: 90
 ---
 
@@ -67,6 +67,7 @@ Progress: [█████████░] 90%
 | Phase 02-classification-pipeline P02 | 3min | 2 tasks | 12 files |
 | Phase 02-classification-pipeline P03 | 5min | 2 tasks | 11 files |
 | Phase 02-classification-pipeline P04 | 4min | 2 tasks | 25 files |
+| Phase 02-classification-pipeline P07 | 4min | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -117,6 +118,8 @@ Recent decisions affecting current work:
 - [Phase 02-classification-pipeline]: PDFBox 3.x uses Loader.loadPDF(byte[]) API — readAllBytes() required before passing to Loader
 - [Phase 02-classification-pipeline]: findRecentByLimit replaces findTopNByOrderByUploadedAtDesc — Spring Data doesn't support dynamic TopN with parameter
 - [Phase 02-classification-pipeline]: ClassificationController resolves uploadedBy UUID via User instanceof cast (User extends UserDetails) — username is not a UUID
+- [Phase 02-classification-pipeline]: CSS max-height transition (0→9999px) for tree expand/collapse — no JS height measurement needed; matches UI-SPEC 0.2s ease
+- [Phase 02-classification-pipeline]: isAdmin hardcoded true in taxonomy page.tsx — role-gating from JWT context deferred to Phase 3
 
 ### Pending Todos
 
@@ -132,6 +135,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-23T20:44:07.346Z
-Stopped at: Completed 02-04-PLAN.md
+Last session: 2026-05-23T20:51:21.966Z
+Stopped at: Completed 02-07-PLAN.md
 Resume file: None
