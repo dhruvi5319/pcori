@@ -80,7 +80,20 @@ Plans:
   3. Each user's dashboard widget layout is saved and restored between sessions
   4. Admin can view pipeline stage health, see stuck records highlighted, and issue start/stop/pause/resume/sync-now commands; admin can retry an individual failed stage
   5. A reviewer receives an in-app notification when their uploaded plan finishes classification or fails; notification preferences are configurable per user
-**Plans**: TBD
+**Plans**: 11 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Flyway V7 migration: dashboard_configurations, dashboard_metrics, notifications, notification_preferences, pipeline_runs, pipeline_logs tables + enums
+- [ ] 03-02-PLAN.md — Frontend foundations: install @dnd-kit/core + @dnd-kit/sortable + recharts + @radix-ui/react-switch; add shimmer-slide CSS keyframe + .skeleton-shimmer + Phase 3 CSS utilities to globals.css
+- [ ] 03-03-PLAN.md — Notification backend: domain entities, NotificationService (dispatch), NotificationController (6 endpoints), wire dispatch into ClassificationPipeline + ClassificationService
+- [ ] 03-04-PLAN.md — Analytics backend: AnalyticsService with 6 native SQL queries, AnalyticsController with 6 GET endpoints (accuracy-trend, category-accuracy, confidence-distribution, processing-volume, overrides, model-performance)
+- [ ] 03-05-PLAN.md — Dashboard backend: DashboardConfiguration entity + DashboardService (metrics queries + config CRUD), DashboardController with 7 endpoints
+- [ ] 03-06-PLAN.md — Pipeline monitoring backend: PipelineRun + PipelineLog entities, PipelineStatusService (surfaces classificationExecutor thread pool), PipelineController with 12 endpoints (status/health/logs/control/retry/sync)
+- [ ] 03-07-PLAN.md — Dashboard frontend: KpiCard + sparkline + drag-to-reorder (@dnd-kit), StatusBreakdownRow, UrgentActionBanner, QuickActionsRow, RecentClassificationsFeed; replaces placeholder page; Playwright e2e
+- [ ] 03-08-PLAN.md — Analytics frontend: AnalyticsDateContext, 6 chart section components (Recharts isAnimationActive=false), shared skeleton/empty/error; Playwright e2e
+- [ ] 03-09-PLAN.md — Data Pipeline frontend: PipelineStatusHeader, 3 StageCards (left-border color-coded), PipelineControlActions (admin only + Radix Dialog confirms), collapsible logs panel, run history; Playwright e2e
+- [ ] 03-10-PLAN.md — Notification frontend: NotificationBell + polling badge, slide-out NotificationDrawer (380px), NotificationPreferencesModal (Radix Switch), wired into app header layout
+- [ ] 03-11-PLAN.md — Sidebar nav: add Analytics (BarChart3) + Data Pipeline (Workflow) links; human verification checkpoint for full Phase 3 end-to-end
 
 ### Phase 4: Reporting & Admin Polish
 **Goal**: Program managers can generate and download Excel reports on demand; admins can manage all users and roles through the UI; every user has a browsable help center — completing the platform for all five personas
@@ -102,7 +115,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Foundation | 11/11 | Complete ✓ | 2026-05-21 |
 | 2. Classification Pipeline | 7/7 | Complete ✓ | 2026-05-23 |
-| 3. Insights | 0/TBD | Not started | - |
+| 3. Insights | 0/11 | Not started | - |
 | 4. Reporting & Admin Polish | 0/TBD | Not started | - |
 
 ---
