@@ -3,14 +3,14 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-06-PLAN.md
-last_updated: "2026-05-24T03:56:09.327Z"
-last_activity: "2026-05-24 — Phase 4 Plan 05: Playwright e2e config + react-markdown dependency (playwright.config.ts, e2e/auth.setup.ts, package.json updated)"
+stopped_at: Completed 04-07-PLAN.md
+last_updated: "2026-05-24T04:03:20.845Z"
+last_activity: "2026-05-24 — Phase 4 Plan 06: Reports frontend with 17 files (types, hooks, page, 12 components, e2e tests); @radix-ui/react-checkbox and @radix-ui/react-accordion added"
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 38
-  completed_plans: 34
+  completed_plans: 35
   percent: 89
 ---
 
@@ -80,6 +80,7 @@ Progress: [█████████░] 89%
 | Phase 04-reporting-admin-polish P04 | 4min | 2 tasks | 14 files |
 | Phase 04-reporting-admin-polish P05 | 1min | 1 tasks | 6 files |
 | Phase 04-reporting-admin-polish P06 | 6min | 2 tasks | 18 files |
+| Phase 04-reporting-admin-polish P07 | 5min | 2 tasks | 16 files |
 
 ## Accumulated Context
 
@@ -156,6 +157,8 @@ Recent decisions affecting current work:
 - [Phase 04-reporting-admin-polish]: react-markdown v9 ships own TypeScript types — no @types/react-markdown needed
 - [Phase 04-reporting-admin-polish]: E2E Playwright tests written as artifacts; execution deferred to verify phase per test execution boundary rules
 - [Phase 04-reporting-admin-polish]: TemplatesTable Delete uses secondary button (not destructive red) — soft-delete is not data loss per UI-SPEC
+- [Phase 04-reporting-admin-polish]: useToggleUserStatus passes username as mutation variable for toast messages without extra lookup
+- [Phase 04-reporting-admin-polish]: DeactivateUserConfirmDialog: onOpenAutoFocus prevents Radix default; sets focus to dismiss button via ref (safer default for destructive actions)
 
 ### Pending Todos
 
@@ -171,6 +174,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T03:56:09.325Z
-Stopped at: Completed 04-06-PLAN.md
+Last session: 2026-05-24T04:03:20.843Z
+Stopped at: Completed 04-07-PLAN.md
 Resume file: None
