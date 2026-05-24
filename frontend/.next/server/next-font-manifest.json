@@ -20,7 +20,23 @@
       "static/media/Geist_Variable-s.p.0-te~ja_gpvcf.woff2",
       "static/media/GeistMono_Variable.p.17jn9btb_52pq.woff2"
     ],
+    "[project]/src/app/(protected)/analytics/page": [
+      "static/media/Geist_Variable-s.p.0-te~ja_gpvcf.woff2",
+      "static/media/GeistMono_Variable.p.17jn9btb_52pq.woff2"
+    ],
+    "[project]/src/app/(protected)/classifications/page": [
+      "static/media/Geist_Variable-s.p.0-te~ja_gpvcf.woff2",
+      "static/media/GeistMono_Variable.p.17jn9btb_52pq.woff2"
+    ],
     "[project]/src/app/(protected)/dashboard/page": [
+      "static/media/Geist_Variable-s.p.0-te~ja_gpvcf.woff2",
+      "static/media/GeistMono_Variable.p.17jn9btb_52pq.woff2"
+    ],
+    "[project]/src/app/(protected)/data-pipeline/page": [
+      "static/media/Geist_Variable-s.p.0-te~ja_gpvcf.woff2",
+      "static/media/GeistMono_Variable.p.17jn9btb_52pq.woff2"
+    ],
+    "[project]/src/app/(protected)/taxonomy/page": [
       "static/media/Geist_Variable-s.p.0-te~ja_gpvcf.woff2",
       "static/media/GeistMono_Variable.p.17jn9btb_52pq.woff2"
     ],

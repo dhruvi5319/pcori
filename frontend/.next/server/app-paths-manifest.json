@@ -4,7 +4,11 @@
   "/(auth)/reset-password/page": "app/(auth)/reset-password/page.js",
   "/(auth)/signup/page": "app/(auth)/signup/page.js",
   "/(auth)/verify-email/page": "app/(auth)/verify-email/page.js",
+  "/(protected)/analytics/page": "app/(protected)/analytics/page.js",
+  "/(protected)/classifications/page": "app/(protected)/classifications/page.js",
   "/(protected)/dashboard/page": "app/(protected)/dashboard/page.js",
+  "/(protected)/data-pipeline/page": "app/(protected)/data-pipeline/page.js",
+  "/(protected)/taxonomy/page": "app/(protected)/taxonomy/page.js",
   "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js"
