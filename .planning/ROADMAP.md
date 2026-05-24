@@ -104,7 +104,18 @@ Plans:
   2. User can build an ad-hoc report by selecting columns and filters, preview results, and download; reports can be saved as named reusable templates
   3. Admin can create, edit, deactivate (not hard-delete), and assign roles to any user account without IT intervention; user search and filtering work across all user fields
   4. Any authenticated user can browse help articles and FAQs by category, search the article index, and submit documentation feedback
-**Plans**: TBD
+**Plans**: 9 plans
+
+Plans:
+- [ ] 04-01-PLAN.md — Flyway V8 migration: report_configurations, excel_reports (report_status enum), filter_configurations, help_articles (GIN FTS), faqs, documentation_feedback tables
+- [ ] 04-02-PLAN.md — UserService + UserController: 8 REST endpoints (CRUD, role assignment, deactivation guard, search)
+- [ ] 04-03-PLAN.md — Report domain backend: Apache POI (XSSF/SXSSF), ExcelGenerationService, ReportService, ReportController (11 endpoints), FilterController (5 endpoints)
+- [ ] 04-04-PLAN.md — Help domain backend: HelpArticle/Faq/DocumentationFeedback entities, HelpService, HelpController (12 endpoints with GIN full-text search)
+- [ ] 04-05-PLAN.md — Frontend prerequisites: playwright.config.ts + auth.setup.ts + react-markdown + @radix-ui/react-accordion to package.json
+- [ ] 04-06-PLAN.md — /reports frontend: 3 Radix Tabs, OneClickExportButton, ColumnSelectorPanel, BuilderFilterPanel, ReportPreviewPanel, SaveTemplateDialog, TemplatesTable + Playwright e2e
+- [ ] 04-07-PLAN.md — /users frontend: UsersTable, UserRoleChips, UserStatusBadge, AddUserDialog, EditUserDialog, DeactivateUserConfirmDialog (destructive red) + Playwright e2e
+- [ ] 04-08-PLAN.md — /help frontend: two-pane layout, react-markdown articles, HelpSearchBar (300ms debounce), Radix Accordion FAQs, FeedbackWidget (post-submit state) + Playwright e2e
+- [ ] 04-09-PLAN.md — Sidebar nav verification + end-to-end human verification checkpoint for full Phase 4
 
 ## Progress
 
