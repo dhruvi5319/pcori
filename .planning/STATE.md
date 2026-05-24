@@ -3,15 +3,15 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-03-PLAN.md
-last_updated: "2026-05-24T03:38:46.629Z"
-last_activity: "2026-05-24 — Phase 4 Plan 03: ExcelGenerationService with XSSF/SXSSF, 11 report endpoints, 5 filter endpoints for FR-6.1–FR-6.4"
+stopped_at: Completed 04-04-PLAN.md
+last_updated: "2026-05-24T03:44:50.983Z"
+last_activity: "2026-05-24 — Phase 4 Plan 04: Help domain (HelpArticle/FAQ/Feedback entities, repositories, HelpService, HelpController with 12 endpoints)"
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 38
-  completed_plans: 31
-  percent: 82
+  completed_plans: 32
+  percent: 84
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 ## Current Position
 
 Phase: 4 of 4 (Reporting, Admin & Polish) — In progress
-Plan: 3/8 complete
-Status: Phase 4 in progress — Report domain complete (FR-6.1–FR-6.4)
-Last activity: 2026-05-24 — Phase 4 Plan 03: ExcelGenerationService with XSSF/SXSSF, ReportController (11 endpoints), FilterController (5 endpoints)
+Plan: 4/8 complete
+Status: Phase 4 in progress — Help domain complete (FR-9.1, FR-9.2)
+Last activity: 2026-05-24 — Phase 4 Plan 04: Help domain (HelpArticle/FAQ/Feedback entities, repositories, HelpService, HelpController with 12 endpoints)
 
-Progress: [████████░░] 82%
+Progress: [████████░░] 84%
 
 ## Performance Metrics
 
@@ -77,6 +77,7 @@ Progress: [████████░░] 82%
 | Phase 04-reporting-admin-polish P01 | 1min | 1 tasks | 1 files |
 | Phase 04-reporting-admin-polish P02 | 4min | 2 tasks | 7 files |
 | Phase 04-reporting-admin-polish P03 | 5min | 2 tasks | 20 files |
+| Phase 04-reporting-admin-polish P04 | 4min | 2 tasks | 14 files |
 
 ## Accumulated Context
 
@@ -147,6 +148,8 @@ Recent decisions affecting current work:
 - [Phase 04-reporting-admin-polish]: GET /api/users/active has no @PreAuthorize — intentionally unrestricted for internal domain use
 - [Phase 04-reporting-admin-polish]: SXSSFWorkbook(500) streaming threshold at 1000 rows for Excel reports — aligns with plan spec; 500-row flush window prevents OOM for large exports
 - [Phase 04-reporting-admin-polish]: Excel report files stored to temp filesystem path — StorageService abstraction exists for future S3 swap; temp path covers dev/testing use case
+- [Phase 04-reporting-admin-polish]: search_vector GENERATED ALWAYS AS STORED excluded from JPA entity — referenced only in native SQL @Query in repository to prevent Hibernate write errors
+- [Phase 04-reporting-admin-polish]: GET /api/help/articles/search declared before GET /api/help/articles/{slug} in HelpController — prevents Spring MVC path conflict resolving 'search' as a slug
 
 ### Pending Todos
 
@@ -162,6 +165,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T03:38:46.627Z
-Stopped at: Completed 04-03-PLAN.md
+Last session: 2026-05-24T03:44:50.981Z
+Stopped at: Completed 04-04-PLAN.md
 Resume file: None
