@@ -47,8 +47,13 @@ Plans:
 - [x] 01-11-PLAN.md — Gap closure: AdminController GET /api/admin/ping with @PreAuthorize ADMIN role (satisfies SC-5 / FR-1.7)
 
 ### Phase 2: Classification Pipeline
+<<<<<<< HEAD
 **Status**: completed (2026-05-23)
 **Last Updated**: 2026-05-23T23:07:34Z
+=======
+**Status**: In Progress
+**Last Updated**: 2026-05-23T00:00:00Z
+>>>>>>> 580607b (docs: update planning artifacts [pivota-auto])
 **Goal**: A reviewer can upload a PDF research plan and receive an automated PCORI taxonomy classification in minutes, with all files tracked in S3 and the full taxonomy tree browsable and maintainable
 **Depends on**: Phase 1
 **Requirements**: FR-2.1, FR-2.2, FR-2.3, FR-2.4, FR-2.5, FR-2.6, FR-2.7, FR-2.8, FR-3.1, FR-3.2, FR-3.3, FR-3.4, FR-3.5, FR-10.1, FR-10.2
@@ -71,6 +76,7 @@ Plans:
 - [x] 02-07-PLAN.md — Taxonomy frontend: /taxonomy two-pane page, collapsible tree, detail pane, inline edit form, Add Category dialog (breadcrumb preview), Deactivate confirm
 
 ### Phase 3: Insights
+**Status**: In Progress
 **Goal**: Program managers and admins have real-time visibility into classification volume, accuracy, override patterns, and pipeline health — with in-app notifications keeping reviewers informed without manual polling
 **Depends on**: Phase 2
 **Requirements**: FR-4.1, FR-4.2, FR-4.3, FR-4.4, FR-4.5, FR-4.6, FR-5.1, FR-5.2, FR-5.3, FR-5.4, FR-5.5, FR-8.1, FR-8.2
