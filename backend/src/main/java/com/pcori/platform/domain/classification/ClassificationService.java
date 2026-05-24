@@ -6,6 +6,8 @@ import com.pcori.platform.domain.classification.dto.*;
 import com.pcori.platform.domain.classification.pipeline.ClassificationPipeline;
 import com.pcori.platform.domain.files.FileService;
 import com.pcori.platform.domain.files.UploadedFile;
+import com.pcori.platform.domain.notification.NotificationService;
+import com.pcori.platform.domain.notification.NotificationType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -29,6 +31,7 @@ public class ClassificationService {
     private final FileValidator fileValidator;
     private final PlanIdGenerator planIdGenerator;
     private final ClassificationPipeline pipeline;
+    private final NotificationService notificationService;
 
     /**
      * FR-2.1/2.3: Upload PDF and kick off async classification pipeline.
@@ -79,7 +82,14 @@ public class ClassificationService {
         c.setReviewedBy(reviewedBy);
         c.setReviewedAt(Instant.now());
         c.setStatus(ClassificationStatus.CLASSIFIED);
-        return classificationRepository.save(c);
+        Classification saved = classificationRepository.save(c);
+        notificationService.dispatch(
+            c.getUploadedBy(),
+            NotificationType.OVERRIDE_SUBMITTED,
+            "Classification Overridden",
+            "Plan " + c.getPlanId() + " classification has been overridden."
+        );
+        return saved;
     }
 
     /**

@@ -4,6 +4,8 @@ import com.pcori.platform.common.exception.DomainExceptions;
 import com.pcori.platform.domain.classification.Classification;
 import com.pcori.platform.domain.classification.ClassificationRepository;
 import com.pcori.platform.domain.classification.ClassificationStatus;
+import com.pcori.platform.domain.notification.NotificationService;
+import com.pcori.platform.domain.notification.NotificationType;
 import com.pcori.platform.integration.ml.ClassificationResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,7 @@ public class ClassificationPipeline {
     private final PdfExtractionStage extractionStage;
     private final ClassificationStage classificationStage;
     private final PersistResultStage persistStage;
+    private final NotificationService notificationService;
 
     @Async("classificationExecutor")
     public void process(UUID classificationId) {
@@ -52,6 +55,12 @@ public class ClassificationPipeline {
                 classification.setStatus(ClassificationStatus.NEEDS_REVIEW);
                 classificationRepository.save(classification);
                 log.info("Pipeline completed for {} with status NEEDS_REVIEW (extraction quality gate)", classificationId);
+                notificationService.dispatch(
+                    classification.getUploadedBy(),
+                    NotificationType.CLASSIFICATION_NEEDS_REVIEW,
+                    "Classification Needs Review",
+                    "Plan " + classification.getPlanId() + " requires manual review."
+                );
                 return;
             }
 
@@ -68,12 +77,35 @@ public class ClassificationPipeline {
                 String.format("%.2f", result.confidenceScore()),
                 System.currentTimeMillis() - startTime);
 
+            // Dispatch notification based on final status
+            if (finalStatus == ClassificationStatus.CLASSIFIED) {
+                notificationService.dispatch(
+                    classification.getUploadedBy(),
+                    NotificationType.CLASSIFICATION_COMPLETED,
+                    "Classification Complete",
+                    "Plan " + classification.getPlanId() + " has been classified successfully."
+                );
+            } else if (finalStatus == ClassificationStatus.NEEDS_REVIEW) {
+                notificationService.dispatch(
+                    classification.getUploadedBy(),
+                    NotificationType.CLASSIFICATION_NEEDS_REVIEW,
+                    "Classification Needs Review",
+                    "Plan " + classification.getPlanId() + " has low confidence and requires review."
+                );
+            }
+
         } catch (Exception e) {
             log.error("Pipeline failed for classification {}: {}", classificationId, e.getMessage(), e);
             try {
                 classification.setStatus(ClassificationStatus.FAILED);
                 classification.setErrorMessage(e.getMessage());
                 classificationRepository.save(classification);
+                notificationService.dispatch(
+                    classification.getUploadedBy(),
+                    NotificationType.CLASSIFICATION_FAILED,
+                    "Classification Failed",
+                    "Plan " + classification.getPlanId() + " failed to classify: " + e.getMessage()
+                );
             } catch (Exception saveEx) {
                 log.error("Failed to persist FAILED status for {}: {}", classificationId, saveEx.getMessage());
             }
