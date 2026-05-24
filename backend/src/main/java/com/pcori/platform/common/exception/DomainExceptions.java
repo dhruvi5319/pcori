@@ -95,4 +95,14 @@ public class DomainExceptions {
     public static class FileTooLargeException extends RuntimeException {
         public FileTooLargeException(String message) { super(message); }
     }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public static class ConflictException extends RuntimeException {
+        public ConflictException(String message) { super(message); }
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class InvalidRequestException extends RuntimeException {
+        public InvalidRequestException(String message) { super(message); }
+    }
 }

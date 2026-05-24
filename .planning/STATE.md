@@ -2,16 +2,16 @@
 pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 03-11-PLAN.md
-last_updated: "2026-05-24T01:32:10.383Z"
-last_activity: "2026-05-24 — Phase 3 Plan 11: Analytics + Data Pipeline sidebar nav items; Phase 3 integration checkpoint approved"
+status: completed
+stopped_at: Completed 04-09-PLAN.md — Phase 4 fully complete, human approved
+last_updated: "2026-05-24T04:13:22Z"
+last_activity: "2026-05-24 — Phase 4 Plan 09: Sidebar nav verified + human e2e approval of complete Phase 4 platform"
 progress:
   total_phases: 4
-  completed_phases: 2
-  total_plans: 29
-  completed_plans: 22
-  percent: 76
+  completed_phases: 4
+  total_plans: 38
+  completed_plans: 38
+  percent: 100
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-20)
 
 **Core value:** Reviewers upload a research plan PDF and receive an automated taxonomy classification in minutes instead of hours — with a full audit trail of every decision and override.
-**Current focus:** Phase 3 — Insights
+**Current focus:** Phase 4 — Reporting, Admin & Polish
 
 ## Current Position
 
-Phase: 3 of 4 (Insights) — Complete
-Plan: 11/11 complete
-Status: Phase 3 complete — all sidebar nav links wired, human e2e verification approved
-Last activity: 2026-05-24 — Phase 3 Plan 11: Analytics + Data Pipeline sidebar nav items, Phase 3 integration checkpoint approved
+Phase: 4 of 4 (Reporting, Admin & Polish) — Complete
+Plan: 9/9 complete
+Status: Phase 4 FULLY COMPLETE — Plan 09: sidebar nav verified (/reports, /users, /help pre-wired from Phase 1), human approved complete Phase 4 platform end-to-end; milestone v1.0 reached
+Last activity: 2026-05-24 — Phase 4 Plan 09: Sidebar nav verified + human e2e approval of complete Phase 4 platform
 
-Progress: [████████░░] 76%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -74,6 +74,15 @@ Progress: [████████░░] 76%
 | Phase 03-insights P10 | 4min | 2 tasks | 9 files |
 | Phase 03-insights P08 | 4min | 2 tasks | 14 files |
 | Phase 03-insights P11 | 3min | 2 tasks | 1 files |
+| Phase 04-reporting-admin-polish P01 | 1min | 1 tasks | 1 files |
+| Phase 04-reporting-admin-polish P02 | 4min | 2 tasks | 7 files |
+| Phase 04-reporting-admin-polish P03 | 5min | 2 tasks | 20 files |
+| Phase 04-reporting-admin-polish P04 | 4min | 2 tasks | 14 files |
+| Phase 04-reporting-admin-polish P05 | 1min | 1 tasks | 6 files |
+| Phase 04-reporting-admin-polish P06 | 6min | 2 tasks | 18 files |
+| Phase 04-reporting-admin-polish P07 | 5min | 2 tasks | 16 files |
+| Phase 04-reporting-admin-polish P08 | 4min | 2 tasks | 16 files |
+| Phase 04-reporting-admin-polish P09 | 3min | 2 tasks | 0 files |
 
 ## Accumulated Context
 
@@ -138,6 +147,25 @@ Recent decisions affecting current work:
 - [Phase 03-insights]: AnalyticsDateContext.isLoading drives data-loading attribute; CSS applies opacity 0.5 pulse — no per-component state needed
 - [Phase 03-insights]: Confidence histogram bar colors: Cell per bar, red for high<=0.7, amber for high<=0.85, green for high>0.85 (UI-SPEC locked)
 - [Phase 03-insights]: Analytics nav item roles corrected to MANAGER+ADMIN (was MANAGER+VIEWER); Data Pipeline nav corrected to ADMIN-only (was ADMIN+MANAGER) — sidebar role gating now matches backend @PreAuthorize and FR-5.x spec
+- [Phase 04-reporting-admin-polish]: V8 migration number chosen intentionally — V7 is taken by Phase 3 Insights (V7__insights_schema.sql exists); no migration gap
+- [Phase 04-reporting-admin-polish]: TSVECTOR GENERATED ALWAYS AS STORED used for help_articles.search_vector — auto-updated on INSERT/UPDATE, no trigger needed
+- [Phase 04-reporting-admin-polish]: ConflictException and InvalidRequestException added to DomainExceptions (missing; required by UserService for user management)
+- [Phase 04-reporting-admin-polish]: GET /api/users/active has no @PreAuthorize — intentionally unrestricted for internal domain use
+- [Phase 04-reporting-admin-polish]: SXSSFWorkbook(500) streaming threshold at 1000 rows for Excel reports — aligns with plan spec; 500-row flush window prevents OOM for large exports
+- [Phase 04-reporting-admin-polish]: Excel report files stored to temp filesystem path — StorageService abstraction exists for future S3 swap; temp path covers dev/testing use case
+- [Phase 04-reporting-admin-polish]: search_vector GENERATED ALWAYS AS STORED excluded from JPA entity — referenced only in native SQL @Query in repository to prevent Hibernate write errors
+- [Phase 04-reporting-admin-polish]: GET /api/help/articles/search declared before GET /api/help/articles/{slug} in HelpController — prevents Spring MVC path conflict resolving 'search' as a slug
+- [Phase 04-reporting-admin-polish]: Playwright storageState auth pattern used: setup project runs auth.setup.ts, chromium project reuses saved auth cookie
+- [Phase 04-reporting-admin-polish]: react-markdown v9 ships own TypeScript types — no @types/react-markdown needed
+- [Phase 04-reporting-admin-polish]: E2E Playwright tests written as artifacts; execution deferred to verify phase per test execution boundary rules
+- [Phase 04-reporting-admin-polish]: TemplatesTable Delete uses secondary button (not destructive red) — soft-delete is not data loss per UI-SPEC
+- [Phase 04-reporting-admin-polish]: useToggleUserStatus passes username as mutation variable for toast messages without extra lookup
+- [Phase 04-reporting-admin-polish]: DeactivateUserConfirmDialog: onOpenAutoFocus prevents Radix default; sets focus to dismiss button via ref (safer default for destructive actions)
+- [Phase 04-reporting-admin-polish]: FeedbackWidget uses localStorage key feedback-{articleId} for session persistence — avoids API round-trip on re-render
+- [Phase 04-reporting-admin-polish]: 409 Conflict from POST /api/help/feedback treated as UX success — duplicate submission shows submitted state, not error toast
+- [Phase 04-reporting-admin-polish]: FAQ chevron rotation via CSS .faq-chevron + [data-state=open] rule in globals.css — Radix data-state attribute drives animation
+- [Phase 04-reporting-admin-polish]: AppSidebar.tsx required no changes — /reports, /users, /help were pre-wired in Phase 1; sidebar nav verified complete
+- [Phase 04-reporting-admin-polish]: Human approved complete Phase 4 platform end-to-end — Reports (3-tab UI, export), Users (CRUD, role chips, deactivate), Help (two-pane, search, Markdown, FAQs, feedback)
 
 ### Pending Todos
 
@@ -153,6 +181,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T01:32:10.381Z
-Stopped at: Completed 03-11-PLAN.md
+Last session: 2026-05-24T04:13:22Z
+Stopped at: Completed 04-09-PLAN.md — Phase 4 fully complete (9/9 plans), human approved, milestone v1.0 reached
 Resume file: None
