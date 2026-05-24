@@ -3,15 +3,15 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-03-PLAN.md
-last_updated: "2026-05-24T00:47:31.903Z"
-last_activity: "2026-05-24 — Phase 3 Plan 01: V7 Flyway migration (dashboard_configurations, dashboard_metrics, notifications, notification_preferences, pipeline_runs, pipeline_logs)"
+stopped_at: Completed 03-06-PLAN.md
+last_updated: "2026-05-24T00:50:01.896Z"
+last_activity: "2026-05-24 — Phase 3 Plan 05: Dashboard domain with metrics, configuration endpoints, per-user widget layout persistence"
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 29
-  completed_plans: 15
-  percent: 45
+  completed_plans: 17
+  percent: 52
 ---
 
 # Project State
@@ -68,6 +68,7 @@ Progress: [█████░░░░░] 52%
 | Phase 03-insights P04 | 3min | 2 tasks | 8 files |
 | Phase 03-insights P03 | 3min | 2 tasks | 13 files |
 | Phase 03-insights P05 | 4min | 2 tasks | 10 files |
+| Phase 03-insights P06 | 5min | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -121,6 +122,8 @@ Recent decisions affecting current work:
 - [Phase 03-insights]: Default notification preference: if no preference record exists for user+type+channel, dispatch defaults to enabled (orElse(true))
 - [Phase 03-insights]: JSON-as-TEXT fallback for dashboard JSONB columns — hypersistence-utils not in classpath; manual ObjectMapper in entity accessors; column DDL still declares jsonb
 - [Phase 03-insights]: DashboardService.getMetrics() reuses ClassificationRepository.getStatistics() aggregate to avoid N+1 COUNT queries
+- [Phase 03-insights]: PipelineStatusService uses in-memory volatile state flag for pipeline control — DB-persisted state deferred to Phase 4
+- [Phase 03-insights]: Classification @SQLRestriction handles soft-delete filtering; countByStatus/findByStatus used in PipelineStatusService (not countByStatusAndDeletedAtIsNull)
 
 ### Pending Todos
 
@@ -136,6 +139,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T00:47:40Z
-Stopped at: Completed 03-05-PLAN.md
+Last session: 2026-05-24T00:50:01.895Z
+Stopped at: Completed 03-06-PLAN.md
 Resume file: None
