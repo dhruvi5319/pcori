@@ -3,14 +3,14 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 02-07-PLAN.md
-last_updated: "2026-05-23T20:51:21.968Z"
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-05-24T00:40:42.982Z"
 last_activity: "2026-05-23 — Phase 2 complete: MinIO+S3 storage, 3-stage async classification pipeline, taxonomy CRUD with cascade deactivation, /classifications page with dialogs, /taxonomy two-pane page"
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 18
-  completed_plans: 17
+  total_plans: 29
+  completed_plans: 12
   percent: 90
 ---
 
@@ -63,12 +63,7 @@ Progress: [█████████░] 90%
 | Phase 01-foundation P10 | 1min | 1 tasks | 2 files |
 | Phase 01-foundation P09 | 2min | 1 tasks | 1 files |
 | Phase 01-foundation P11 | 1min | 1 tasks | 1 files |
-| Phase 02-classification-pipeline P01 | 1min | 3 tasks | 3 files |
-| Phase 02-classification-pipeline P02 | 3min | 2 tasks | 12 files |
-| Phase 02-classification-pipeline P03 | 5min | 2 tasks | 11 files |
-| Phase 02-classification-pipeline P04 | 4min | 2 tasks | 25 files |
-| Phase 02-classification-pipeline P05 | 4min | 2 tasks | 15 files |
-| Phase 02-classification-pipeline P07 | 4min | 2 tasks | 12 files |
+| Phase 03-insights P02 | 5min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -110,19 +105,8 @@ Recent decisions affecting current work:
 - [Phase 02-classification-pipeline]: @radix-ui/react-progress added to package.json for UploadProgressBar in Plan 06
 - [Phase 02-classification-pipeline]: dash-flow @keyframe added to globals.css for PDF dropzone SVG animated dashed border
 - [Phase 02-classification-pipeline]: Classifications page wires all 4 dialogs (Upload, View, Override, Retry) in single page.tsx; dialog state via useState hooks
-- [Phase 02-classification-pipeline]: V4/V5 migration numbering used — V3 was taken by Phase 1 audit columns; classification_schema=V4, taxonomy_seed=V5
-- [Phase 02-classification-pipeline]: MinIO added to Docker Compose with pcori-files bucket via minio-setup initializer; backend uses STORAGE_ENDPOINT env var for S3StorageService endpointOverride
-- [Phase 02-classification-pipeline]: S3Presigner built in constructor with @Value params rather than separate @Bean to avoid circular dependency
-- [Phase 02-classification-pipeline]: UploadedFile.uploadedBy stored as UUID column (not @ManyToOne) to avoid circular loading with User domain
-- [Phase 02-classification-pipeline]: TaxonomyCategory.createdBy mapped as String (not UUID) — V6 migration fixes V5 DDL mismatch to match AuditableEntity @CreatedBy String pattern
-- [Phase 02-classification-pipeline]: TaxonomyController delegates to TaxonomyService.toDto() (public method) — avoids duplicate mapping logic; DELETE /taxonomy/{id} returns 200 with deactivated entity to confirm soft-delete
-- [Phase 02-classification-pipeline]: PDFBox 3.x uses Loader.loadPDF(byte[]) API — readAllBytes() required before passing to Loader
-- [Phase 02-classification-pipeline]: findRecentByLimit replaces findTopNByOrderByUploadedAtDesc — Spring Data doesn't support dynamic TopN with parameter
-- [Phase 02-classification-pipeline]: ClassificationController resolves uploadedBy UUID via User instanceof cast (User extends UserDetails) — username is not a UUID
-- [Phase 02-classification-pipeline]: CSS max-height transition (0→9999px) for tree expand/collapse — no JS height measurement needed; matches UI-SPEC 0.2s ease
-- [Phase 02-classification-pipeline]: isAdmin hardcoded true in taxonomy page.tsx — role-gating from JWT context deferred to Phase 3
-- [Phase 02-classification-pipeline]: formatRelativeDate added to lib/utils.ts — simple relative date string without external library dependency (implied by ClassificationRow code)
-- [Phase 02-classification-pipeline]: TanStack Query conditional refetchInterval: polls 5s when any row status === PROCESSING; false otherwise — stops polling when all terminal
+- [Phase 03-insights]: Install exactly 4 packages: @dnd-kit/core, @dnd-kit/sortable, recharts, @radix-ui/react-switch — no additional packages
+- [Phase 03-insights]: Skeleton tokens added as CSS custom properties under :root + .dark following existing Phase 1 token pattern
 
 ### Pending Todos
 
@@ -138,6 +122,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-23T20:51:21.966Z
-Stopped at: Completed 02-07-PLAN.md
+Last session: 2026-05-24T00:40:42.981Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
