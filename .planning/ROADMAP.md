@@ -72,7 +72,7 @@ Plans:
 - [x] 02-07-PLAN.md — Taxonomy frontend: /taxonomy two-pane page, collapsible tree, detail pane, inline edit form, Add Category dialog (breadcrumb preview), Deactivate confirm
 
 ### Phase 3: Insights
-**Status**: In Progress
+**Status**: executing
 **Goal**: Program managers and admins have real-time visibility into classification volume, accuracy, override patterns, and pipeline health — with in-app notifications keeping reviewers informed without manual polling
 **Depends on**: Phase 2
 **Requirements**: FR-4.1, FR-4.2, FR-4.3, FR-4.4, FR-4.5, FR-4.6, FR-5.1, FR-5.2, FR-5.3, FR-5.4, FR-5.5, FR-8.1, FR-8.2
