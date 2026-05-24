@@ -4,7 +4,7 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 stopped_at: Completed 03-07-PLAN.md
-last_updated: "2026-05-24T00:56:35.026Z"
+last_updated: "2026-05-24T00:56:38.776Z"
 last_activity: "2026-05-24 — Phase 3 Plan 05: Dashboard domain with metrics, configuration endpoints, per-user widget layout persistence"
 progress:
   total_phases: 4
@@ -133,6 +133,9 @@ Recent decisions affecting current work:
 - [Phase 03-insights]: Widget order stored as { widgets: KpiWidgetConfig[] } inside DashboardConfiguration.layout JSON — matches existing server schema without changes
 - [Phase 03-insights]: NotificationBell placed in AppHeader (existing header composition component) rather than directly in layout.tsx
 - [Phase 03-insights]: date-fns installed to fix pre-existing blocking build error in PipelineStatusHeader.tsx
+- [Phase 03-insights]: isAnimationActive=false on every Recharts animated primitive (Line/Bar/Area) — production requirement per UI-SPEC
+- [Phase 03-insights]: AnalyticsDateContext.isLoading drives data-loading attribute; CSS applies opacity 0.5 pulse — no per-component state needed
+- [Phase 03-insights]: Confidence histogram bar colors: Cell per bar, red for high<=0.7, amber for high<=0.85, green for high>0.85 (UI-SPEC locked)
 
 ### Pending Todos
 
