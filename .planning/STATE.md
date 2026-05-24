@@ -3,14 +3,14 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 03-02-PLAN.md
-last_updated: "2026-05-24T00:40:42.982Z"
+stopped_at: Completed 03-01-PLAN.md
+last_updated: "2026-05-24T00:42:01.656Z"
 last_activity: "2026-05-23 — Phase 2 complete: MinIO+S3 storage, 3-stage async classification pipeline, taxonomy CRUD with cascade deactivation, /classifications page with dialogs, /taxonomy two-pane page"
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 29
-  completed_plans: 12
+  completed_plans: 13
   percent: 90
 ---
 
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-20)
 
 **Core value:** Reviewers upload a research plan PDF and receive an automated taxonomy classification in minutes instead of hours — with a full audit trail of every decision and override.
-**Current focus:** Phase 2 — Classification Pipeline
+**Current focus:** Phase 3 — Insights
 
 ## Current Position
 
-Phase: 2 of 4 (Classification Pipeline) — COMPLETE ✓
-Plan: 7/7 complete
-Status: Phase 2 complete — ready for Phase 3
-Last activity: 2026-05-23 — Phase 2 complete: MinIO+S3 storage, 3-stage async classification pipeline, taxonomy CRUD with cascade deactivation, /classifications page with dialogs, /taxonomy two-pane page
+Phase: 3 of 4 (Insights) — In Progress
+Plan: 1/TBD complete
+Status: Phase 3 executing — V7 insights schema migration complete
+Last activity: 2026-05-24 — Phase 3 Plan 01: V7 Flyway migration (dashboard_configurations, dashboard_metrics, notifications, notification_preferences, pipeline_runs, pipeline_logs)
 
-Progress: [█████████░] 90%
+Progress: [█████░░░░░] 45%
 
 ## Performance Metrics
 
@@ -64,6 +64,7 @@ Progress: [█████████░] 90%
 | Phase 01-foundation P09 | 2min | 1 tasks | 1 files |
 | Phase 01-foundation P11 | 1min | 1 tasks | 1 files |
 | Phase 03-insights P02 | 5min | 2 tasks | 3 files |
+| Phase 03-insights P01 | 2min | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -107,6 +108,9 @@ Recent decisions affecting current work:
 - [Phase 02-classification-pipeline]: Classifications page wires all 4 dialogs (Upload, View, Override, Retry) in single page.tsx; dialog state via useState hooks
 - [Phase 03-insights]: Install exactly 4 packages: @dnd-kit/core, @dnd-kit/sortable, recharts, @radix-ui/react-switch — no additional packages
 - [Phase 03-insights]: Skeleton tokens added as CSS custom properties under :root + .dark following existing Phase 1 token pattern
+- [Phase 03-insights]: V6 no-op placeholder created to fill sequential migration gap (V5→V7); V6 was expected by plan but missing from Phase 2
+- [Phase 03-insights]: notification_channel enum: exactly 2 values (IN_APP, EMAIL) — no PUSH per TechArch spec
+- [Phase 03-insights]: dashboard_configurations.user_id UNIQUE constraint enforces one config per user at DB level
 
 ### Pending Todos
 
@@ -122,6 +126,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T00:40:42.981Z
-Stopped at: Completed 03-02-PLAN.md
+Last session: 2026-05-24T00:42:01.655Z
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None
