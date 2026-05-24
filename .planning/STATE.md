@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 ## Current Position
 
 Phase: 3 of 4 (Insights) — In Progress
-Plan: 4/TBD complete
-Status: Phase 3 executing — analytics domain (6 endpoints) complete
-Last activity: 2026-05-24 — Phase 3 Plan 04: Analytics domain with 6 native SQL query methods and REST endpoints at /api/analytics/**
+Plan: 5/TBD complete
+Status: Phase 3 executing — dashboard domain (7 endpoints) complete
+Last activity: 2026-05-24 — Phase 3 Plan 05: Dashboard domain with metrics, configuration endpoints, per-user widget layout persistence
 
 Progress: [█████░░░░░] 52%
 
@@ -67,6 +67,7 @@ Progress: [█████░░░░░] 52%
 | Phase 03-insights P01 | 2min | 1 tasks | 2 files |
 | Phase 03-insights P04 | 3min | 2 tasks | 8 files |
 | Phase 03-insights P03 | 3min | 2 tasks | 13 files |
+| Phase 03-insights P05 | 4min | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -118,6 +119,8 @@ Recent decisions affecting current work:
 - [Phase 03-insights]: Confidence distribution always returns all 10 buckets filling zeros — frontend doesn't need to handle missing buckets
 - [Phase 03-insights]: NotificationService.dispatch() is synchronous within classificationExecutor thread — no @Async to preserve SecurityContext propagation
 - [Phase 03-insights]: Default notification preference: if no preference record exists for user+type+channel, dispatch defaults to enabled (orElse(true))
+- [Phase 03-insights]: JSON-as-TEXT fallback for dashboard JSONB columns — hypersistence-utils not in classpath; manual ObjectMapper in entity accessors; column DDL still declares jsonb
+- [Phase 03-insights]: DashboardService.getMetrics() reuses ClassificationRepository.getStatistics() aggregate to avoid N+1 COUNT queries
 
 ### Pending Todos
 
@@ -133,6 +136,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T00:47:31.902Z
-Stopped at: Completed 03-03-PLAN.md
+Last session: 2026-05-24T00:47:40Z
+Stopped at: Completed 03-05-PLAN.md
 Resume file: None
