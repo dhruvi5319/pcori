@@ -3,15 +3,15 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-05-PLAN.md
-last_updated: "2026-05-24T03:47:31.800Z"
-last_activity: "2026-05-24 — Phase 4 Plan 05: Playwright e2e config (playwright.config.ts, auth.setup.ts) and react-markdown dependency added to frontend/package.json"
+stopped_at: Completed 04-06-PLAN.md
+last_updated: "2026-05-24T03:56:09.327Z"
+last_activity: "2026-05-24 — Phase 4 Plan 05: Playwright e2e config + react-markdown dependency (playwright.config.ts, e2e/auth.setup.ts, package.json updated)"
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 38
-  completed_plans: 33
-  percent: 87
+  completed_plans: 34
+  percent: 89
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 ## Current Position
 
 Phase: 4 of 4 (Reporting, Admin & Polish) — In progress
-Plan: 5/8 complete
-Status: Phase 4 in progress — Playwright infrastructure and react-markdown setup complete (04-05)
-Last activity: 2026-05-24 — Phase 4 Plan 05: Playwright e2e config + react-markdown dependency (playwright.config.ts, e2e/auth.setup.ts, package.json updated)
+Plan: 6/8 complete
+Status: Phase 4 in progress — Reports frontend complete (04-06): /reports page, 3 Radix Tabs, OneClickExportButton, ColumnSelectorPanel, BuilderFilterPanel, ReportPreviewPanel, SaveTemplateDialog, TemplatesTable, Playwright e2e tests
+Last activity: 2026-05-24 — Phase 4 Plan 06: Reports frontend with 17 files (types, hooks, page, 12 components, e2e tests); @radix-ui/react-checkbox and @radix-ui/react-accordion added
 
-Progress: [█████████░] 87%
+Progress: [█████████░] 89%
 
 ## Performance Metrics
 
@@ -79,6 +79,7 @@ Progress: [█████████░] 87%
 | Phase 04-reporting-admin-polish P03 | 5min | 2 tasks | 20 files |
 | Phase 04-reporting-admin-polish P04 | 4min | 2 tasks | 14 files |
 | Phase 04-reporting-admin-polish P05 | 1min | 1 tasks | 6 files |
+| Phase 04-reporting-admin-polish P06 | 6min | 2 tasks | 18 files |
 
 ## Accumulated Context
 
@@ -153,6 +154,8 @@ Recent decisions affecting current work:
 - [Phase 04-reporting-admin-polish]: GET /api/help/articles/search declared before GET /api/help/articles/{slug} in HelpController — prevents Spring MVC path conflict resolving 'search' as a slug
 - [Phase 04-reporting-admin-polish]: Playwright storageState auth pattern used: setup project runs auth.setup.ts, chromium project reuses saved auth cookie
 - [Phase 04-reporting-admin-polish]: react-markdown v9 ships own TypeScript types — no @types/react-markdown needed
+- [Phase 04-reporting-admin-polish]: E2E Playwright tests written as artifacts; execution deferred to verify phase per test execution boundary rules
+- [Phase 04-reporting-admin-polish]: TemplatesTable Delete uses secondary button (not destructive red) — soft-delete is not data loss per UI-SPEC
 
 ### Pending Todos
 
@@ -168,6 +171,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T03:47:31.797Z
-Stopped at: Completed 04-05-PLAN.md
+Last session: 2026-05-24T03:56:09.325Z
+Stopped at: Completed 04-06-PLAN.md
 Resume file: None
