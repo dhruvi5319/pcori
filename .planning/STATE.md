@@ -3,15 +3,15 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-08-PLAN.md
-last_updated: "2026-05-24T00:56:41.918Z"
-last_activity: "2026-05-24 — Phase 3 Plan 05: Dashboard domain with metrics, configuration endpoints, per-user widget layout persistence"
+stopped_at: Completed 03-11-PLAN.md
+last_updated: "2026-05-24T01:32:10.383Z"
+last_activity: "2026-05-24 — Phase 3 Plan 11: Analytics + Data Pipeline sidebar nav items; Phase 3 integration checkpoint approved"
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 29
-  completed_plans: 21
-  percent: 52
+  completed_plans: 22
+  percent: 76
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 
 ## Current Position
 
-Phase: 3 of 4 (Insights) — In Progress
-Plan: 5/TBD complete
-Status: Phase 3 executing — dashboard domain (7 endpoints) complete
-Last activity: 2026-05-24 — Phase 3 Plan 05: Dashboard domain with metrics, configuration endpoints, per-user widget layout persistence
+Phase: 3 of 4 (Insights) — Complete
+Plan: 11/11 complete
+Status: Phase 3 complete — all sidebar nav links wired, human e2e verification approved
+Last activity: 2026-05-24 — Phase 3 Plan 11: Analytics + Data Pipeline sidebar nav items, Phase 3 integration checkpoint approved
 
-Progress: [█████░░░░░] 52%
+Progress: [████████░░] 76%
 
 ## Performance Metrics
 
@@ -73,6 +73,7 @@ Progress: [█████░░░░░] 52%
 | Phase 03-insights P07 | 15min | 2 tasks | 13 files |
 | Phase 03-insights P10 | 4min | 2 tasks | 9 files |
 | Phase 03-insights P08 | 4min | 2 tasks | 14 files |
+| Phase 03-insights P11 | 3min | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -136,6 +137,7 @@ Recent decisions affecting current work:
 - [Phase 03-insights]: isAnimationActive=false on every Recharts animated primitive (Line/Bar/Area) — production requirement per UI-SPEC
 - [Phase 03-insights]: AnalyticsDateContext.isLoading drives data-loading attribute; CSS applies opacity 0.5 pulse — no per-component state needed
 - [Phase 03-insights]: Confidence histogram bar colors: Cell per bar, red for high<=0.7, amber for high<=0.85, green for high>0.85 (UI-SPEC locked)
+- [Phase 03-insights]: Analytics nav item roles corrected to MANAGER+ADMIN (was MANAGER+VIEWER); Data Pipeline nav corrected to ADMIN-only (was ADMIN+MANAGER) — sidebar role gating now matches backend @PreAuthorize and FR-5.x spec
 
 ### Pending Todos
 
@@ -151,6 +153,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T00:56:41.917Z
-Stopped at: Completed 03-08-PLAN.md
+Last session: 2026-05-24T01:32:10.381Z
+Stopped at: Completed 03-11-PLAN.md
 Resume file: None
