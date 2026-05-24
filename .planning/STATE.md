@@ -2,16 +2,16 @@
 pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-05-24T03:24:27.648Z"
-last_activity: "2026-05-24 — Phase 3 Plan 11: Analytics + Data Pipeline sidebar nav items, Phase 3 integration checkpoint approved"
+status: completed
+stopped_at: Completed 04-02-PLAN.md
+last_updated: "2026-05-24T03:30:47.570Z"
+last_activity: "2026-05-24 — Phase 4 Plan 01: V8 migration with report_configurations, excel_reports, filter_configurations, help_articles, faqs, documentation_feedback"
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 38
-  completed_plans: 29
-  percent: 76
+  completed_plans: 30
+  percent: 79
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 ## Current Position
 
 Phase: 4 of 4 (Reporting, Admin & Polish) — In progress
-Plan: 1/8 complete
-Status: Phase 4 started — V8 Flyway migration (Reporting & Help Center schema) complete
-Last activity: 2026-05-24 — Phase 4 Plan 01: V8 migration with report_configurations, excel_reports, filter_configurations, help_articles, faqs, documentation_feedback
+Plan: 2/8 complete
+Status: Phase 4 in progress — User management service and REST API complete
+Last activity: 2026-05-24 — Phase 4 Plan 02: UserService, UserController (8 endpoints), UserSpecification, DTOs for FR-7.1–FR-7.3
 
-Progress: [████████░░] 76%
+Progress: [████████░░] 79%
 
 ## Performance Metrics
 
@@ -75,6 +75,7 @@ Progress: [████████░░] 76%
 | Phase 03-insights P08 | 4min | 2 tasks | 14 files |
 | Phase 03-insights P11 | 3min | 2 tasks | 1 files |
 | Phase 04-reporting-admin-polish P01 | 1min | 1 tasks | 1 files |
+| Phase 04-reporting-admin-polish P02 | 4min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -141,6 +142,8 @@ Recent decisions affecting current work:
 - [Phase 03-insights]: Analytics nav item roles corrected to MANAGER+ADMIN (was MANAGER+VIEWER); Data Pipeline nav corrected to ADMIN-only (was ADMIN+MANAGER) — sidebar role gating now matches backend @PreAuthorize and FR-5.x spec
 - [Phase 04-reporting-admin-polish]: V8 migration number chosen intentionally — V7 is taken by Phase 3 Insights (V7__insights_schema.sql exists); no migration gap
 - [Phase 04-reporting-admin-polish]: TSVECTOR GENERATED ALWAYS AS STORED used for help_articles.search_vector — auto-updated on INSERT/UPDATE, no trigger needed
+- [Phase 04-reporting-admin-polish]: ConflictException and InvalidRequestException added to DomainExceptions (missing; required by UserService for user management)
+- [Phase 04-reporting-admin-polish]: GET /api/users/active has no @PreAuthorize — intentionally unrestricted for internal domain use
 
 ### Pending Todos
 
@@ -156,6 +159,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T03:24:27.646Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-05-24T03:30:47.568Z
+Stopped at: Completed 04-02-PLAN.md
 Resume file: None
