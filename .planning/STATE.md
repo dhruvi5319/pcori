@@ -2,16 +2,16 @@
 pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-05-24T00:42:01.656Z"
-last_activity: "2026-05-23 — Phase 2 complete: MinIO+S3 storage, 3-stage async classification pipeline, taxonomy CRUD with cascade deactivation, /classifications page with dialogs, /taxonomy two-pane page"
+status: executing
+stopped_at: Completed 03-03-PLAN.md
+last_updated: "2026-05-24T00:47:31.903Z"
+last_activity: "2026-05-24 — Phase 3 Plan 01: V7 Flyway migration (dashboard_configurations, dashboard_metrics, notifications, notification_preferences, pipeline_runs, pipeline_logs)"
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 29
-  completed_plans: 13
-  percent: 90
+  completed_plans: 15
+  percent: 45
 ---
 
 # Project State
@@ -65,6 +65,8 @@ Progress: [█████░░░░░] 45%
 | Phase 01-foundation P11 | 1min | 1 tasks | 1 files |
 | Phase 03-insights P02 | 5min | 2 tasks | 3 files |
 | Phase 03-insights P01 | 2min | 1 tasks | 2 files |
+| Phase 03-insights P04 | 3min | 2 tasks | 8 files |
+| Phase 03-insights P03 | 3min | 2 tasks | 13 files |
 
 ## Accumulated Context
 
@@ -111,6 +113,11 @@ Recent decisions affecting current work:
 - [Phase 03-insights]: V6 no-op placeholder created to fill sequential migration gap (V5→V7); V6 was expected by plan but missing from Phase 2
 - [Phase 03-insights]: notification_channel enum: exactly 2 values (IN_APP, EMAIL) — no PUSH per TechArch spec
 - [Phase 03-insights]: dashboard_configurations.user_id UNIQUE constraint enforces one config per user at DB level
+- [Phase 03-insights]: Analytics endpoints restricted to MANAGER and ADMIN roles via @PreAuthorize at class level
+- [Phase 03-insights]: Native SQL via EntityManager for all analytics queries — avoids JPQL limitations with date_trunc and width_bucket PostgreSQL functions
+- [Phase 03-insights]: Confidence distribution always returns all 10 buckets filling zeros — frontend doesn't need to handle missing buckets
+- [Phase 03-insights]: NotificationService.dispatch() is synchronous within classificationExecutor thread — no @Async to preserve SecurityContext propagation
+- [Phase 03-insights]: Default notification preference: if no preference record exists for user+type+channel, dispatch defaults to enabled (orElse(true))
 
 ### Pending Todos
 
@@ -126,6 +133,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T00:42:01.655Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-05-24T00:47:31.902Z
+Stopped at: Completed 03-03-PLAN.md
 Resume file: None
