@@ -28,6 +28,16 @@ public interface ClassificationRepository
 
     List<Classification> findByOrderByUploadedAtDesc(Pageable pageable);
 
+    // Pipeline monitoring: count by status (deletedAt filter applied via @SQLRestriction)
+    long countByStatus(ClassificationStatus status);
+
+    // Pipeline monitoring: find all by status for dispatch (deletedAt filter applied via @SQLRestriction)
+    List<Classification> findByStatus(ClassificationStatus status);
+
+    // Pipeline monitoring: count stuck PROCESSING records older than threshold
+    @Query("SELECT COUNT(c) FROM Classification c WHERE c.status = com.pcori.platform.domain.classification.ClassificationStatus.PROCESSING AND c.deletedAt IS NULL AND c.updatedAt < :threshold")
+    long countStuckProcessing(@Param("threshold") Instant threshold);
+
     // Statistics aggregate
     @Query("SELECT new com.pcori.platform.domain.classification.dto.ClassificationStats(" +
         "COUNT(c), " +
@@ -38,4 +48,13 @@ public interface ClassificationRepository
         "SUM(CASE WHEN c.status = com.pcori.platform.domain.classification.ClassificationStatus.NEEDS_REVIEW THEN 1L ELSE 0L END), " +
         "AVG(c.confidenceScore)) FROM Classification c WHERE c.deletedAt IS NULL")
     ClassificationStats getStatistics();
+
+    // Dashboard date-range metrics (FR-4.6)
+    long countByUploadedAtBetweenAndDeletedAtIsNull(Instant start, Instant end);
+
+    long countByStatusAndUploadedAtBetweenAndDeletedAtIsNull(ClassificationStatus status, Instant start, Instant end);
+
+    @Query("SELECT COALESCE(AVG(c.confidenceScore), 0.0) FROM Classification c " +
+           "WHERE c.deletedAt IS NULL AND c.uploadedAt >= :start AND c.uploadedAt <= :end")
+    double findAvgConfidenceForRange(@Param("start") Instant start, @Param("end") Instant end);
 }
