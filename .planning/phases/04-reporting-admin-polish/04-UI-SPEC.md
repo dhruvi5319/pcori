@@ -177,14 +177,14 @@ text: 14px / 400 amber — same pattern as stuck records callout (Phase 3)
 | `ReportStatusCell` | inside table | — | Dot + text status; GENERATING has animate-ping; READY shows Download button |
 | `ReportDownloadButton` | inside table | — | "Download Report" — calls GET /api/reports/{id}/download → triggers browser download |
 | `OneClickExportButton` | `/reports` header | — | "Export to Excel" gradient CTA; shows Loader2 + "Generating…" during POST /api/excel/generate |
-| `LargeReportWarningDialog` | triggered by export | `Dialog` (Radix) | "This report has N rows — generation may take a moment. Continue?" — [Cancel] [Generate] |
+| `LargeReportWarningDialog` | triggered by export | `Dialog` (Radix) | "This report has N rows — generation may take a moment. Continue?" — [Cancel Export] [Generate] |
 | `AdHocBuilderTab` | `/reports` tab | — | 4-step flow: Column Selection → Filters → Preview → Generate |
 | `ColumnSelectorPanel` | inside builder | — | Checklist of all available columns with Radix Checkbox; scrollable max-height 320px; "Select all" / "Deselect all" links |
 | `BuilderFilterPanel` | inside builder | — | Status multi-select, date range, PCC multi-select, "Load Saved Filter" dropdown |
 | `LoadSavedFilterDropdown` | inside filter panel | `DropdownMenu` (Radix) | Lists user's FilterConfigurations; selecting one pre-populates filter fields |
 | `ReportPreviewPanel` | inside builder | — | "N matching rows" count (16px/600) + 3-row sample table; amber callout if N > 50,000 |
-| `SaveTemplateDialog` | "Save as Template" | `Dialog` (Radix) | Single field: Template Name (required); [Cancel] [Save Template]; 409 → inline field error |
-| `SaveFilterDialog` | "Save Filter" | `Dialog` (Radix) | Single field: Filter Name (required); [Cancel] [Save Filter] |
+| `SaveTemplateDialog` | "Save as Template" | `Dialog` (Radix) | Single field: Template Name (required); [Don't Save] [Save Template]; 409 → inline field error |
+| `SaveFilterDialog` | "Save Filter" | `Dialog` (Radix) | Single field: Filter Name (required); [Don't Save] [Save Filter] |
 | `TemplatesTab` | `/reports` tab | — | Table of saved templates: Name, Created, Last Run, Actions (Run / Edit / Delete) |
 | `TemplatesTable` | inside tab | — | E1 elevation rows; action icons appear on hover (same pattern as classifications table) |
 | `EditTemplateDialog` | template row | `Dialog` (Radix) | Edit columns + filters; same layout as Ad-hoc Builder but pre-populated |
@@ -200,11 +200,11 @@ text: 14px / 400 amber — same pattern as stuck records callout (Phase 3)
 | `UserRoleChips` | inside table | — | One chip per role; 24px height; secondary bg with accent text |
 | `UserStatusBadge` | inside table | — | Reuses StatusBadge pattern: Active (green), Inactive (gray), Email Unverified (amber) |
 | `UserRowActions` | inside table | — | Eye/Edit/Deactivate icons; fade-in on hover (same pattern as Phase 2 ClassificationRow) |
-| `AddUserDialog` | "Add User" button | `Dialog` (Radix) | 6 fields: Username, Email, Password, First Name, Last Name + RoleCheckboxGroup; [Cancel] [Create User] |
+| `AddUserDialog` | "Add User" button | `Dialog` (Radix) | 6 fields: Username, Email, Password, First Name, Last Name + RoleCheckboxGroup; [Discard] [Create User] |
 | `RoleCheckboxGroup` | inside dialogs | `Checkbox` (Radix) | 5 roles: Reviewer, Manager, Taxonomy Admin, Admin, Viewer; each with 1-line description; at least 1 required |
-| `EditUserDialog` | user row edit | `Dialog` (Radix) | Editable: First Name, Last Name, Phone, Roles; Read-only: Username, Email (shown for reference); [Cancel] [Save Changes] |
-| `DeactivateUserConfirmDialog` | user row deactivate | `Dialog` (Radix) | Shows full name; explicit consequence copy; [Cancel] [Deactivate] — Deactivate button uses `bg-[#DC2626]` (destructive red, NOT gradient) |
-| `ReactivateUserConfirmDialog` | inactive user | `Dialog` (Radix) | "Reactivate [username]?" — [Cancel] [Reactivate] — secondary buttons (NOT destructive) |
+| `EditUserDialog` | user row edit | `Dialog` (Radix) | Editable: First Name, Last Name, Phone, Roles; Read-only: Username, Email (shown for reference); [Discard Changes] [Save Changes] |
+| `DeactivateUserConfirmDialog` | user row deactivate | `Dialog` (Radix) | Shows full name; explicit consequence copy; [Keep Active] [Deactivate User] — Deactivate button uses `bg-[#DC2626]` (destructive red, NOT gradient) |
+| `ReactivateUserConfirmDialog` | inactive user | `Dialog` (Radix) | "Reactivate [username]?" — [Keep Inactive] [Reactivate User] — secondary buttons (NOT destructive) |
 | `UsersTableSkeleton` | loading state | — | 5 skeleton rows; gradient shimmer (skeleton-shimmer class, Phase 3 pattern) |
 | `UsersEmptyState` | no results | — | UserX icon + "No users found" heading + body |
 
@@ -521,12 +521,12 @@ GENERATING → READY: row status cell transitions via React state update (TanSta
 | Reports: ad-hoc generate | "Generate Excel" | Gradient CTA; `FileSpreadsheet` icon |
 | Reports: save template | "Save as Template" | Ghost/link button; `BookmarkPlus` icon |
 | Reports: save filter | "Save Filter" | Ghost/link button; `Save` icon |
-| Reports: run template | "Run" | Secondary icon button; `Play` icon |
+| Reports: run template | "Run Report" | Secondary icon button; `Play` icon |
 | Users: add user | "Add User" | Gradient CTA; `UserPlus` icon |
 | Users: create confirm | "Create User" | Gradient CTA (inside dialog); disabled until valid |
 | Users: save changes | "Save Changes" | Gradient CTA (inside dialog); disabled until dirty |
-| Users: deactivate confirm | "Deactivate" | Destructive red `bg-[#DC2626]`; NOT gradient |
-| Users: reactivate confirm | "Reactivate" | Secondary outline; NOT red |
+| Users: deactivate confirm | "Deactivate User" | Destructive red `bg-[#DC2626]`; NOT gradient |
+| Users: reactivate confirm | "Reactivate User" | Secondary outline; NOT red |
 | Help: feedback submit | "Submit Feedback" | Secondary outline; only shown when textarea visible |
 
 ### Empty State Copy
@@ -579,7 +579,7 @@ GENERATING → READY: row status cell transitions via React state update (TanSta
 
 | Action | Confirmation Approach | Confirm Button | Dismiss Button |
 |--------|----------------------|----------------|----------------|
-| Deactivate user | Modal dialog with consequence copy | "Deactivate" (`bg-[#DC2626]` — destructive red) | "Cancel" |
+| Deactivate user | Modal dialog with consequence copy | "Deactivate User" (`bg-[#DC2626]` — destructive red) | "Keep Active" |
 | Delete report template | Modal dialog: "Delete [name]?" — soft-delete, recoverable | "Delete Template" (secondary button — NOT red; soft-delete is not data-loss) | "Keep Template" |
 
 ---
@@ -601,6 +601,8 @@ GENERATING → READY: row status cell transitions via React state update (TanSta
 | Help article Markdown | Rendered Markdown does NOT inject `<script>` or raw HTML; sanitized |
 | Search results overlay | `role="listbox"` on results container; each result is `role="option"` |
 | Role chips in table | `aria-label="Roles: [comma-separated list]"` on the cell; chips are decorative within |
+| `UserRowActions` icon buttons | `aria-label="View user [username]"` on Eye icon button; `aria-label="Edit user [username]"` on Edit icon button; `aria-label="Deactivate [username]"` (or "Reactivate [username]") on the action button |
+| `···` MoreHorizontal trigger in Users table | `aria-label="Actions for [username]"` on the MoreHorizontal icon button that opens the DropdownMenu |
 
 ---
 
