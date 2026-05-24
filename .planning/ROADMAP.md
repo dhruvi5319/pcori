@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - JWT auth, RBAC, Docker dev environment, Spring Boot project scaffold with PostgreSQL 16 and all security infrastructure
 - [ ] **Phase 2: Classification Pipeline** - PDF upload, async 3-stage pipeline, taxonomy CRUD/tree, S3 file storage, manual override, classification list
-- [ ] **Phase 3: Insights** - Dashboards, KPI cards, analytics charts, pipeline monitoring UI, in-app notifications
+- [x] **Phase 3: Insights** - Dashboards, KPI cards, analytics charts, pipeline monitoring UI, in-app notifications
 - [ ] **Phase 4: Reporting & Admin Polish** - Excel reports, ad-hoc report builder, saved templates, user management, help center
 
 ## Phase Details
