@@ -99,7 +99,7 @@ Plans:
 - [ ] 03-11-PLAN.md — Sidebar nav: add Analytics (BarChart3) + Data Pipeline (Workflow) links; human verification checkpoint for full Phase 3 end-to-end
 
 ### Phase 4: Reporting & Admin Polish
-**Status**: awaiting decision
+**Status**: In Progress
 **Goal**: Program managers can generate and download Excel reports on demand; admins can manage all users and roles through the UI; every user has a browsable help center — completing the platform for all five personas
 **Depends on**: Phase 3
 **Requirements**: FR-6.1, FR-6.2, FR-6.3, FR-6.4, FR-7.1, FR-7.2, FR-7.3, FR-9.1, FR-9.2
