@@ -3,15 +3,15 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-07-PLAN.md
-last_updated: "2026-05-24T04:03:20.845Z"
-last_activity: "2026-05-24 — Phase 4 Plan 06: Reports frontend with 17 files (types, hooks, page, 12 components, e2e tests); @radix-ui/react-checkbox and @radix-ui/react-accordion added"
+stopped_at: Completed 04-08-PLAN.md
+last_updated: "2026-05-24T04:09:20.283Z"
+last_activity: "2026-05-24 — Phase 4 Plan 08: Help Center frontend with 15 files (types, hooks, page, 10 components, e2e tests); react-markdown Radix Accordion FeedbackWidget"
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 4
   total_plans: 38
-  completed_plans: 35
-  percent: 89
+  completed_plans: 36
+  percent: 95
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-20)
 
 ## Current Position
 
-Phase: 4 of 4 (Reporting, Admin & Polish) — In progress
-Plan: 6/8 complete
-Status: Phase 4 in progress — Reports frontend complete (04-06): /reports page, 3 Radix Tabs, OneClickExportButton, ColumnSelectorPanel, BuilderFilterPanel, ReportPreviewPanel, SaveTemplateDialog, TemplatesTable, Playwright e2e tests
-Last activity: 2026-05-24 — Phase 4 Plan 06: Reports frontend with 17 files (types, hooks, page, 12 components, e2e tests); @radix-ui/react-checkbox and @radix-ui/react-accordion added
+Phase: 4 of 4 (Reporting, Admin & Polish) — Complete
+Plan: 8/8 complete
+Status: Phase 4 complete — Help Center frontend (04-08): /help two-pane page, HelpCategorySidebar, HelpArticleView (react-markdown), HelpSearchBar (debounced), FaqSection (Radix Accordion), FeedbackWidget (4-state machine), 5 Playwright e2e tests
+Last activity: 2026-05-24 — Phase 4 Plan 08: Help Center frontend with 15 files (types, hooks, page, 10 components, e2e tests)
 
-Progress: [█████████░] 89%
+Progress: [██████████] 95%
 
 ## Performance Metrics
 
@@ -81,6 +81,7 @@ Progress: [█████████░] 89%
 | Phase 04-reporting-admin-polish P05 | 1min | 1 tasks | 6 files |
 | Phase 04-reporting-admin-polish P06 | 6min | 2 tasks | 18 files |
 | Phase 04-reporting-admin-polish P07 | 5min | 2 tasks | 16 files |
+| Phase 04-reporting-admin-polish P08 | 4min | 2 tasks | 16 files |
 
 ## Accumulated Context
 
@@ -159,6 +160,9 @@ Recent decisions affecting current work:
 - [Phase 04-reporting-admin-polish]: TemplatesTable Delete uses secondary button (not destructive red) — soft-delete is not data loss per UI-SPEC
 - [Phase 04-reporting-admin-polish]: useToggleUserStatus passes username as mutation variable for toast messages without extra lookup
 - [Phase 04-reporting-admin-polish]: DeactivateUserConfirmDialog: onOpenAutoFocus prevents Radix default; sets focus to dismiss button via ref (safer default for destructive actions)
+- [Phase 04-reporting-admin-polish]: FeedbackWidget uses localStorage key feedback-{articleId} for session persistence — avoids API round-trip on re-render
+- [Phase 04-reporting-admin-polish]: 409 Conflict from POST /api/help/feedback treated as UX success — duplicate submission shows submitted state, not error toast
+- [Phase 04-reporting-admin-polish]: FAQ chevron rotation via CSS .faq-chevron + [data-state=open] rule in globals.css — Radix data-state attribute drives animation
 
 ### Pending Todos
 
@@ -174,6 +178,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T04:03:20.843Z
-Stopped at: Completed 04-07-PLAN.md
+Last session: 2026-05-24T04:09:20.280Z
+Stopped at: Completed 04-08-PLAN.md
 Resume file: None
