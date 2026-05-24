@@ -3,14 +3,14 @@ pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-06-PLAN.md
-last_updated: "2026-05-24T00:50:01.896Z"
+stopped_at: Completed 03-07-PLAN.md
+last_updated: "2026-05-24T00:56:35.026Z"
 last_activity: "2026-05-24 — Phase 3 Plan 05: Dashboard domain with metrics, configuration endpoints, per-user widget layout persistence"
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 29
-  completed_plans: 17
+  completed_plans: 21
   percent: 52
 ---
 
@@ -69,6 +69,10 @@ Progress: [█████░░░░░] 52%
 | Phase 03-insights P03 | 3min | 2 tasks | 13 files |
 | Phase 03-insights P05 | 4min | 2 tasks | 10 files |
 | Phase 03-insights P06 | 5min | 2 tasks | 12 files |
+| Phase 03-insights P09 | 4min | 2 tasks | 14 files |
+| Phase 03-insights P07 | 15min | 2 tasks | 13 files |
+| Phase 03-insights P10 | 4min | 2 tasks | 9 files |
+| Phase 03-insights P08 | 4min | 2 tasks | 14 files |
 
 ## Accumulated Context
 
@@ -124,6 +128,11 @@ Recent decisions affecting current work:
 - [Phase 03-insights]: DashboardService.getMetrics() reuses ClassificationRepository.getStatistics() aggregate to avoid N+1 COUNT queries
 - [Phase 03-insights]: PipelineStatusService uses in-memory volatile state flag for pipeline control — DB-persisted state deferred to Phase 4
 - [Phase 03-insights]: Classification @SQLRestriction handles soft-delete filtering; countByStatus/findByStatus used in PipelineStatusService (not countByStatusAndDeletedAtIsNull)
+- [Phase 03-insights]: PIPELINE_STATE_COLORS exported from types/pipeline.ts as single source of truth for all color-coded pipeline UI elements
+- [Phase 03-insights]: PipelineControlActions renders null when isAdmin=false — control section completely hidden for non-admins per FR-5.2
+- [Phase 03-insights]: Widget order stored as { widgets: KpiWidgetConfig[] } inside DashboardConfiguration.layout JSON — matches existing server schema without changes
+- [Phase 03-insights]: NotificationBell placed in AppHeader (existing header composition component) rather than directly in layout.tsx
+- [Phase 03-insights]: date-fns installed to fix pre-existing blocking build error in PipelineStatusHeader.tsx
 
 ### Pending Todos
 
@@ -139,6 +148,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T00:50:01.895Z
-Stopped at: Completed 03-06-PLAN.md
+Last session: 2026-05-24T00:56:35.025Z
+Stopped at: Completed 03-07-PLAN.md
 Resume file: None
