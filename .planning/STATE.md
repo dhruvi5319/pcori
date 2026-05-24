@@ -2,15 +2,15 @@
 pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 03-11-PLAN.md
-last_updated: "2026-05-24T01:32:10.383Z"
-last_activity: "2026-05-24 — Phase 3 Plan 11: Analytics + Data Pipeline sidebar nav items; Phase 3 integration checkpoint approved"
+status: verifying
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-05-24T03:24:27.648Z"
+last_activity: "2026-05-24 — Phase 3 Plan 11: Analytics + Data Pipeline sidebar nav items, Phase 3 integration checkpoint approved"
 progress:
   total_phases: 4
   completed_phases: 2
-  total_plans: 29
-  completed_plans: 22
+  total_plans: 38
+  completed_plans: 29
   percent: 76
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-20)
 
 **Core value:** Reviewers upload a research plan PDF and receive an automated taxonomy classification in minutes instead of hours — with a full audit trail of every decision and override.
-**Current focus:** Phase 3 — Insights
+**Current focus:** Phase 4 — Reporting, Admin & Polish
 
 ## Current Position
 
-Phase: 3 of 4 (Insights) — Complete
-Plan: 11/11 complete
-Status: Phase 3 complete — all sidebar nav links wired, human e2e verification approved
-Last activity: 2026-05-24 — Phase 3 Plan 11: Analytics + Data Pipeline sidebar nav items, Phase 3 integration checkpoint approved
+Phase: 4 of 4 (Reporting, Admin & Polish) — In progress
+Plan: 1/8 complete
+Status: Phase 4 started — V8 Flyway migration (Reporting & Help Center schema) complete
+Last activity: 2026-05-24 — Phase 4 Plan 01: V8 migration with report_configurations, excel_reports, filter_configurations, help_articles, faqs, documentation_feedback
 
 Progress: [████████░░] 76%
 
@@ -74,6 +74,7 @@ Progress: [████████░░] 76%
 | Phase 03-insights P10 | 4min | 2 tasks | 9 files |
 | Phase 03-insights P08 | 4min | 2 tasks | 14 files |
 | Phase 03-insights P11 | 3min | 2 tasks | 1 files |
+| Phase 04-reporting-admin-polish P01 | 1min | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -138,6 +139,8 @@ Recent decisions affecting current work:
 - [Phase 03-insights]: AnalyticsDateContext.isLoading drives data-loading attribute; CSS applies opacity 0.5 pulse — no per-component state needed
 - [Phase 03-insights]: Confidence histogram bar colors: Cell per bar, red for high<=0.7, amber for high<=0.85, green for high>0.85 (UI-SPEC locked)
 - [Phase 03-insights]: Analytics nav item roles corrected to MANAGER+ADMIN (was MANAGER+VIEWER); Data Pipeline nav corrected to ADMIN-only (was ADMIN+MANAGER) — sidebar role gating now matches backend @PreAuthorize and FR-5.x spec
+- [Phase 04-reporting-admin-polish]: V8 migration number chosen intentionally — V7 is taken by Phase 3 Insights (V7__insights_schema.sql exists); no migration gap
+- [Phase 04-reporting-admin-polish]: TSVECTOR GENERATED ALWAYS AS STORED used for help_articles.search_vector — auto-updated on INSERT/UPDATE, no trigger needed
 
 ### Pending Todos
 
@@ -153,6 +156,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-24T01:32:10.381Z
-Stopped at: Completed 03-11-PLAN.md
+Last session: 2026-05-24T03:24:27.646Z
+Stopped at: Completed 04-01-PLAN.md
 Resume file: None
