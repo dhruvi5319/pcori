@@ -65,7 +65,7 @@ created: 2026-05-20
 | Chart section card min-height | 320px | Recharts needs breathing room; skeleton matches this height |
 | Notification panel width | 380px | User decision — slide-out from right edge |
 | Notification panel max-height | calc(100vh - 64px) | Full height minus app header |
-| Notification item padding | 16px horizontal, 8px vertical | Comfortable tap target in dense list (16px + 8px + 14px text = ≥36px per item; dense list appropriate) |
+| Notification item padding | 16px horizontal, 8px vertical | Compact list — 8px vertical + 14px text yields adequate touch target height |
 | Pipeline stage card min-width | 200px | 3 across; fits EXTRACT/CLASSIFY/PERSIST labels + status |
 | Pipeline status header height | 80px | Fits 2 rows of status info + last sync timestamp |
 | Pipeline log panel height | 240px (collapsed), 480px (expanded) | Collapsed shows ~4 log lines; expanded shows ~10 |
@@ -885,8 +885,8 @@ This is a PRD mandate (PRD §5.1) to prevent paint jank. NEVER remove this prop 
 
 | Element | Copy | Style |
 |---------|------|-------|
-| Dashboard customize toggle (inactive) | "Customize" (mode toggle — noun implied by page context) | Secondary outline button; `Settings2` icon |
-| Dashboard customize toggle (active) | "Done" (mode toggle — noun implied by page context) | Secondary outline button; `Check` icon |
+| Dashboard customize toggle (inactive) | "Customize" | Secondary outline button; `Settings2` icon |
+| Dashboard customize toggle (active) | "Done" | Secondary outline button; `Check` icon |
 | Dashboard reset layout | "Reset to Default" | Ghost/link style; inside customize mode |
 | Notification drawer close (overlay click) | (no label — accessible via aria-label="Close notifications") | |
 | Notification preferences save | "Save Preferences" | Gradient accent |
@@ -908,7 +908,7 @@ This is a PRD mandate (PRD §5.1) to prevent paint jank. NEVER remove this prop 
 | Analytics — Processing Volume | No data in date range | `TrendingUp` (48px, muted) | "No activity in range" | "No plans were uploaded in this date range." | None |
 | Analytics — Recent Overrides | No overrides in range | `Edit` (48px, muted) | "No overrides yet" | "Override records will appear here once reviewers correct AI classifications." | None |
 | Analytics — Model Performance | totalEvaluated < 10 | `BarChart3` (48px, muted) | "Insufficient data" | "Model performance metrics require at least 10 evaluated records to display." | None |
-| Notification panel | No notifications | `Bell` (32px, muted) | "No notifications" | "You're all caught up. Notifications will appear here when your plans are classified." | None |
+| Notification panel | No notifications | `Bell` (32px, muted) | "No notifications" | — | None |
 
 ### Error State Copy
 
@@ -974,7 +974,6 @@ This is a PRD mandate (PRD §5.1) to prevent paint jank. NEVER remove this prop 
 | Collapsible log panel | `aria-expanded` on toggle button; `aria-controls` pointing to log panel id |
 | Analytics loading pulse | `aria-busy="true"` on chart sections when `isLoading === true`; removed when false |
 | Date range inputs | Explicit `<label>` for each date input; `aria-describedby` for validation errors |
-| KPI card error state retry | `aria-label="Retry loading [metric name]"` on `RotateCcw` icon button | Inline error state on `KpiCard` |
 
 ---
 
