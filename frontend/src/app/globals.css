@@ -211,3 +211,15 @@ code, pre, .font-mono {
   opacity: 0.5;
   pointer-events: none;
 }
+
+/* ================================================================
+   Phase 4 — FAQ accordion chevron rotation (UI-SPEC §Help Center)
+   ChevronRight rotates 90° on open to indicate open accordion item.
+   ================================================================ */
+.faq-chevron {
+  transition: transform 0.2s ease;
+}
+
+[data-state="open"] .faq-chevron {
+  transform: rotate(90deg);
+}
