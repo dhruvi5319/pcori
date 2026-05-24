@@ -194,6 +194,30 @@
         "x-next-revalidate-tag-token"
       ]
     },
+    "/help": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/help",
+      "dataRoute": "/help.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
     "/login": {
       "experimentalBypassFor": [
         {
@@ -209,6 +233,30 @@
       "initialRevalidateSeconds": false,
       "srcRoute": "/login",
       "dataRoute": "/login.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/reports": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/reports",
+      "dataRoute": "/reports.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -290,6 +338,30 @@
         "x-next-revalidate-tag-token"
       ]
     },
+    "/users": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/users",
+      "dataRoute": "/users.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
     "/verify-email": {
       "experimentalBypassFor": [
         {
@@ -318,8 +390,8 @@
   "dynamicRoutes": {},
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "9288e6e8d98b7dc76a25949d758fb58c",
-    "previewModeSigningKey": "eea7d9f53e78690b45ea6e3fe5c30e7eba7aa00e9ce1b6d64b6222ed9f1d8595",
-    "previewModeEncryptionKey": "ab47a1e4794b713d834dc4dcb765548d04cb66a5c58ba9136c3c95213b47ce48"
+    "previewModeId": "728f3afa8aa75c0c6711950085e0ef9c",
+    "previewModeSigningKey": "735f4637fa644feba60c32f15f2067282f3be4a47541a44dac7df699ea1a08be",
+    "previewModeEncryptionKey": "ab430b26c0cb622b5f77267bb2529bf2696fff580afbf96ab798455a4215e846"
   }
 }

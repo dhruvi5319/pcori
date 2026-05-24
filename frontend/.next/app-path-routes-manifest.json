@@ -8,7 +8,10 @@
   "/(protected)/classifications/page": "/classifications",
   "/(protected)/dashboard/page": "/dashboard",
   "/(protected)/data-pipeline/page": "/data-pipeline",
+  "/(protected)/help/page": "/help",
+  "/(protected)/reports/page": "/reports",
   "/(protected)/taxonomy/page": "/taxonomy",
+  "/(protected)/users/page": "/users",
   "/_global-error/page": "/_global-error",
   "/_not-found/page": "/_not-found",
   "/page": "/"

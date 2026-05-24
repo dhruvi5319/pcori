@@ -36,7 +36,19 @@
       "static/media/Geist_Variable-s.p.0-te~ja_gpvcf.woff2",
       "static/media/GeistMono_Variable.p.17jn9btb_52pq.woff2"
     ],
+    "[project]/src/app/(protected)/help/page": [
+      "static/media/Geist_Variable-s.p.0-te~ja_gpvcf.woff2",
+      "static/media/GeistMono_Variable.p.17jn9btb_52pq.woff2"
+    ],
+    "[project]/src/app/(protected)/reports/page": [
+      "static/media/Geist_Variable-s.p.0-te~ja_gpvcf.woff2",
+      "static/media/GeistMono_Variable.p.17jn9btb_52pq.woff2"
+    ],
     "[project]/src/app/(protected)/taxonomy/page": [
+      "static/media/Geist_Variable-s.p.0-te~ja_gpvcf.woff2",
+      "static/media/GeistMono_Variable.p.17jn9btb_52pq.woff2"
+    ],
+    "[project]/src/app/(protected)/users/page": [
       "static/media/Geist_Variable-s.p.0-te~ja_gpvcf.woff2",
       "static/media/GeistMono_Variable.p.17jn9btb_52pq.woff2"
     ],

@@ -78,10 +78,22 @@
       "namedRegex": "^/forgot\\-password(?:/)?$"
     },
     {
+      "page": "/help",
+      "regex": "^/help(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/help(?:/)?$"
+    },
+    {
       "page": "/login",
       "regex": "^/login(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/reports",
+      "regex": "^/reports(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/reports(?:/)?$"
     },
     {
       "page": "/reset-password",
@@ -100,6 +112,12 @@
       "regex": "^/taxonomy(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/taxonomy(?:/)?$"
+    },
+    {
+      "page": "/users",
+      "regex": "^/users(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/users(?:/)?$"
     },
     {
       "page": "/verify-email",
