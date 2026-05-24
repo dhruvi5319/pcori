@@ -2,7 +2,7 @@
 
 import { Menu } from 'lucide-react'
 import { ThemeToggle } from './ThemeToggle'
-import { NotificationBell } from './NotificationBell'
+import { NotificationBell } from '@/components/notifications/NotificationBell'
 import { UserMenu } from './UserMenu'
 import { cn } from '@/lib/utils'
 

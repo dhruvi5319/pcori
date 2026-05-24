@@ -109,40 +109,16 @@ public class GlobalExceptionHandler {
                 .build());
     }
 
-    @ExceptionHandler(DomainExceptions.StorageUnavailableException.class)
-    public ResponseEntity<ErrorResponse> handleStorageUnavailable(DomainExceptions.StorageUnavailableException ex) {
-        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(
-            ErrorResponse.builder()
-                .type("https://pcori.com/errors/storage-unavailable")
-                .title("Storage Unavailable")
-                .status(503)
-                .detail(ex.getMessage())
-                .timestamp(Instant.now())
-                .build());
-    }
-
-    // ── Taxonomy domain exception handlers ─────────────────────────────────
-
-    @ExceptionHandler(DomainExceptions.CodeDuplicateException.class)
-    public ResponseEntity<ErrorResponse> handleCodeDuplicate(DomainExceptions.CodeDuplicateException ex) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(
-            ErrorResponse.builder()
-                .type("https://pcori.com/errors/taxonomy/code-duplicate")
-                .title("Duplicate Taxonomy Code")
-                .status(409)
-                .detail(ex.getMessage())
-                .timestamp(Instant.now())
-                .build());
-    }
-
-    @ExceptionHandler({DomainExceptions.InvalidParentException.class,
-                        DomainExceptions.InvalidLevelException.class,
-                        DomainExceptions.CircularReferenceException.class,
-                        DomainExceptions.InactiveParentException.class})
+    @ExceptionHandler({
+        DomainExceptions.InvalidParentException.class,
+        DomainExceptions.InvalidLevelException.class,
+        DomainExceptions.CircularReferenceException.class,
+        DomainExceptions.InactiveParentException.class
+    })
     public ResponseEntity<ErrorResponse> handleTaxonomyValidation(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
             ErrorResponse.builder()
-                .type("https://pcori.com/errors/taxonomy/validation")
+                .type("https://pcori.com/errors/taxonomy-validation")
                 .title("Taxonomy Validation Error")
                 .status(400)
                 .detail(ex.getMessage())
@@ -150,7 +126,29 @@ public class GlobalExceptionHandler {
                 .build());
     }
 
-    // ── Classification domain exception handlers ─────────────────────────────
+    @ExceptionHandler(DomainExceptions.CodeDuplicateException.class)
+    public ResponseEntity<ErrorResponse> handleCodeDuplicate(DomainExceptions.CodeDuplicateException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+            ErrorResponse.builder()
+                .type("https://pcori.com/errors/code-duplicate")
+                .title("Duplicate Code")
+                .status(409)
+                .detail(ex.getMessage())
+                .timestamp(Instant.now())
+                .build());
+    }
+
+    @ExceptionHandler(DomainExceptions.InvalidStatusException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidStatus(DomainExceptions.InvalidStatusException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+            ErrorResponse.builder()
+                .type("https://pcori.com/errors/invalid-status")
+                .title("Invalid Status")
+                .status(400)
+                .detail(ex.getMessage())
+                .timestamp(Instant.now())
+                .build());
+    }
 
     @ExceptionHandler(DomainExceptions.InvalidFileTypeException.class)
     public ResponseEntity<ErrorResponse> handleInvalidFileType(DomainExceptions.InvalidFileTypeException ex) {
@@ -176,13 +174,25 @@ public class GlobalExceptionHandler {
                 .build());
     }
 
-    @ExceptionHandler(DomainExceptions.InvalidStatusException.class)
-    public ResponseEntity<ErrorResponse> handleInvalidStatus(DomainExceptions.InvalidStatusException ex) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+    @ExceptionHandler(DomainExceptions.StorageUnavailableException.class)
+    public ResponseEntity<ErrorResponse> handleStorageUnavailable(DomainExceptions.StorageUnavailableException ex) {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(
             ErrorResponse.builder()
-                .type("https://pcori.com/errors/invalid-status")
-                .title("Invalid Status Transition")
-                .status(409)
+                .type("https://pcori.com/errors/storage-unavailable")
+                .title("Storage Unavailable")
+                .status(503)
+                .detail(ex.getMessage())
+                .timestamp(Instant.now())
+                .build());
+    }
+
+    @ExceptionHandler(DomainExceptions.ClassificationException.class)
+    public ResponseEntity<ErrorResponse> handleClassificationError(DomainExceptions.ClassificationException ex) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(
+            ErrorResponse.builder()
+                .type("https://pcori.com/errors/classification-failed")
+                .title("Classification Failed")
+                .status(422)
                 .detail(ex.getMessage())
                 .timestamp(Instant.now())
                 .build());

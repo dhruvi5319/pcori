@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - JWT auth, RBAC, Docker dev environment, Spring Boot project scaffold with PostgreSQL 16 and all security infrastructure
 - [ ] **Phase 2: Classification Pipeline** - PDF upload, async 3-stage pipeline, taxonomy CRUD/tree, S3 file storage, manual override, classification list
-- [ ] **Phase 3: Insights** - Dashboards, KPI cards, analytics charts, pipeline monitoring UI, in-app notifications
+- [x] **Phase 3: Insights** - Dashboards, KPI cards, analytics charts, pipeline monitoring UI, in-app notifications
 - [ ] **Phase 4: Reporting & Admin Polish** - Excel reports, ad-hoc report builder, saved templates, user management, help center
 
 ## Phase Details
@@ -47,10 +47,6 @@ Plans:
 - [x] 01-11-PLAN.md — Gap closure: AdminController GET /api/admin/ping with @PreAuthorize ADMIN role (satisfies SC-5 / FR-1.7)
 
 ### Phase 2: Classification Pipeline
-<<<<<<< HEAD
-**Status**: completed (2026-05-23)
-**Last Updated**: 2026-05-23T23:07:34Z
-=======
 **Status**: In Progress
 **Last Updated**: 2026-05-23T00:00:00Z
 >>>>>>> 580607b (docs: update planning artifacts [pivota-auto])
@@ -76,7 +72,8 @@ Plans:
 - [x] 02-07-PLAN.md — Taxonomy frontend: /taxonomy two-pane page, collapsible tree, detail pane, inline edit form, Add Category dialog (breadcrumb preview), Deactivate confirm
 
 ### Phase 3: Insights
-**Status**: In Progress
+**Status**: completed (2026-05-24)
+**Last Updated**: 2026-05-24T01:46:22Z
 **Goal**: Program managers and admins have real-time visibility into classification volume, accuracy, override patterns, and pipeline health — with in-app notifications keeping reviewers informed without manual polling
 **Depends on**: Phase 2
 **Requirements**: FR-4.1, FR-4.2, FR-4.3, FR-4.4, FR-4.5, FR-4.6, FR-5.1, FR-5.2, FR-5.3, FR-5.4, FR-5.5, FR-8.1, FR-8.2

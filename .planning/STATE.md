@@ -2,16 +2,16 @@
 pivota_spec_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Completed 02-07-PLAN.md
-last_updated: "2026-05-23T20:51:21.968Z"
-last_activity: "2026-05-23 — Phase 2 complete: MinIO+S3 storage, 3-stage async classification pipeline, taxonomy CRUD with cascade deactivation, /classifications page with dialogs, /taxonomy two-pane page"
+status: executing
+stopped_at: Completed 03-11-PLAN.md
+last_updated: "2026-05-24T01:32:10.383Z"
+last_activity: "2026-05-24 — Phase 3 Plan 11: Analytics + Data Pipeline sidebar nav items; Phase 3 integration checkpoint approved"
 progress:
   total_phases: 4
-  completed_phases: 1
-  total_plans: 18
-  completed_plans: 17
-  percent: 90
+  completed_phases: 2
+  total_plans: 29
+  completed_plans: 22
+  percent: 76
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-20)
 
 **Core value:** Reviewers upload a research plan PDF and receive an automated taxonomy classification in minutes instead of hours — with a full audit trail of every decision and override.
-**Current focus:** Phase 2 — Classification Pipeline
+**Current focus:** Phase 3 — Insights
 
 ## Current Position
 
-Phase: 2 of 4 (Classification Pipeline) — COMPLETE ✓
-Plan: 7/7 complete
-Status: Phase 2 complete — ready for Phase 3
-Last activity: 2026-05-23 — Phase 2 complete: MinIO+S3 storage, 3-stage async classification pipeline, taxonomy CRUD with cascade deactivation, /classifications page with dialogs, /taxonomy two-pane page
+Phase: 3 of 4 (Insights) — Complete
+Plan: 11/11 complete
+Status: Phase 3 complete — all sidebar nav links wired, human e2e verification approved
+Last activity: 2026-05-24 — Phase 3 Plan 11: Analytics + Data Pipeline sidebar nav items, Phase 3 integration checkpoint approved
 
-Progress: [█████████░] 90%
+Progress: [████████░░] 76%
 
 ## Performance Metrics
 
@@ -63,12 +63,17 @@ Progress: [█████████░] 90%
 | Phase 01-foundation P10 | 1min | 1 tasks | 2 files |
 | Phase 01-foundation P09 | 2min | 1 tasks | 1 files |
 | Phase 01-foundation P11 | 1min | 1 tasks | 1 files |
-| Phase 02-classification-pipeline P01 | 1min | 3 tasks | 3 files |
-| Phase 02-classification-pipeline P02 | 3min | 2 tasks | 12 files |
-| Phase 02-classification-pipeline P03 | 5min | 2 tasks | 11 files |
-| Phase 02-classification-pipeline P04 | 4min | 2 tasks | 25 files |
-| Phase 02-classification-pipeline P05 | 4min | 2 tasks | 15 files |
-| Phase 02-classification-pipeline P07 | 4min | 2 tasks | 12 files |
+| Phase 03-insights P02 | 5min | 2 tasks | 3 files |
+| Phase 03-insights P01 | 2min | 1 tasks | 2 files |
+| Phase 03-insights P04 | 3min | 2 tasks | 8 files |
+| Phase 03-insights P03 | 3min | 2 tasks | 13 files |
+| Phase 03-insights P05 | 4min | 2 tasks | 10 files |
+| Phase 03-insights P06 | 5min | 2 tasks | 12 files |
+| Phase 03-insights P09 | 4min | 2 tasks | 14 files |
+| Phase 03-insights P07 | 15min | 2 tasks | 13 files |
+| Phase 03-insights P10 | 4min | 2 tasks | 9 files |
+| Phase 03-insights P08 | 4min | 2 tasks | 14 files |
+| Phase 03-insights P11 | 3min | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -110,19 +115,29 @@ Recent decisions affecting current work:
 - [Phase 02-classification-pipeline]: @radix-ui/react-progress added to package.json for UploadProgressBar in Plan 06
 - [Phase 02-classification-pipeline]: dash-flow @keyframe added to globals.css for PDF dropzone SVG animated dashed border
 - [Phase 02-classification-pipeline]: Classifications page wires all 4 dialogs (Upload, View, Override, Retry) in single page.tsx; dialog state via useState hooks
-- [Phase 02-classification-pipeline]: V4/V5 migration numbering used — V3 was taken by Phase 1 audit columns; classification_schema=V4, taxonomy_seed=V5
-- [Phase 02-classification-pipeline]: MinIO added to Docker Compose with pcori-files bucket via minio-setup initializer; backend uses STORAGE_ENDPOINT env var for S3StorageService endpointOverride
-- [Phase 02-classification-pipeline]: S3Presigner built in constructor with @Value params rather than separate @Bean to avoid circular dependency
-- [Phase 02-classification-pipeline]: UploadedFile.uploadedBy stored as UUID column (not @ManyToOne) to avoid circular loading with User domain
-- [Phase 02-classification-pipeline]: TaxonomyCategory.createdBy mapped as String (not UUID) — V6 migration fixes V5 DDL mismatch to match AuditableEntity @CreatedBy String pattern
-- [Phase 02-classification-pipeline]: TaxonomyController delegates to TaxonomyService.toDto() (public method) — avoids duplicate mapping logic; DELETE /taxonomy/{id} returns 200 with deactivated entity to confirm soft-delete
-- [Phase 02-classification-pipeline]: PDFBox 3.x uses Loader.loadPDF(byte[]) API — readAllBytes() required before passing to Loader
-- [Phase 02-classification-pipeline]: findRecentByLimit replaces findTopNByOrderByUploadedAtDesc — Spring Data doesn't support dynamic TopN with parameter
-- [Phase 02-classification-pipeline]: ClassificationController resolves uploadedBy UUID via User instanceof cast (User extends UserDetails) — username is not a UUID
-- [Phase 02-classification-pipeline]: CSS max-height transition (0→9999px) for tree expand/collapse — no JS height measurement needed; matches UI-SPEC 0.2s ease
-- [Phase 02-classification-pipeline]: isAdmin hardcoded true in taxonomy page.tsx — role-gating from JWT context deferred to Phase 3
-- [Phase 02-classification-pipeline]: formatRelativeDate added to lib/utils.ts — simple relative date string without external library dependency (implied by ClassificationRow code)
-- [Phase 02-classification-pipeline]: TanStack Query conditional refetchInterval: polls 5s when any row status === PROCESSING; false otherwise — stops polling when all terminal
+- [Phase 03-insights]: Install exactly 4 packages: @dnd-kit/core, @dnd-kit/sortable, recharts, @radix-ui/react-switch — no additional packages
+- [Phase 03-insights]: Skeleton tokens added as CSS custom properties under :root + .dark following existing Phase 1 token pattern
+- [Phase 03-insights]: V6 no-op placeholder created to fill sequential migration gap (V5→V7); V6 was expected by plan but missing from Phase 2
+- [Phase 03-insights]: notification_channel enum: exactly 2 values (IN_APP, EMAIL) — no PUSH per TechArch spec
+- [Phase 03-insights]: dashboard_configurations.user_id UNIQUE constraint enforces one config per user at DB level
+- [Phase 03-insights]: Analytics endpoints restricted to MANAGER and ADMIN roles via @PreAuthorize at class level
+- [Phase 03-insights]: Native SQL via EntityManager for all analytics queries — avoids JPQL limitations with date_trunc and width_bucket PostgreSQL functions
+- [Phase 03-insights]: Confidence distribution always returns all 10 buckets filling zeros — frontend doesn't need to handle missing buckets
+- [Phase 03-insights]: NotificationService.dispatch() is synchronous within classificationExecutor thread — no @Async to preserve SecurityContext propagation
+- [Phase 03-insights]: Default notification preference: if no preference record exists for user+type+channel, dispatch defaults to enabled (orElse(true))
+- [Phase 03-insights]: JSON-as-TEXT fallback for dashboard JSONB columns — hypersistence-utils not in classpath; manual ObjectMapper in entity accessors; column DDL still declares jsonb
+- [Phase 03-insights]: DashboardService.getMetrics() reuses ClassificationRepository.getStatistics() aggregate to avoid N+1 COUNT queries
+- [Phase 03-insights]: PipelineStatusService uses in-memory volatile state flag for pipeline control — DB-persisted state deferred to Phase 4
+- [Phase 03-insights]: Classification @SQLRestriction handles soft-delete filtering; countByStatus/findByStatus used in PipelineStatusService (not countByStatusAndDeletedAtIsNull)
+- [Phase 03-insights]: PIPELINE_STATE_COLORS exported from types/pipeline.ts as single source of truth for all color-coded pipeline UI elements
+- [Phase 03-insights]: PipelineControlActions renders null when isAdmin=false — control section completely hidden for non-admins per FR-5.2
+- [Phase 03-insights]: Widget order stored as { widgets: KpiWidgetConfig[] } inside DashboardConfiguration.layout JSON — matches existing server schema without changes
+- [Phase 03-insights]: NotificationBell placed in AppHeader (existing header composition component) rather than directly in layout.tsx
+- [Phase 03-insights]: date-fns installed to fix pre-existing blocking build error in PipelineStatusHeader.tsx
+- [Phase 03-insights]: isAnimationActive=false on every Recharts animated primitive (Line/Bar/Area) — production requirement per UI-SPEC
+- [Phase 03-insights]: AnalyticsDateContext.isLoading drives data-loading attribute; CSS applies opacity 0.5 pulse — no per-component state needed
+- [Phase 03-insights]: Confidence histogram bar colors: Cell per bar, red for high<=0.7, amber for high<=0.85, green for high>0.85 (UI-SPEC locked)
+- [Phase 03-insights]: Analytics nav item roles corrected to MANAGER+ADMIN (was MANAGER+VIEWER); Data Pipeline nav corrected to ADMIN-only (was ADMIN+MANAGER) — sidebar role gating now matches backend @PreAuthorize and FR-5.x spec
 
 ### Pending Todos
 
@@ -138,6 +153,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-23T20:51:21.966Z
-Stopped at: Completed 02-07-PLAN.md
+Last session: 2026-05-24T01:32:10.381Z
+Stopped at: Completed 03-11-PLAN.md
 Resume file: None

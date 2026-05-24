@@ -50,11 +50,10 @@ public class DomainExceptions {
         public StorageUnavailableException(String message) { super(message); }
     }
 
-    // ── Taxonomy domain exceptions ──────────────────────────────────────────
-
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public static class CodeDuplicateException extends RuntimeException {
-        public CodeDuplicateException(String message) { super(message); }
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public static class ClassificationException extends RuntimeException {
+        public ClassificationException(String message) { super(message); }
+        public ClassificationException(String message, Throwable cause) { super(message, cause); }
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -67,6 +66,11 @@ public class DomainExceptions {
         public InvalidLevelException(String message) { super(message); }
     }
 
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public static class CodeDuplicateException extends RuntimeException {
+        public CodeDuplicateException(String message) { super(message); }
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public static class CircularReferenceException extends RuntimeException {
         public CircularReferenceException(String message) { super(message); }
@@ -77,7 +81,10 @@ public class DomainExceptions {
         public InactiveParentException(String message) { super(message); }
     }
 
-    // ── Classification domain exceptions ────────────────────────────────────
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public static class InvalidStatusException extends RuntimeException {
+        public InvalidStatusException(String message) { super(message); }
+    }
 
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     public static class InvalidFileTypeException extends RuntimeException {
@@ -87,10 +94,5 @@ public class DomainExceptions {
     @ResponseStatus(HttpStatus.PAYLOAD_TOO_LARGE)
     public static class FileTooLargeException extends RuntimeException {
         public FileTooLargeException(String message) { super(message); }
-    }
-
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public static class InvalidStatusException extends RuntimeException {
-        public InvalidStatusException(String message) { super(message); }
     }
 }

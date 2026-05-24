@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils'
 import type { UserRole } from '@/types/user'
 
 // Nav items per UI-SPEC Screen 7 "Sidebar Navigation Items" table — exact routes and roles
+// Phase 3 order: Dashboard → Classifications → Analytics (MANAGER+ADMIN) → Data Pipeline (ADMIN) → Taxonomy → …
 const NAV_ITEMS: {
   href: string
   label: string
@@ -20,9 +21,9 @@ const NAV_ITEMS: {
 }[] = [
   { href: '/dashboard',      label: 'Dashboard',       icon: LayoutDashboard },
   { href: '/classifications', label: 'Classifications',  icon: FileSearch,       roles: ['REVIEWER', 'MANAGER'] },
+  { href: '/analytics',       label: 'Analytics',        icon: BarChart3,         roles: ['MANAGER', 'ADMIN'] },
+  { href: '/data-pipeline',   label: 'Data Pipeline',    icon: Workflow,          roles: ['ADMIN'] },
   { href: '/taxonomy',        label: 'Taxonomy',         icon: TreePine,          roles: ['TAXONOMY_ADMIN', 'REVIEWER'] },
-  { href: '/data-pipeline',   label: 'Pipeline',         icon: Workflow,          roles: ['ADMIN', 'MANAGER'] },
-  { href: '/analytics',       label: 'Analytics',        icon: BarChart3,         roles: ['MANAGER', 'VIEWER'] },
   { href: '/reports',         label: 'Reports',          icon: FileSpreadsheet,   roles: ['MANAGER', 'VIEWER'] },
   { href: '/users',           label: 'Users',            icon: Users,             roles: ['ADMIN'] },
   { href: '/help',            label: 'Help',             icon: HelpCircle },

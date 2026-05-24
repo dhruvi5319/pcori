@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * Stage 3 of ClassificationPipeline: persist the final classification result.
+ * Stage 3: Persist the classification result to the database.
  */
 @Component
 @RequiredArgsConstructor

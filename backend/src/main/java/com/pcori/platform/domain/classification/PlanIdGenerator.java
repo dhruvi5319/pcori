@@ -6,8 +6,9 @@ import java.time.Year;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Thread-safe RP-YYYY-### plan ID generator per TechArch spec (FR-2.3).
- * Format: RP-2026-001, RP-2026-002, ... resets each calendar year.
+ * Thread-safe RP-YYYY-### plan ID generator.
+ * Resets counter on year rollover.
+ * Format: RP-2026-001
  */
 @Component
 public class PlanIdGenerator {

@@ -1,6 +1,5 @@
 package com.pcori.platform.domain.classification;
 
-import com.pcori.platform.common.dto.PagedResponse;
 import com.pcori.platform.domain.classification.dto.*;
 import com.pcori.platform.domain.user.User;
 import jakarta.validation.Valid;
@@ -23,19 +22,16 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-/**
- * REST controller for classification endpoints (FR-2.1–FR-2.8).
- * All 11 endpoints per TechArch API catalog §Classifications.
- */
 @RestController
 @RequestMapping("/api/classifications")
 @RequiredArgsConstructor
 public class ClassificationController {
 
     private final ClassificationService classificationService;
-    private final ClassificationRepository classificationRepository;
 
-    // POST /api/classifications/upload — FR-2.1
+    /**
+     * POST /api/classifications/upload — upload PDF; returns 202 with planId
+     */
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<UploadResponse> upload(
@@ -45,10 +41,12 @@ public class ClassificationController {
             @AuthenticationPrincipal UserDetails userDetails) {
         UUID userId = resolveUserId(userDetails);
         return ResponseEntity.accepted()
-                .body(classificationService.uploadAndClassify(file, title, notes, userId));
+            .body(classificationService.uploadAndClassify(file, title, notes, userId));
     }
 
-    // GET /api/classifications — FR-2.8 (filter + paginate)
+    /**
+     * GET /api/classifications — paginated list with filters
+     */
     @GetMapping
     public ResponseEntity<PagedResponse<ClassificationResponse>> list(
             @RequestParam(required = false) ClassificationStatus status,
@@ -58,78 +56,105 @@ public class ClassificationController {
             @RequestParam(required = false) String q,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "25") int size,
-            @RequestParam(defaultValue = "uploadedAt,desc") String sort) {
+            @RequestParam(defaultValue = "uploadedAt") String sortBy,
+            @RequestParam(defaultValue = "desc") String sortDir) {
+
         ClassificationFilters filters = new ClassificationFilters(
-                status,
-                parseDate(startDate),
-                parseDate(endDate),
-                pcc,
-                q
+            status,
+            parseDate(startDate),
+            parseDate(endDate),
+            pcc,
+            q
         );
-        Pageable pageable = buildPageable(page, size, sort);
+        Sort sort = sortDir.equalsIgnoreCase("asc")
+            ? Sort.by(sortBy).ascending()
+            : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, Math.min(size, 100), sort);
         Page<Classification> result = classificationService.list(filters, pageable);
-        return ResponseEntity.ok(PagedResponse.from(result, ClassificationResponse::from));
+
+        return ResponseEntity.ok(new PagedResponse<>(
+            result.getContent().stream().map(this::toResponse).collect(Collectors.toList()),
+            result.getNumber(),
+            result.getSize(),
+            result.getTotalElements(),
+            result.getTotalPages(),
+            result.isLast()
+        ));
     }
 
-    // GET /api/classifications/{id}
+    /**
+     * GET /api/classifications/{id}
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ClassificationResponse> getById(@PathVariable UUID id) {
-        return ResponseEntity.ok(ClassificationResponse.from(classificationService.getById(id)));
+        return ResponseEntity.ok(toResponse(classificationService.getById(id)));
     }
 
-    // PUT /api/classifications/{id}/override — FR-2.6
+    /**
+     * PUT /api/classifications/{id}/override — manual override
+     */
     @PutMapping("/{id}/override")
     public ResponseEntity<ClassificationResponse> override(
             @PathVariable UUID id,
             @Valid @RequestBody ManualOverrideRequest req,
             @AuthenticationPrincipal UserDetails userDetails) {
-        UUID reviewedBy = resolveUserId(userDetails);
-        return ResponseEntity.ok(
-                ClassificationResponse.from(classificationService.applyOverride(id, req, reviewedBy)));
+        UUID userId = resolveUserId(userDetails);
+        return ResponseEntity.ok(toResponse(classificationService.applyOverride(id, req, userId)));
     }
 
-    // POST /api/classifications/{id}/retry — FR-2.7
+    /**
+     * POST /api/classifications/{id}/retry — retry FAILED classification
+     */
     @PostMapping("/{id}/retry")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<ClassificationResponse> retry(@PathVariable UUID id) {
-        return ResponseEntity.accepted()
-                .body(ClassificationResponse.from(classificationService.retry(id)));
+        return ResponseEntity.accepted().body(toResponse(classificationService.retry(id)));
     }
 
-    // GET /api/classifications/statistics — MANAGER+
+    /**
+     * GET /api/classifications/statistics — PROGRAM_MANAGER / ADMIN only
+     */
     @GetMapping("/statistics")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAnyRole('PROGRAM_MANAGER', 'ADMIN')")
     public ResponseEntity<ClassificationStats> getStatistics() {
-        return ResponseEntity.ok(classificationRepository.getStatistics());
+        return ResponseEntity.ok(classificationService.getStatistics());
     }
 
-    // GET /api/classifications/recent
+    /**
+     * GET /api/classifications/recent — last 10 classifications
+     */
     @GetMapping("/recent")
     public ResponseEntity<List<ClassificationResponse>> getRecent(
             @RequestParam(defaultValue = "10") int limit) {
-        return ResponseEntity.ok(
-                classificationRepository.findRecentByLimit(Math.min(limit, 25))
-                        .stream()
-                        .map(ClassificationResponse::from)
-                        .collect(Collectors.toList()));
+        Pageable pageable = PageRequest.of(0, Math.min(limit, 25), Sort.by("uploadedAt").descending());
+        Page<Classification> result = classificationService.list(
+            new ClassificationFilters(null, null, null, null, null), pageable);
+        return ResponseEntity.ok(result.getContent().stream()
+            .map(this::toResponse)
+            .collect(Collectors.toList()));
     }
 
-    // ── Private helpers ──────────────────────────────────────────────────────
+    // ── Mapping helpers ──────────────────────────────────────────────────────
 
-    /**
-     * Resolves the authenticated user's UUID.
-     * User extends UserDetails and its id is a UUID; username stores the UUID string.
-     */
+    private ClassificationResponse toResponse(Classification c) {
+        return new ClassificationResponse(
+            c.getId(), c.getPlanId(), c.getTitle(), c.getStatus(),
+            c.getPcc(), c.getTaxonomyCategory(), c.getTaxonomyCode(), c.getTaxonomySubcode(),
+            c.getPrimaryCondition(), c.getProjectSummary(), c.getTextPreview(), c.getExtractionWarning(),
+            c.getConfidenceScore(), c.getModelVersion(), c.getProcessingTimeMs(),
+            c.getFileName(), c.getFileSize(), c.getNotes(),
+            c.getUploadedBy(), c.getUploadedAt(), c.getClassifiedAt(),
+            c.getReviewedBy(), c.getReviewedAt(), c.getOverrideReason(), c.getErrorMessage(),
+            c.getCreatedAt(), c.getUpdatedAt()
+        );
+    }
+
     private UUID resolveUserId(UserDetails userDetails) {
         if (userDetails instanceof User user) {
             return user.getId();
         }
-        // Fallback: parse username as UUID (used in tests/stubs where User is not available)
-        try {
-            return UUID.fromString(userDetails.getUsername());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalStateException("Cannot resolve user ID from principal: " + userDetails.getUsername());
-        }
+        // Fallback: should not happen in normal operation
+        throw new IllegalStateException("Cannot resolve user ID from principal");
     }
 
     private LocalDate parseDate(String dateStr) {
@@ -138,21 +163,6 @@ public class ClassificationController {
             return LocalDate.parse(dateStr);
         } catch (Exception e) {
             return null;
-        }
-    }
-
-    private Pageable buildPageable(int page, int size, String sortParam) {
-        int clampedSize = Math.min(Math.max(size, 1), 100);
-        int clampedPage = Math.max(page, 0);
-        try {
-            String[] parts = sortParam.split(",");
-            String field = parts[0].trim();
-            Sort.Direction direction = parts.length > 1 && "asc".equalsIgnoreCase(parts[1].trim())
-                    ? Sort.Direction.ASC
-                    : Sort.Direction.DESC;
-            return PageRequest.of(clampedPage, clampedSize, Sort.by(direction, field));
-        } catch (Exception e) {
-            return PageRequest.of(clampedPage, clampedSize, Sort.by(Sort.Direction.DESC, "uploadedAt"));
         }
     }
 }

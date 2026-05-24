@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { SidebarProvider } from '@/contexts/SidebarContext'
 import { AppSidebar } from '@/components/layout/AppSidebar'
 import { AppHeader } from '@/components/layout/AppHeader'
+// AppHeader renders: hamburger | [ThemeToggle] [NotificationBell] [UserMenu]
 import { useSidebar } from '@/contexts/SidebarContext'
 import { cn } from '@/lib/utils'
 

@@ -12,7 +12,7 @@ import java.util.UUID;
 @Repository
 public interface TaxonomyRepository extends JpaRepository<TaxonomyCategory, UUID> {
 
-    // Tree: root nodes (parent IS NULL, active only)
+    // Tree: root nodes (parent IS NULL)
     List<TaxonomyCategory> findByParentIsNullOrderByDisplayOrderAsc();
 
     // Children of a node
@@ -24,27 +24,27 @@ public interface TaxonomyRepository extends JpaRepository<TaxonomyCategory, UUID
     // Lookup by code
     Optional<TaxonomyCategory> findByCode(String code);
 
-    // Direct children query (explicit JPQL)
-    @Query("SELECT tc FROM TaxonomyCategory tc WHERE tc.parent.id = :parentId")
-    List<TaxonomyCategory> findDirectChildrenOf(@Param("parentId") UUID parentId);
-
     // Full-text search via GIN index (native query)
-    @Query(value = "SELECT * FROM taxonomy_categories WHERE deleted_at IS NULL AND search_vector @@ plainto_tsquery('english', :term) ORDER BY ts_rank(search_vector, plainto_tsquery('english', :term)) DESC",
-           nativeQuery = true)
+    @Query(value = "SELECT * FROM taxonomy_categories WHERE deleted_at IS NULL " +
+        "AND search_vector @@ plainto_tsquery('english', :term) " +
+        "ORDER BY ts_rank(search_vector, plainto_tsquery('english', :term)) DESC",
+        nativeQuery = true)
     List<TaxonomyCategory> searchByText(@Param("term") String term);
 
     // Active-only search
-    @Query(value = "SELECT * FROM taxonomy_categories WHERE deleted_at IS NULL AND is_active = TRUE AND search_vector @@ plainto_tsquery('english', :term) ORDER BY ts_rank(search_vector, plainto_tsquery('english', :term)) DESC",
-           nativeQuery = true)
+    @Query(value = "SELECT * FROM taxonomy_categories WHERE deleted_at IS NULL AND is_active = TRUE " +
+        "AND search_vector @@ plainto_tsquery('english', :term) " +
+        "ORDER BY ts_rank(search_vector, plainto_tsquery('english', :term)) DESC",
+        nativeQuery = true)
     List<TaxonomyCategory> searchActiveByText(@Param("term") String term);
 
-    // Check if code exists within same parent (for uniqueness validation)
+    // Check code uniqueness within same parent
     boolean existsByCodeAndParentId(String code, UUID parentId);
 
-    // Root-level uniqueness
+    // Root-level uniqueness check
     boolean existsByCodeAndParentIsNull(String code);
 
-    // All descendants of a node (for cascade deactivation — recursive CTE)
+    // All descendants (recursive CTE for cascade deactivation)
     @Query(value = """
         WITH RECURSIVE descendants AS (
             SELECT id FROM taxonomy_categories WHERE parent_id = :rootId AND deleted_at IS NULL

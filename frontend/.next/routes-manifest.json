@@ -48,10 +48,28 @@
       "namedRegex": "^/_not\\-found(?:/)?$"
     },
     {
+      "page": "/analytics",
+      "regex": "^/analytics(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/analytics(?:/)?$"
+    },
+    {
+      "page": "/classifications",
+      "regex": "^/classifications(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/classifications(?:/)?$"
+    },
+    {
       "page": "/dashboard",
       "regex": "^/dashboard(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/dashboard(?:/)?$"
+    },
+    {
+      "page": "/data-pipeline",
+      "regex": "^/data\\-pipeline(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/data\\-pipeline(?:/)?$"
     },
     {
       "page": "/forgot-password",
@@ -76,6 +94,12 @@
       "regex": "^/signup(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/signup(?:/)?$"
+    },
+    {
+      "page": "/taxonomy",
+      "regex": "^/taxonomy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/taxonomy(?:/)?$"
     },
     {
       "page": "/verify-email",
