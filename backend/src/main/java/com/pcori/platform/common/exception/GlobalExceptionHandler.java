@@ -198,8 +198,11 @@ public class GlobalExceptionHandler {
                 .build());
     }
 
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneral(Exception ex) {
+        log.error("Unhandled exception", ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
             ErrorResponse.builder()
                 .type("https://pcori.com/errors/internal")

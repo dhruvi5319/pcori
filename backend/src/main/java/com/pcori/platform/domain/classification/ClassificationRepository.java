@@ -41,11 +41,11 @@ public interface ClassificationRepository
     // Statistics aggregate
     @Query("SELECT new com.pcori.platform.domain.classification.dto.ClassificationStats(" +
         "COUNT(c), " +
-        "SUM(CASE WHEN c.status = com.pcori.platform.domain.classification.ClassificationStatus.CLASSIFIED THEN 1L ELSE 0L END), " +
-        "SUM(CASE WHEN c.status = com.pcori.platform.domain.classification.ClassificationStatus.PROCESSING THEN 1L ELSE 0L END), " +
-        "SUM(CASE WHEN c.status = com.pcori.platform.domain.classification.ClassificationStatus.PENDING THEN 1L ELSE 0L END), " +
-        "SUM(CASE WHEN c.status = com.pcori.platform.domain.classification.ClassificationStatus.FAILED THEN 1L ELSE 0L END), " +
-        "SUM(CASE WHEN c.status = com.pcori.platform.domain.classification.ClassificationStatus.NEEDS_REVIEW THEN 1L ELSE 0L END), " +
+        "COALESCE(SUM(CASE WHEN c.status = com.pcori.platform.domain.classification.ClassificationStatus.CLASSIFIED THEN 1L ELSE 0L END), 0L), " +
+        "COALESCE(SUM(CASE WHEN c.status = com.pcori.platform.domain.classification.ClassificationStatus.PROCESSING THEN 1L ELSE 0L END), 0L), " +
+        "COALESCE(SUM(CASE WHEN c.status = com.pcori.platform.domain.classification.ClassificationStatus.PENDING THEN 1L ELSE 0L END), 0L), " +
+        "COALESCE(SUM(CASE WHEN c.status = com.pcori.platform.domain.classification.ClassificationStatus.FAILED THEN 1L ELSE 0L END), 0L), " +
+        "COALESCE(SUM(CASE WHEN c.status = com.pcori.platform.domain.classification.ClassificationStatus.NEEDS_REVIEW THEN 1L ELSE 0L END), 0L), " +
         "AVG(c.confidenceScore)) FROM Classification c WHERE c.deletedAt IS NULL")
     ClassificationStats getStatistics();
 
